@@ -48,6 +48,6 @@ Please install the following software before starting development:
 
 ## Contributors
 
-* [ValeriiaKuz](https://github.com/ValeriiaKuz)
-* [DialecticalLaw](https://github.com/DialecticalLaw)
-* [SplitCode](https://github.com/SplitCode)
+- [ValeriiaKuz](https://github.com/ValeriiaKuz)
+- [DialecticalLaw](https://github.com/DialecticalLaw)
+- [SplitCode](https://github.com/SplitCode)
