@@ -1,12 +1,11 @@
 import { ctpClient } from './BuildClient';
+import { ApiData } from './apiData';
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 
 const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
-  projectKey: 'sloths_rss_ecommerce'
+  projectKey: ApiData.PROJECT_KEY
 });
 
-export const getProject = () => {
-  return apiRoot.get().execute();
+export const getProducts = () => {
+  return apiRoot.products().get().execute();
 };
-
-getProject().then(console.log).catch(console.error);
