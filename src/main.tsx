@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import './index.css';
+import './global.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const rootElement = document.getElementById('root');
@@ -15,13 +15,9 @@ const router = createBrowserRouter([
 if (rootElement) {
   const root = createRoot(rootElement);
 
-  // закомментировано до момента создания стора
-
   root.render(
     <React.StrictMode>
-      {/*<Provider store={store}>*/}
       <RouterProvider router={router} />
-      {/*</Provider>*/}
     </React.StrictMode>
   );
 } else {
