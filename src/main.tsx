@@ -1,16 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
 import './global.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
+import router from './router/router';
 
 const rootElement = document.getElementById('root');
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />
-  }
-]);
 
 if (rootElement) {
   const root = createRoot(rootElement);
