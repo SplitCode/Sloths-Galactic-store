@@ -1,0 +1,9 @@
+.error {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 105%;
+  color: #ff0000;
+  font-size: 1rem;
+}

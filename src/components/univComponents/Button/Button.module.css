@@ -1,0 +1,89 @@
+.button {
+  --highlight-color: rgb(31, 163, 240);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: none;
+  border-right: none;
+  outline: none;
+  background: linear-gradient(0deg, rgba(33, 33, 33, 1) 0%, rgba(80, 80, 80, 1) 100%);
+  box-shadow: 0px 8px 16px 1px #000000;
+  letter-spacing: 2px;
+  font-family: Megatrans;
+  font-size: 1.6rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.buttonText {
+  overflow: hidden;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 60px;
+  border-radius: 30px;
+  backdrop-filter: blur(15px);
+}
+
+.buttonText::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
+  transform: skewX(45deg) translate(0);
+  transition: 0.4s;
+}
+
+.buttonText:hover::after {
+  transform: skewX(45deg) translate(110%);
+}
+
+.button::after,
+.button::before {
+  content: '';
+  z-index: 0;
+  position: absolute;
+  width: 30px;
+  height: 5px;
+  background-color: var(--highlight-color);
+  box-shadow:
+    0 0 5px var(--highlight-color),
+    0 0 15px var(--highlight-color),
+    0 0 30px var(--highlight-color),
+    0 0 60px var(--highlight-color);
+  border-radius: 10px 10px 0 0;
+  transition: 0.4s;
+}
+
+.button::after {
+  top: -5px;
+}
+
+.button::before {
+  bottom: -5px;
+}
+
+.button:hover::after,
+.button:hover::before {
+  width: 80%;
+  height: 50%;
+  border-radius: 30px;
+}
+
+.button:hover::after {
+  top: 0;
+}
+
+.button:hover::before {
+  bottom: 0;
+}
