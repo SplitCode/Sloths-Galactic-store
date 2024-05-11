@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import './global.css';
 import { RouterProvider } from 'react-router-dom';
 import router from './router/router';
-import { Main } from './components/Main/Main';
 
 const rootElement = document.getElementById('root');
 
@@ -12,9 +11,7 @@ if (rootElement) {
 
   root.render(
     <React.StrictMode>
-      <Main>
-        <RouterProvider router={router} />
-      </Main>
+      <RouterProvider router={router} />
     </React.StrictMode>
   );
 } else {
