@@ -9,6 +9,7 @@ import { CountrySelect } from './CountrySelect/CountrySelect';
 import { Planets } from './Planets/Planets';
 import { RegisterSchema } from '../validationSchemes';
 import type { RegisterValues } from '../Main.interfaces';
+import { CustomLink } from '../../univComponents/CustomForm/Link/Link';
 
 const initialValues: RegisterValues = {
   email: '',
@@ -72,8 +73,12 @@ export function Register() {
               <ValidError name="postalCode"></ValidError>
             </Input>
 
-            <Planets></Planets>
+            <Planets />
             <Button type="submit">Register</Button>
+
+            <CustomLink text="Already have an account?" to="/login">
+              Login
+            </CustomLink>
           </>
         </CustomForm>
       </Formik>

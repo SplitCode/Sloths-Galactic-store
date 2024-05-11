@@ -1,0 +1,12 @@
+.linkWrapper {
+  font-size: 1.5rem;
+  color: rgb(155, 155, 155);
+}
+
+.link {
+  color: rgb(206, 206, 206);
+}
+
+.link:hover {
+  color: rgb(255, 255, 255);
+}
