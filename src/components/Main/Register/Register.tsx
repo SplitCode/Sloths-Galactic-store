@@ -34,7 +34,7 @@ export function Register() {
       >
         <CustomForm>
           <>
-            <Title>Registration</Title>
+            <Title mainText={'Register'} additionText={'Welcome to the future'}></Title>
             <Input name={'email'} type="email" placeholder="Email">
               <ValidError name="email"></ValidError>
             </Input>

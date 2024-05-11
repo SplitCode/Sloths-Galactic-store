@@ -2,9 +2,12 @@ export interface StringObj {
   [key: string]: string;
 }
 
-export interface RegisterValues {
+export interface LoginValues {
   email: string;
   password: string;
+}
+
+export interface RegisterValues extends LoginValues {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
