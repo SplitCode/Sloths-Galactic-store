@@ -40,6 +40,10 @@ a {
   color: inherit;
 }
 
+h1 {
+  font-family: var(--decorative-font);
+}
+
 ::-webkit-scrollbar {
   background-color: #000000;
 }
