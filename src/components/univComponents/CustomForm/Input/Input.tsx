@@ -1,14 +1,21 @@
 import { useState } from 'react';
-import { Field } from 'formik';
+import { Field, useFormikContext } from 'formik';
 import type { InputProps } from '../../UnivComponents.interfaces';
 import { PasswordButton } from '../PasswordButton/PasswordButton';
 import styles from './Input.module.css';
 
 export function Input({ name, type, placeholder, children }: InputProps) {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
+  const { setFieldValue, setFieldTouched } = useFormikContext();
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility((prevShowPassword: boolean) => !prevShowPassword);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setFieldValue(name, value);
+    setFieldTouched(name, true, false);
   };
 
   return (
@@ -18,6 +25,7 @@ export function Input({ name, type, placeholder, children }: InputProps) {
         name={name}
         type={type === 'password' ? (passwordVisibility ? 'text' : 'password') : type}
         placeholder={placeholder}
+        onChange={handleChange}
       />
       {type === 'password' && (
         <PasswordButton
