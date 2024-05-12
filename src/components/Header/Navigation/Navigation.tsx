@@ -1,5 +1,6 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styles from './Navigation.module.css';
+import CustomNavLink from './NavLink';
 
 function Navigation() {
   const locationPath = useLocation().pathname;
@@ -8,26 +9,18 @@ function Navigation() {
     <nav>
       <ul className={styles.navigation_list}>
         <li>
-          <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to={`/catalog`}>
-            Catalog
-          </NavLink>
+          <CustomNavLink text={'Catalog'} to={`/catalog`} />
         </li>
         <li>
-          <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to={`/about`}>
-            About
-          </NavLink>
+          <CustomNavLink text={'About'} to={`/about`} />
         </li>
         {locationPath !== '/login' && locationPath !== '/register' && (
           <>
             <li>
-              <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to={`/login`}>
-                Login
-              </NavLink>
+              <CustomNavLink text={'Login'} to={'/login'} />
             </li>
             <li>
-              <NavLink className={({ isActive }) => (isActive ? styles.active : '')} to={`/register`}>
-                Registration
-              </NavLink>
+              <CustomNavLink text={'Registration'} to={'/register'} />
             </li>
           </>
         )}
