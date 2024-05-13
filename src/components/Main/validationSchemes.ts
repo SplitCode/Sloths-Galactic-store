@@ -22,10 +22,12 @@ export const RegisterSchema = object().shape({
   firstName: string()
     .min(1, 'Too short!')
     .matches(/^[a-zA-Z]+$/, 'No special characters or numbers')
+    .trim()
     .required('Required field!'),
   lastName: string()
     .min(1, 'Too short!')
     .matches(/^[a-zA-Z]+$/, 'No special characters or numbers')
+    .trim()
     .required('Required field!'),
   dateOfBirth: date()
     .required('Required field!')
@@ -33,15 +35,17 @@ export const RegisterSchema = object().shape({
       if (!value) return false;
       return new Date().getFullYear() - value.getFullYear() >= 13;
     }),
-  street: string().min(1, 'Too short!').required('Required field!'),
+  street: string().min(1, 'Too short!').trim().required('Required field!'),
   city: string()
     .min(1, 'Too short!')
     .matches(/^[a-zA-Z]+$/, 'No special characters or numbers')
+    .trim()
     .required('Required field!'),
   postalCode: string()
-    .required('Required field!')
     .length(6, '6 numbers are needed')
     .matches(/^[0-9]+$/, 'Only numbers are allowed')
+    .trim()
+    .required('Required field!')
 });
 
 export const LoginSchema = object().shape({
