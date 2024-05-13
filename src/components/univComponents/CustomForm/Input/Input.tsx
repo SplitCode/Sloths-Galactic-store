@@ -3,8 +3,9 @@ import { Field, useFormikContext } from 'formik';
 import type { InputProps } from '../../UnivComponents.interfaces';
 import { PasswordButton } from '../PasswordButton/PasswordButton';
 import styles from './Input.module.css';
+import { ValidError } from './ValidError/ValidError';
 
-export function Input({ name, type, placeholder, children }: InputProps) {
+export function Input({ name, type, placeholder }: InputProps) {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
   const { setFieldValue, setFieldTouched } = useFormikContext();
 
@@ -34,7 +35,7 @@ export function Input({ name, type, placeholder, children }: InputProps) {
         />
       )}
       <div className={styles.line} />
-      {children}
+      <ValidError name={name} />
     </label>
   );
 }

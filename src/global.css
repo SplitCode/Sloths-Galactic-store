@@ -17,6 +17,7 @@
 :root {
   --bg-color: #171717;
   --text-color: #f5f7fc;
+  --error-color: #ff0000;
   --main-font: Megatrans;
   --decorative-font: Dune;
   --toastify-color-dark: #242424f1;

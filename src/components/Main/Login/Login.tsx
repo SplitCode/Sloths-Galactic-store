@@ -2,8 +2,7 @@ import { Formik } from 'formik';
 import { CustomForm } from '../../univComponents/CustomForm/CustomForm';
 import { Input } from '../../univComponents/CustomForm/Input/Input';
 import { Button } from '../../univComponents/Button/Button';
-import { CustomLink } from '../../univComponents/CustomForm/Link/Link';
-import { ValidError } from '../../univComponents/ValidError/ValidError';
+import { CustomLink } from '../../univComponents/CustomForm/CustomLink/CustomLink';
 import { Title } from '../../univComponents/CustomForm/Title/Title';
 import { LoginSchema } from '../validationSchemes';
 import type { LoginValues } from '../Main.interfaces';
@@ -30,13 +29,9 @@ export function Login() {
         <CustomForm>
           <>
             <Title mainText={'Login'} additionText={'Welcome back to the future'}></Title>
-            <Input name={'email'} type="text" placeholder="Email">
-              <ValidError name="email"></ValidError>
-            </Input>
+            <Input name={'email'} type="text" placeholder="Email"></Input>
 
-            <Input name={'password'} type="password" placeholder="Password">
-              <ValidError name="password"></ValidError>
-            </Input>
+            <Input name={'password'} type="password" placeholder="Password"></Input>
 
             <Button type="submit">Login</Button>
             <CustomLink text="Don't have an account yet?" to="/register">
