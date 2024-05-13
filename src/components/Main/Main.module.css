@@ -1,4 +1,7 @@
 .main {
   position: relative;
   padding-top: 7rem;
+  min-height: 100vh;
+  display: flex;
+  flex-grow: 1;
 }

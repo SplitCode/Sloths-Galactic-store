@@ -44,6 +44,10 @@ h1 {
   font-family: var(--decorative-font);
 }
 
+#root {
+  display: flex;
+}
+
 ::-webkit-scrollbar {
   background-color: #000000;
 }

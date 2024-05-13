@@ -1,0 +1,91 @@
+.bg {
+  position: absolute;
+  min-width: 100vw;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: -2;
+}
+
+.planet_big {
+  position: absolute;
+  height: 80vh;
+  right: -20rem;
+  top: 8rem;
+}
+
+.planet_small {
+  position: absolute;
+  height: 50vh;
+  left: -2rem;
+  bottom: -7rem;
+}
+
+.sidebar {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2rem;
+}
+
+.planet_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.planet_item {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.planet {
+  appearance: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-repeat: repeat-x;
+  background-size: cover;
+  filter: grayscale(1);
+  animation-fill-mode: both;
+  animation: animatePlanet 15s linear infinite reverse paused;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+.planet_item:hover .planet {
+  filter: grayscale(0);
+  animation-play-state: running;
+}
+.mars:checked,
+.venus:checked,
+.earth:checked {
+  filter: grayscale(0);
+  animation-play-state: running;
+}
+
+.mars {
+  background-image: url('../../assets/img/planets/marsSmall.jpg');
+}
+.venus {
+  background-image: url('../../assets/img/planets/venusSmall.jpg');
+}
+.earth {
+  background-image: url('../../assets/img/planets/earthSmall.webp');
+}
+
+@keyframes animatePlanet {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
