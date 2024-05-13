@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Navigation.module.css';
-function CustomNavLink({
+export function CustomNavLink({
   text,
   to
 }: {
@@ -13,5 +13,3 @@ function CustomNavLink({
     </NavLink>
   );
 }
-
-export default CustomNavLink;

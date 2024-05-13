@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import styles from './Navigation.module.css';
-import CustomNavLink from './NavLink';
+import { CustomNavLink } from './NavLink';
 
-function Navigation() {
+export function Navigation() {
   const locationPath = useLocation().pathname;
 
   return (
@@ -28,4 +28,3 @@ function Navigation() {
     </nav>
   );
 }
-export default Navigation;

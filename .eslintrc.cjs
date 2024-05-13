@@ -11,6 +11,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   rules: {
+    'import/no-default-export': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/consistent-type-imports': [2, { fixStyle: 'separate-type-imports' }],
     '@typescript-eslint/no-restricted-imports': [

@@ -1,7 +1,7 @@
 import styles from './Error.module.css';
-import Header from '../../Header/Header';
-import CustomNavLink from '../../Header/Navigation/NavLink';
-function ErrorPage() {
+import { Header } from '../../Header/Header';
+import { CustomNavLink } from '../../Header/Navigation/NavLink';
+export function ErrorPage() {
   return (
     <>
       <Header />
@@ -11,4 +11,3 @@ function ErrorPage() {
     </>
   );
 }
-export default ErrorPage;

@@ -1,8 +1,8 @@
-import Logo from './Logo/Logo';
-import Navigation from './Navigation/Navigation';
 import styles from './Header.module.css';
+import { Navigation } from './Navigation/Navigation';
+import { Logo } from './Logo/Logo';
 
-function Header() {
+export function Header() {
   return (
     <header className={styles.header}>
       <Logo />
@@ -10,5 +10,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;
