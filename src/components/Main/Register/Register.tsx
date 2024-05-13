@@ -52,7 +52,7 @@ export function Register() {
         onSubmit={(values, { resetForm }) =>
           submitCustomerData(values).then(() => {
             resetForm();
-            showToast('Successful registration!', 'success');
+            showToast({ type: 'success', text: 'Successful registration!' });
           })
         }
       >

@@ -1,19 +1,14 @@
 import { toast } from 'react-toastify';
+import type { ToastInfo } from './helpers.interfaces';
 
-export function showToast(
-  text: string,
-  toastInfo:
-    | 'success'
-    | 'error'
-    | 'warning'
-    | 'info'
-    | { pending: string; success: string; error: string; promise: Promise<unknown> }
-) {
-  if (typeof toastInfo === 'object') {
+export function showToast(toastInfo: ToastInfo) {
+  if ('type' in toastInfo) {
+    toast[toastInfo.type](toastInfo.text);
+  } else {
     toast.promise(toastInfo.promise, {
       pending: toastInfo.pending,
       success: toastInfo.success,
       error: toastInfo.error
     });
-  } else toast[toastInfo](text);
+  }
 }
