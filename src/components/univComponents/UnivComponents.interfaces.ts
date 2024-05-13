@@ -1,7 +1,7 @@
 export interface ButtonProps {
   children: string;
   type: 'submit' | 'reset' | 'button';
-  onClick?: () => void;
+  onClick?: (...args: unknown[]) => unknown;
 }
 
 export interface InputProps {
