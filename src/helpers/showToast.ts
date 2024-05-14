@@ -6,9 +6,23 @@ export function showToast(toastInfo: ToastInfo) {
     toast[toastInfo.type](toastInfo.text);
   } else {
     toast.promise(toastInfo.promise, {
-      pending: toastInfo.pending,
-      success: toastInfo.success,
-      error: toastInfo.error
+      pending: {
+        render() {
+          return toastInfo.pending;
+        }
+      },
+      success: {
+        render() {
+          return toastInfo.success;
+        }
+      },
+      error: {
+        render({ data }) {
+          if (data instanceof Error) {
+            return data.message;
+          }
+        }
+      }
     });
   }
 }
