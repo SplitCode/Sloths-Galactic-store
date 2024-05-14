@@ -1,4 +1,5 @@
 import { Formik } from 'formik';
+import { showToast } from '../../../helpers/showToast';
 import { CustomForm } from '../../univComponents/CustomForm/CustomForm';
 import { Input } from '../../univComponents/CustomForm/Input/Input';
 import { Button } from '../../univComponents/Button/Button';
@@ -8,12 +9,20 @@ import { LoginSchema } from '../validationSchemes';
 import type { LoginValues } from '../Main.interfaces';
 import { loginCustomer } from '../../../api/customers/loginCustomer';
 
-const login = async ({ email, password }: LoginValues): Promise<void> => {
+const login = async (values: LoginValues): Promise<void> => {
   try {
-    await loginCustomer({ email, password });
-    console.log('Logined');
+    await loginCustomer(values);
+    showToast({
+      text: 'Successful login!',
+      type: 'success'
+    });
+    values.email = '';
+    values.password = '';
   } catch (error) {
-    console.error('Error:', error);
+    showToast({
+      text: 'Incorrect email or password. Please try again!',
+      type: 'error'
+    });
   }
 };
 
