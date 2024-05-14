@@ -21,6 +21,7 @@
   --main-font: Megatrans;
   --decorative-font: Dune;
   --toastify-color-dark: #242424f1;
+  --highlight-color: rgb(31, 163, 240);
 }
 html {
   font-size: 10px;

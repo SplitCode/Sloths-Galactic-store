@@ -17,4 +17,6 @@ export interface CustomerBody {
   lastName: string;
   dateOfBirth: string;
   addresses: Address[];
+  defaultShippingAddress?: number;
+  defaultBillingAddress?: number;
 }

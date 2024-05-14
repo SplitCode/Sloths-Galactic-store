@@ -4,13 +4,13 @@ import { Input } from '../../univComponents/CustomForm/Input/Input';
 import { Button } from '../../univComponents/Button/Button';
 import { Title } from '../../univComponents/CustomForm/Title/Title';
 import styles from './Register.module.css';
-import { CountrySelect } from './CountrySelect/CountrySelect';
-import { Planets } from './Planets/Planets';
 import { RegisterSchema } from '../validationSchemes';
 import type { RegisterValues } from '../Main.interfaces';
 import { CustomLink } from '../../univComponents/CustomForm/CustomLink/CustomLink';
 import { showToast } from '../../../helpers/showToast';
 import { createCustomer } from '../../../api/customers/createCustomer';
+import { Address } from '../../univComponents/CustomForm/Address/Address';
+import type { CustomerBody } from '../../../api/api.interfaces';
 
 const initialValues: RegisterValues = {
   email: '',
@@ -18,15 +18,17 @@ const initialValues: RegisterValues = {
   firstName: '',
   lastName: '',
   dateOfBirth: '',
-  street: '',
-  city: '',
-  postalCode: '',
-  country: 'Russia',
-  planet: 'earth'
+  address: {
+    street: '',
+    city: '',
+    postalCode: '',
+    country: 'Russia',
+    isDefault: false
+  }
 };
 
 const submitCustomerData = (values: RegisterValues) => {
-  return createCustomer({
+  const customerBody: CustomerBody = {
     email: values.email,
     password: values.password,
     firstName: values.firstName,
@@ -34,13 +36,19 @@ const submitCustomerData = (values: RegisterValues) => {
     dateOfBirth: values.dateOfBirth,
     addresses: [
       {
-        country: values.country === 'Russia' ? 'RU' : 'BY',
-        city: values.city,
-        streetName: values.street,
-        postalCode: values.postalCode
+        country: values.address.country === 'Russia' ? 'RU' : 'BY',
+        city: values.address.city,
+        streetName: values.address.street,
+        postalCode: values.address.postalCode
       }
     ]
-  });
+  };
+
+  if (values.address.isDefault) {
+    customerBody.defaultShippingAddress = 0; // Yes, the magic numbers. In the future, this functionality will be different (in RSS-ECOMM-2_15)
+    customerBody.defaultBillingAddress = 0;
+  }
+  return createCustomer(customerBody);
 };
 
 export function Register() {
@@ -73,17 +81,8 @@ export function Register() {
 
             <Input name={'dateOfBirth'} type="date" placeholder="Date of birth"></Input>
 
-            <CountrySelect name={'country'}></CountrySelect>
+            <Address />
 
-            <div className={styles.inputsGroup}>
-              <Input name={'city'} type="text" placeholder="City"></Input>
-
-              <Input name={'street'} type="text" placeholder="Street"></Input>
-            </div>
-
-            <Input name={'postalCode'} type="text" placeholder="Postal code"></Input>
-
-            <Planets />
             <Button type="submit">Register</Button>
 
             <CustomLink text="Already have an account?" to="/login">
