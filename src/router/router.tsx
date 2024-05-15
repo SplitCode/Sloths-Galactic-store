@@ -6,7 +6,7 @@ import { Home } from '../components/Main/Home/Home';
 import { Catalog } from '../components/Main/Catalog/Catalog';
 import { About } from '../components/Main/About/About';
 import { App } from '../App';
-
+import { ProtectedRoute } from './protected-route';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -19,11 +19,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />
+        element: <ProtectedRoute element={<Login />} withAuth={false} />
       },
       {
         path: '/register',
-        element: <Register />
+        element: <ProtectedRoute element={<Register />} withAuth={false} />
       },
       {
         path: '/catalog',

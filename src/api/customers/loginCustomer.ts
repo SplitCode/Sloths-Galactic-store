@@ -11,8 +11,8 @@ export const loginCustomer = async ({
   email,
   password
 }: Login): Promise<ClientResponse<CustomerSignInResult>> => {
-  const сlient = getPasswordFlowClient(email, password);
-  const ApiRoot = createApiBuilderFromCtpClient(сlient).withProjectKey({
+  const client = getPasswordFlowClient(email, password);
+  const ApiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
     projectKey: ApiData.PROJECT_KEY
   });
   return await ApiRoot.login()

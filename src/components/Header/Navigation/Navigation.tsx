@@ -1,9 +1,9 @@
-import { useLocation } from 'react-router-dom';
 import styles from './Navigation.module.css';
 import { CustomNavLink } from './NavLink';
+import { useAppSelector } from '../../../store/hooks';
 
 export function Navigation() {
-  const locationPath = useLocation().pathname;
+  const isAuth = useAppSelector((state) => state.customer_slice.customerId);
 
   return (
     <nav>
@@ -14,7 +14,7 @@ export function Navigation() {
         <li>
           <CustomNavLink text={'About'} to={`/about`} />
         </li>
-        {locationPath !== '/login' && locationPath !== '/register' && (
+        {!isAuth && (
           <>
             <li>
               <CustomNavLink text={'Login'} to={'/login'} />
