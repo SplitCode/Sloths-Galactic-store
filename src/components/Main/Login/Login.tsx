@@ -25,13 +25,15 @@ export function Login() {
         onSubmit={({ email, password }, { resetForm }) => login({ email, password }, dispatch, resetForm)}
       >
         <CustomForm>
-          <Title mainText={'Login'} additionText={'Welcome back to the future'} />
-          <Input name={'email'} type="text" placeholder="Email" />
-          <Input name={'password'} type="password" placeholder="Password" />
-          <Button type="submit">Login</Button>
-          <CustomLink text="Don't have an account yet?" to="/register">
-            Register
-          </CustomLink>
+          <>
+            <Title mainText={'Login'} additionText={'Welcome back to the future'} />
+            <Input name={'email'} type="text" placeholder="Email" />
+            <Input name={'password'} type="password" placeholder="Password" />
+            <Button type="submit">Login</Button>
+            <CustomLink text="Don't have an account yet?" to="/register">
+              Register
+            </CustomLink>
+          </>
         </CustomForm>
       </Formik>
     </>

@@ -3,14 +3,14 @@ import type { AppDispatch } from '../../../store/store';
 import { showToast } from '../../../helpers/showToast';
 import { setCustomer } from '../../../store/slices/customer-slice';
 import { loginCustomer } from '../../../api/customers/loginCustomer';
-import type { FormikState, FormikValues } from 'formik';
+import type { FormikState } from 'formik';
 import type { RegisterValues } from '../Main.interfaces';
 import type { CustomerBody } from '../../../api/api.interfaces';
 
 export const login = async (
   values: LoginValues,
   dispatch: AppDispatch,
-  resetForm?: (nextState?: Partial<FormikState<FormikValues>>) => void
+  resetForm?: (nextState?: Partial<FormikState<LoginValues>> | undefined) => void
 ): Promise<void> => {
   try {
     await loginCustomer(values).then(({ body }) => {

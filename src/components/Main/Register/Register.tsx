@@ -49,19 +49,21 @@ export function Register() {
         }}
       >
         <CustomForm>
-          <Title mainText={'Register'} additionText={'Welcome to the future'}></Title>
-          <Input name={'email'} type="email" placeholder="Email"></Input>
-          <Input name={'password'} type="password" placeholder="Password"></Input>
-          <div className={styles.inputsGroup}>
-            <Input name={'firstName'} type="text" placeholder="Name"></Input>
-            <Input name={'lastName'} type="text" placeholder="Surname"></Input>
-          </div>
-          <Input name={'dateOfBirth'} type="date" placeholder="Date of birth"></Input>
-          <Address />
-          <Button type="submit">Register</Button>
-          <CustomLink text="Already have an account?" to="/login">
-            Login
-          </CustomLink>
+          <>
+            <Title mainText={'Register'} additionText={'Welcome to the future'}></Title>
+            <Input name={'email'} type="email" placeholder="Email"></Input>
+            <Input name={'password'} type="password" placeholder="Password"></Input>
+            <div className={styles.inputsGroup}>
+              <Input name={'firstName'} type="text" placeholder="Name"></Input>
+              <Input name={'lastName'} type="text" placeholder="Surname"></Input>
+            </div>
+            <Input name={'dateOfBirth'} type="date" placeholder="Date of birth"></Input>
+            <Address />
+            <Button type="submit">Register</Button>
+            <CustomLink text="Already have an account?" to="/login">
+              Login
+            </CustomLink>
+          </>
         </CustomForm>
       </Formik>
     </>
