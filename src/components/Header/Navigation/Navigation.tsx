@@ -9,18 +9,18 @@ export function Navigation() {
     <nav>
       <ul className={styles.navigation_list}>
         <li>
-          <CustomNavLink text={'Catalog'} to={`/catalog`} />
+          <CustomNavLink text={'Каталог'} to={`/catalog`} />
         </li>
         <li>
-          <CustomNavLink text={'About'} to={`/about`} />
+          <CustomNavLink text={'О нас'} to={`/about`} />
         </li>
         {!isAuth && (
           <>
             <li>
-              <CustomNavLink text={'Login'} to={'/login'} />
+              <CustomNavLink text={'Авторизация'} to={'/login'} />
             </li>
             <li>
-              <CustomNavLink text={'Registration'} to={'/register'} />
+              <CustomNavLink text={'Регистрация'} to={'/register'} />
             </li>
           </>
         )}

@@ -12,14 +12,18 @@ export function Address({ name }: { name: 'shipping' | 'billing' }) {
     <fieldset
       className={`${styles.address} ${name === 'billing' && values.shipping.isSameAddress && styles.hidden}`}
     >
-      <legend className={styles.legend}>{name} address</legend>
+      <legend className={styles.legend}>
+        Адрес {name === 'shipping' ? 'доставки' : 'выставления счёта'}
+      </legend>
       <CountrySelect name={`${name}.country`}></CountrySelect>
-      <Input name={`${name}.city`} type="text" placeholder="City"></Input>
-      <Input name={`${name}.street`} type="text" placeholder="Street"></Input>
-      <Input name={`${name}.postalCode`} type="text" placeholder="Postal code"></Input>
-      <Checkbox name={`${name}.isDefault`}>Use as default</Checkbox>
+      <Input name={`${name}.city`} type="text" placeholder="Город"></Input>
+      <Input name={`${name}.street`} type="text" placeholder="Улица"></Input>
+      <Input name={`${name}.postalCode`} type="text" placeholder="Почтовый индекс"></Input>
+      <Checkbox name={`${name}.isDefault`}>Использовать по умолчанию</Checkbox>
 
-      {name === 'shipping' && <Checkbox name={'shipping.isSameAddress'}>Use as the billing address</Checkbox>}
+      {name === 'shipping' && (
+        <Checkbox name={'shipping.isSameAddress'}>Использовать как адрес выставления счёта</Checkbox>
+      )}
     </fieldset>
   );
 }

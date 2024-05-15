@@ -1,3 +1,5 @@
+import type { ErrorResponse } from '@commercetools/platform-sdk';
+
 export interface Login {
   email: string;
   password: string;
@@ -21,4 +23,10 @@ export interface CustomerBody {
   billingAddresses: number[];
   defaultShippingAddress?: number;
   defaultBillingAddress?: number;
+}
+
+export interface ApiError {
+  body: ErrorResponse;
+  statusCode: number;
+  message: string;
 }

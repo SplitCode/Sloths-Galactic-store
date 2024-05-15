@@ -1,7 +1,7 @@
 export function Catalog() {
   return (
     <>
-      <h1>Catalog</h1>
+      <h1>Каталог</h1>
     </>
   );
 }

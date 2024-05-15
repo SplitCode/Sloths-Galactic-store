@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import type { ToastInfo } from './helpers.interfaces';
+import type { ApiError } from '../api/api.interfaces';
 
 export function showToast(toastInfo: ToastInfo) {
   if ('type' in toastInfo) {
@@ -17,10 +18,8 @@ export function showToast(toastInfo: ToastInfo) {
         }
       },
       error: {
-        render({ data }) {
-          if (data instanceof Error) {
-            return data.message;
-          }
+        render({ data }: { data: ApiError }) {
+          return toastInfo.errorHandler(data.body);
         }
       }
     });

@@ -26,12 +26,12 @@ export function Login() {
       >
         <CustomForm>
           <>
-            <Title mainText={'Login'} additionText={'Welcome back to the future'} />
-            <Input name={'email'} type="text" placeholder="Email" />
-            <Input name={'password'} type="password" placeholder="Password" />
-            <Button type="submit">Login</Button>
-            <CustomLink text="Don't have an account yet?" to="/register">
-              Register
+            <Title mainText={'Авторизация'} additionText={'С возвращением'} />
+            <Input name={'email'} type="text" placeholder="Эл. почта" />
+            <Input name={'password'} type="password" placeholder="Пароль" />
+            <Button type="submit">Войти</Button>
+            <CustomLink text="Нет аккаунта?" to="/register">
+              Зарегистрируйтесь
             </CustomLink>
           </>
         </CustomForm>

@@ -15,7 +15,7 @@ export const login = async (
   try {
     await loginCustomer(values).then(({ body }) => {
       showToast({
-        text: 'Successful login!',
+        text: 'Успешная авторизация!',
         type: 'success'
       });
       if (resetForm) {
@@ -25,7 +25,7 @@ export const login = async (
     });
   } catch (error) {
     showToast({
-      text: 'Incorrect email or password. Please try again!',
+      text: 'Неверный адрес эл. почты или пароль. Попробуйте снова!',
       type: 'error'
     });
   }

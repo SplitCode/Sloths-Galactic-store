@@ -6,7 +6,7 @@ export function ErrorPage() {
     <>
       <Header />
       <section className={styles.error_page}>
-        <CustomNavLink text={'Back to your planet'} to={'/'} />
+        <CustomNavLink text={'Вернуться на главную страницу'} to={'/'} />
       </section>
     </>
   );

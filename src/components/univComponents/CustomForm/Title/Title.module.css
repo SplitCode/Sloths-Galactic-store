@@ -1,7 +1,7 @@
 .titleAddition {
   position: absolute;
   top: 30px;
-  font-family: Dune;
+  font-family: var(--decorative-font);
   font-size: 2.5rem;
   width: max-content;
   font-weight: bold;
@@ -16,7 +16,7 @@
 
 .titleMain {
   margin: 18% 0 20px 0;
-  font-family: Dune;
+  font-family: var(--decorative-font);
   font-size: 2rem;
   font-weight: bold;
   text-align: center;

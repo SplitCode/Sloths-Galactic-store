@@ -45,7 +45,7 @@ export function Sidebar() {
                       onPlanetClick(e);
                     }}
                   />
-                  __MARS
+                  _Марс
                 </label>
                 <label className={styles.planet_item}>
                   <Field
@@ -57,7 +57,7 @@ export function Sidebar() {
                       onPlanetClick(e);
                     }}
                   />
-                  __VENUS
+                  _Венера
                 </label>
                 <label className={styles.planet_item}>
                   <Field
@@ -69,7 +69,7 @@ export function Sidebar() {
                       onPlanetClick(e);
                     }}
                   />
-                  __EARTH
+                  _Земля
                 </label>
               </div>
             </Form>

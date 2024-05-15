@@ -1,11 +1,11 @@
 @font-face {
-  font-family: Megatrans;
-  src: url(assets/fonts/megatrans-regular.otf);
+  font-family: MainFont;
+  src: url(assets/fonts/KreadonLightest.ttf);
 }
 
 @font-face {
-  font-family: Dune;
-  src: url(assets/fonts/Dune_Rise.otf);
+  font-family: DecorativeFont;
+  src: url(assets/fonts/spaceagecyrillicregular.ttf);
 }
 
 * {
@@ -18,8 +18,8 @@
   --bg-color: #171717;
   --text-color: #f5f7fc;
   --error-color: #ff0000;
-  --main-font: Megatrans;
-  --decorative-font: Dune;
+  --main-font: MainFont;
+  --decorative-font: DecorativeFont;
   --toastify-color-dark: #242424f1;
   --highlight-color: rgb(31, 163, 240);
 }
@@ -31,7 +31,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-size: 1.6rem;
-  font-family: var(--main-font), serif;
+  font-family: var(--main-font);
 }
 
 li {
