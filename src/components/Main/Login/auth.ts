@@ -32,6 +32,9 @@ export const login = async (
 };
 
 export const formatCustomerData = (values: RegisterValues): CustomerBody => {
+  const shippingIndex = 0;
+  const billingIndex = 1;
+
   const customerBody: CustomerBody = {
     email: values.email,
     password: values.password,
@@ -40,17 +43,33 @@ export const formatCustomerData = (values: RegisterValues): CustomerBody => {
     dateOfBirth: values.dateOfBirth,
     addresses: [
       {
-        country: values.address.country === 'Russia' ? 'RU' : 'BY',
-        city: values.address.city,
-        streetName: values.address.street,
-        postalCode: values.address.postalCode
+        city: values.shipping.city,
+        country: values.shipping.country === 'Russia' ? 'RU' : 'BY',
+        postalCode: values.shipping.postalCode,
+        streetName: values.shipping.street
       }
-    ]
+    ],
+    shippingAddresses: [shippingIndex],
+    billingAddresses: values.shipping.isSameAddress ? [shippingIndex] : [billingIndex]
   };
 
-  if (values.address.isDefault) {
-    customerBody.defaultShippingAddress = 0;
-    customerBody.defaultBillingAddress = 0;
+  if (values.shipping.isSameAddress && values.shipping.isDefault) {
+    customerBody.defaultShippingAddress = shippingIndex;
+    customerBody.defaultBillingAddress = shippingIndex;
+  } else if (!values.shipping.isSameAddress) {
+    customerBody.addresses.push({
+      city: values.billing.city,
+      country: values.shipping.country === 'Russia' ? 'RU' : 'BY',
+      postalCode: values.billing.postalCode,
+      streetName: values.billing.street
+    });
+
+    if (values.shipping.isDefault) {
+      customerBody.defaultShippingAddress = shippingIndex;
+    }
+    if (values.billing.isDefault) {
+      customerBody.defaultBillingAddress = billingIndex;
+    }
   }
 
   return customerBody;

@@ -5,7 +5,7 @@ export function Checkbox({ children, name }: { children: string; name: string })
   return (
     <label className={styles.label}>
       {children}
-      <Field className={styles.checkbox} name={`address.${name}`} type="checkbox" />
+      <Field className={styles.checkbox} name={name} type="checkbox" />
     </label>
   );
 }

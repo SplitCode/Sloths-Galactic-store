@@ -5,9 +5,18 @@
   gap: 35px;
   width: 100%;
   padding: 25px 10px;
+  transition: 0.3s;
 }
 
 .legend {
   padding: 8px;
   letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.hidden {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.4;
+  transform: scale(0.6);
 }

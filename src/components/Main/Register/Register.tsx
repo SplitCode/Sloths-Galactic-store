@@ -19,7 +19,15 @@ const initialValues: RegisterValues = {
   firstName: '',
   lastName: '',
   dateOfBirth: '',
-  address: {
+  shipping: {
+    street: '',
+    city: '',
+    postalCode: '',
+    country: 'Russia',
+    isDefault: false,
+    isSameAddress: false
+  },
+  billing: {
     street: '',
     city: '',
     postalCode: '',
@@ -58,7 +66,10 @@ export function Register() {
               <Input name={'lastName'} type="text" placeholder="Surname"></Input>
             </div>
             <Input name={'dateOfBirth'} type="date" placeholder="Date of birth"></Input>
-            <Address />
+
+            <Address name="shipping" />
+            <Address name="billing" />
+
             <Button type="submit">Register</Button>
             <CustomLink text="Already have an account?" to="/login">
               Login

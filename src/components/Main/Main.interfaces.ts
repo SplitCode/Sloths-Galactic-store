@@ -7,7 +7,7 @@ export interface LoginValues {
   password: string;
 }
 
-interface AddressField {
+interface BillingAddress {
   street: string;
   city: string;
   postalCode: string;
@@ -15,9 +15,14 @@ interface AddressField {
   isDefault: boolean;
 }
 
+interface ShippingAddress extends BillingAddress {
+  isSameAddress: boolean;
+}
+
 export interface RegisterValues extends LoginValues {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
-  address: AddressField;
+  shipping: ShippingAddress;
+  billing: BillingAddress;
 }
