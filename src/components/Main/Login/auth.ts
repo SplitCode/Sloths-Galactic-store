@@ -13,16 +13,16 @@ export const login = async (
   resetForm?: (nextState?: Partial<FormikState<LoginValues>> | undefined) => void
 ): Promise<void> => {
   try {
-    await loginCustomer(values).then(({ body }) => {
-      showToast({
-        text: 'Успешная авторизация!',
-        type: 'success'
-      });
-      if (resetForm) {
-        resetForm();
-      }
-      dispatch(setCustomer(body.customer));
+    const { email, password } = values;
+    const response = await loginCustomer(email, password);
+    showToast({
+      text: 'Успешная авторизация!',
+      type: 'success'
     });
+    if (resetForm) {
+      resetForm();
+    }
+    dispatch(setCustomer(response.customer));
   } catch (error) {
     showToast({
       text: 'Неверный адрес эл. почты или пароль. Попробуйте снова!',

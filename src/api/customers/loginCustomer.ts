@@ -1,26 +1,28 @@
-import {
-  createApiBuilderFromCtpClient,
-  type ClientResponse,
-  type CustomerSignInResult
-} from '@commercetools/platform-sdk';
-import type { Login } from '../api.interfaces';
+import { type CustomerSignInResult } from '@commercetools/platform-sdk';
 import { getPasswordFlowClient } from '../BuildClient';
-import { ApiData } from '../apiData';
+import { myToken } from '../tokenCache';
 
-export const loginCustomer = async ({
-  email,
-  password
-}: Login): Promise<ClientResponse<CustomerSignInResult>> => {
-  const client = getPasswordFlowClient(email, password);
-  const ApiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
-    projectKey: ApiData.PROJECT_KEY
+export async function loginCustomer(email: string, password: string): Promise<CustomerSignInResult> {
+  myToken.set({
+    token: '',
+    expirationTime: 0,
+    refreshToken: ''
   });
-  return await ApiRoot.login()
-    .post({
-      body: {
-        email,
-        password
-      }
-    })
-    .execute();
-};
+  try {
+    const client = getPasswordFlowClient(email, password);
+    const response = await client
+      .login()
+      .post({
+        body: {
+          email,
+          password
+        }
+      })
+      .execute();
+    localStorage.setItem('sloth-refreshToken', myToken.get().refreshToken || '');
+    return response.body;
+  } catch (error) {
+    console.error('Error occurred during login:', error);
+    throw error;
+  }
+}
