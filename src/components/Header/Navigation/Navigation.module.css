@@ -1,6 +1,7 @@
 .navigation_list {
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .active {

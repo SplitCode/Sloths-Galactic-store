@@ -7,6 +7,7 @@ import { Catalog } from '../components/Main/Catalog/Catalog';
 import { About } from '../components/Main/About/About';
 import { App } from '../App';
 import { ProtectedRoute } from './protected-route';
+import { Profile } from '../components/Main/Profile/Profile';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: '/about',
         element: <About />
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       }
     ]
   }

@@ -5,7 +5,7 @@ export function CustomNavLink({
   to
 }: {
   text: string;
-  to: '/login' | '/register' | '/catalog' | '/about' | '/';
+  to: '/login' | '/register' | '/catalog' | '/about' | '/' | '/profile';
 }) {
   return (
     <NavLink className={({ isActive }) => (isActive ? styles.active : styles.nav_link)} to={to}>

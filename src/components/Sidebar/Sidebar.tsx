@@ -9,7 +9,7 @@ import { BgPlanets } from './Bg-planets';
 export function Sidebar() {
   const dispatch = useAppDispatch();
   const locationPath = useLocation().pathname;
-  const isShow = ['/catalog', '/', '/about'].includes(locationPath);
+  const isShow = ['/catalog', '/', '/about', '/profile'].includes(locationPath);
   const planet = useAppSelector((state) => state.planet_slice.planet);
   const onPlanetClick = (e: Event) => {
     if (e.target instanceof HTMLInputElement) {
