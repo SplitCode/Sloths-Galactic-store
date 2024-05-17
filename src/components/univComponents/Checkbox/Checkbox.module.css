@@ -1,6 +1,6 @@
 .label {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   align-items: center;
   letter-spacing: 2px;
   cursor: pointer;
@@ -12,8 +12,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
 }
 
 .checkbox:checked {
@@ -33,17 +33,17 @@
 .checkbox:checked::after {
   border: 2px solid var(--highlight-color);
   box-shadow:
-    inset 0 0 5px var(--highlight-color),
-    0 0 5px var(--highlight-color),
-    0 0 15px var(--highlight-color),
-    0 0 30px var(--highlight-color),
-    0 0 60px var(--highlight-color);
+    inset 0 0 0.5rem var(--highlight-color),
+    0 0 0.5rem var(--highlight-color),
+    0 0 1.5rem var(--highlight-color),
+    0 0 3rem var(--highlight-color),
+    0 0 6rem var(--highlight-color);
 }
 
 .checkbox::before {
   content: '';
   position: absolute;
-  bottom: 3px;
+  bottom: 0.3rem;
   transform: rotate(360deg) scale(0);
   width: 20%;
   height: 65%;
@@ -54,7 +54,7 @@
 
 .checkbox:checked::before {
   transform: rotate(45deg) scale(1);
-  filter: drop-shadow(0 0 5px var(--highlight-color));
+  filter: drop-shadow(0 0 0.5rem var(--highlight-color));
 }
 
 @keyframes checkboxAnimation {

@@ -8,7 +8,10 @@ export function CustomNavLink({
   to: '/login' | '/register' | '/catalog' | '/about' | '/' | '/profile';
 }) {
   return (
-    <NavLink className={({ isActive }) => (isActive ? styles.active : styles.nav_link)} to={to}>
+    <NavLink
+      className={({ isActive }) => (isActive ? `${styles.active} ${styles.nav_link}` : styles.nav_link)}
+      to={to}
+    >
       {text}
     </NavLink>
   );

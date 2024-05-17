@@ -1,4 +1,10 @@
 .logo {
   width: 5rem;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 12px 15px var(--light-shadow-color));
 }

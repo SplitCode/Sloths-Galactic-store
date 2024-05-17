@@ -9,19 +9,18 @@
 }
 
 .form {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 35px;
+  gap: 3.5rem;
   width: 60vw;
-  height: 100%;
+  height: max-content;
   min-height: 100dvh;
-  margin: 0 auto;
+  margin: -7.5rem auto 0 auto;
   max-width: 600px;
-  padding: 25px 15px;
+  padding: 2.5rem 1.5rem;
   color: #ffffff;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.882) 5%, rgb(35, 35, 35) 100%);
-  box-shadow: 0 0 15px 3px rgb(26, 26, 26);
+  box-shadow: 0 0 1.5rem 0.3rem rgb(26, 26, 26);
 }

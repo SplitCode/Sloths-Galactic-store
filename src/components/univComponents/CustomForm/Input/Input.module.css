@@ -5,7 +5,7 @@
 
 .field {
   width: 100%;
-  padding: 6px;
+  padding: 0.6rem;
   background-color: transparent;
   outline: none;
   border: none;
@@ -17,9 +17,9 @@
 
 .field[type='date']::-webkit-calendar-picker-indicator {
   background-color: #ffffff;
-  padding: 5px;
+  padding: 0.5rem;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
 .line {
