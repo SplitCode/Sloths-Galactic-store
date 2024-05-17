@@ -7,11 +7,9 @@ import {
   type RefreshAuthMiddlewareOptions
 } from '@commercetools/sdk-client-v2';
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk';
-import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { ApiData } from './apiData';
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import { myToken } from './tokenCache';
-
 
 const authMiddlewareOptions: AuthMiddlewareOptions = {
   host: ApiData.AUTH_URL,
