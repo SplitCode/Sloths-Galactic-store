@@ -2,6 +2,7 @@
   width: 5rem;
   cursor: pointer;
   transition: 0.3s;
+  margin-bottom: 1rem;
 }
 
 .logo:hover {

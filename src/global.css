@@ -8,6 +8,11 @@
   src: url(assets/fonts/spaceagecyrillicregular.ttf);
 }
 
+@font-face {
+  font-family: LogoFont;
+  src: url(assets/fonts/Megatrans.otf);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,12 +24,14 @@
   --text-color: #f5f7fc;
   --error-color: #ff0000;
   --main-font: MainFont;
+  --add-font: LogoFont;
   --decorative-font: DecorativeFont;
   --toastify-color-dark: #242424f1;
   --highlight-color: rgb(31, 163, 240);
   --header-background: rgba(20, 20, 20, 0.7);
   --light-shadow-color: #ffffff88;
 }
+
 html {
   font-size: 10px;
 }

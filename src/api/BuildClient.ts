@@ -6,6 +6,7 @@ import {
   type PasswordAuthMiddlewareOptions,
   type RefreshAuthMiddlewareOptions
 } from '@commercetools/sdk-client-v2';
+import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk';
 import { ApiData } from './apiData';
 import { myToken } from './tokenCache';
