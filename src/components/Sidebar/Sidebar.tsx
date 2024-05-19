@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import type { Planet } from '../../store/slices/planet-slice';
 import { choosePlanet } from '../../store/slices/planet-slice';
+import { useState } from 'react';
+import arrowIcon from '../../assets/img/arrow.svg';
 import { BgPlanets } from './Bg-planets';
 
 export function Sidebar() {
@@ -11,10 +13,13 @@ export function Sidebar() {
   const locationPath = useLocation().pathname;
   const isShow = ['/catalog', '/', '/about', '/profile'].includes(locationPath);
   const planet = useAppSelector((state) => state.planet_slice.planet);
+  const [isSidebarVisible, setVisibility] = useState<boolean>(false);
+
   const onPlanetClick = (e: Event) => {
     if (e.target instanceof HTMLInputElement) {
       const value = e.target.value as Planet;
       if (value !== planet) {
+        setVisibility(false);
         dispatch(choosePlanet(value));
       }
     }
@@ -23,8 +28,8 @@ export function Sidebar() {
   return (
     isShow && (
       <>
-        <aside className={styles.sidebar}>
-          <BgPlanets />
+        <BgPlanets />
+        <aside className={styles.sidebar + ' ' + (isSidebarVisible ? styles.sidebar__visible : '')}>
           <Formik
             initialValues={{
               picked: planet
@@ -33,7 +38,7 @@ export function Sidebar() {
               console.log(values);
             }}
           >
-            <Form>
+            <Form className={styles.form}>
               <div role="group" aria-labelledby="my-radio-group" className={styles.planet_list}>
                 <label className={styles.planet_item}>
                   <Field
@@ -71,6 +76,9 @@ export function Sidebar() {
                   />
                   _Земля
                 </label>
+              </div>
+              <div onClick={() => setVisibility(!isSidebarVisible)} className={styles.arrow_wrapper}>
+                <img src={arrowIcon} alt="arrow" className={styles.arrow} />
               </div>
             </Form>
           </Formik>

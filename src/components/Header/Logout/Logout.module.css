@@ -23,14 +23,16 @@
   transform: scaleX(0);
   transform-origin: right;
   background-color: #ffffff;
-  box-shadow: 0 0px 12px 0.5px transparent;
+  box-shadow: 0 0 12px 0.5px transparent;
   border-radius: 1rem;
   transition:
     transform 0.3s ease-out,
     box-shadow 0.3s ease-out;
 }
 
-.button:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
+@media (hover: hover) and (pointer: fine) {
+  .button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }

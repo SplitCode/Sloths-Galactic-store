@@ -36,3 +36,9 @@
 .field:focus ~ .line {
   transform: scaleX(1);
 }
+
+@media (max-width: 860px) {
+  .label {
+    width: 90%;
+  }
+}

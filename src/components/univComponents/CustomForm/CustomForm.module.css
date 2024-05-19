@@ -16,11 +16,24 @@
   gap: 3.5rem;
   width: 60vw;
   height: max-content;
-  min-height: 100dvh;
-  margin: -7.5rem auto 0 auto;
+  min-height: calc(100dvh - var(--header-height));
+  margin: 0 auto;
   max-width: 600px;
   padding: 2.5rem 1.5rem;
   color: #ffffff;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.882) 5%, rgb(35, 35, 35) 100%);
   box-shadow: 0 0 1.5rem 0.3rem rgb(26, 26, 26);
+}
+
+@media (max-width: 1150px) {
+  .form {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .form {
+    font-size: 1.4rem;
+    width: 100%;
+  }
 }

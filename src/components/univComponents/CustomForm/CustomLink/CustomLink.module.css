@@ -6,7 +6,8 @@
 .link {
   color: rgb(206, 206, 206);
 }
-
-.link:hover {
-  color: rgb(255, 255, 255);
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: rgb(255, 255, 255);
+  }
 }

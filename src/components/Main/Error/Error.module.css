@@ -13,3 +13,16 @@
 .error_page a {
   z-index: 1;
 }
+@media (max-width: 860px) {
+  .error_page {
+    padding: 25% 0 0 15%;
+  }
+}
+@media (max-width: 580px) {
+  .error_page {
+    padding: 45% 0 0 15%;
+  }
+  .error_page a {
+    width: 20rem;
+  }
+}

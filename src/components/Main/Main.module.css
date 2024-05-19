@@ -3,5 +3,17 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-  padding-top: 7.5rem;
+  padding-top: var(--header-height);
+  overflow-x: hidden;
+}
+@media (max-width: 860px) {
+  .main {
+    padding: var(--header-height) 6rem 0;
+  }
+}
+
+@media (max-width: 580px) {
+  .main {
+    padding: var(--header-height) 4rem 0;
+  }
 }

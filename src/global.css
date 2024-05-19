@@ -30,6 +30,8 @@
   --highlight-color: rgb(31, 163, 240);
   --header-background: rgba(20, 20, 20, 0.7);
   --light-shadow-color: #ffffff88;
+  --dark-transparent-background: rgba(20, 20, 20, 0.7);
+  --header-height: 8rem;
 }
 
 html {
@@ -62,7 +64,7 @@ h1 {
 }
 
 ::-webkit-scrollbar {
-  background-color: var(--header-background);
+  background-color: var(--dark-transparent-background);
 }
 
 ::-webkit-scrollbar-thumb {
