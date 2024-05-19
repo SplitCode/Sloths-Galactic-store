@@ -1,0 +1,53 @@
+.loader_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+.loader {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 8rem;
+  border: 0.3rem solid rgba(255, 255, 255, 0.7);
+  top: 28%;
+  top: -webkit-calc(50% - 4.3rem);
+  top: calc(50% - 4.3rem);
+  left: 35%;
+  left: -webkit-calc(50% - 4.3rem);
+  left: calc(50% - 4.3rem);
+
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-animation: loader1 3s linear infinite;
+  animation: loader1 3s linear infinite;
+}
+
+.loader:after {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 1rem;
+  background-color: #fff;
+}
+
+@-webkit-keyframes loader1 {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes loader1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

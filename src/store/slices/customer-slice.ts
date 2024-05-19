@@ -2,12 +2,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Customer } from '@commercetools/platform-sdk';
 export interface customerSliceState {
-  customerId: null | string;
+  customerId: null | string | undefined;
   customerName: null | string | undefined;
 }
 const initialState: customerSliceState = {
-  customerId: null,
-  customerName: null
+  customerId: undefined,
+  customerName: undefined
 };
 export const customerSlice = createSlice({
   name: 'customer_slice',
