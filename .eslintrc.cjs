@@ -8,7 +8,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime'
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'coverage'],
   parser: '@typescript-eslint/parser',
   rules: {
     'import/no-default-export': 'error',
