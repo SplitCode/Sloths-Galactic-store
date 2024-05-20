@@ -32,7 +32,6 @@ export const ctpClient = new ClientBuilder()
   .withProjectKey(ApiData.PROJECT_KEY)
   .withClientCredentialsFlow(authMiddlewareOptions)
   .withHttpMiddleware(httpMiddlewareOptions)
-  .withLoggerMiddleware()
   .build();
 
 export const getPasswordFlowClient = (email: string, password: string) => {
@@ -55,7 +54,6 @@ export const getPasswordFlowClient = (email: string, password: string) => {
   const client = new ClientBuilder()
     .withPasswordFlow(options)
     .withHttpMiddleware(httpMiddlewareOptions)
-    .withLoggerMiddleware()
     .build();
 
   const ApiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
@@ -80,7 +78,6 @@ export const getRefreshFlowClient = (): ByProjectKeyRequestBuilder => {
   const client = new ClientBuilder()
     .withRefreshTokenFlow(options)
     .withHttpMiddleware(httpMiddlewareOptions)
-    .withLoggerMiddleware()
     .build();
 
   const ApiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
