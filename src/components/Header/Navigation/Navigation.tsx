@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../store/hooks';
 import { Logout } from '../Logout/Logout';
 import type { NavigationProps } from '../Header.interfaces';
 
-export function Navigation({ menuOpen, toggleMenuOpen }: NavigationProps) {
+export function Navigation({ menuOpen, toggleMenuOpen }: Required<NavigationProps>) {
   const isAuth = useAppSelector((state) => state.customer_slice.customerId);
 
   return (
@@ -32,7 +32,7 @@ export function Navigation({ menuOpen, toggleMenuOpen }: NavigationProps) {
               <CustomNavLink text={'Профиль'} to={'/profile'} toggleMenuOpen={toggleMenuOpen} />
             </li>
             <li>
-              <Logout />
+              <Logout toggleMenuOpen={toggleMenuOpen} />
             </li>
           </>
         )}
