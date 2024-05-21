@@ -3,7 +3,7 @@ import { Register } from './Register';
 import { expect, test } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './../../../store/store';
+import { store } from '../../../store/store';
 
 test('renders register form correctly', () => {
   render(
