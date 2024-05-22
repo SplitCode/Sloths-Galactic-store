@@ -22,7 +22,9 @@ export function Login() {
       <Formik
         initialValues={initialValues}
         validationSchema={LoginSchema}
-        onSubmit={({ email, password }, { resetForm }) => login({ email, password }, dispatch, resetForm)}
+        onSubmit={async (values: LoginValues, { resetForm }) => {
+          await login(values, dispatch, resetForm);
+        }}
       >
         <CustomForm>
           <>

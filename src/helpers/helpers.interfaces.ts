@@ -13,3 +13,8 @@ export interface PromiseToast {
 }
 
 export type ToastInfo = SimpleToast | PromiseToast;
+
+export enum ErrorMessages {
+  duplicateField = 'Уже есть существующий клиент с указанным адресом электронной почты.',
+  invalidLogin = 'Неверный адрес эл. почты или пароль. Попробуйте снова!'
+}
