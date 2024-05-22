@@ -6,10 +6,9 @@ export enum Planets {
   venus = 'Venus',
   mars = 'Mars'
 }
-export type Planet = 'Earth' | 'Venus' | 'Mars';
 
 export interface planetSliceState {
-  planet: null | Planet;
+  planet: null | Planets;
 }
 
 const initialState: planetSliceState = {
@@ -19,7 +18,7 @@ export const planetSlice = createSlice({
   name: 'planet_slice',
   initialState,
   reducers: {
-    choosePlanet(state, action: PayloadAction<Planet>) {
+    choosePlanet(state, action: PayloadAction<Planets>) {
       state.planet = action.payload;
     }
   }

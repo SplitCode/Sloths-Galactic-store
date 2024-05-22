@@ -4,24 +4,27 @@ import { Main } from './components/Main/Main';
 import { Header } from './components/Header/Header';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { ToastContainer } from 'react-toastify';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { reloginCustomer } from './api/customers/reloginCustomer';
 import { useAppDispatch, useAppSelector } from './store/hooks';
-import { deleteCustomer } from './store/slices/customer-slice';
 import { Loader } from './components/Main/Loader/Loader';
 
 export function App() {
   const dispatch = useAppDispatch();
   const customer = useAppSelector((state) => state.customer_slice.customerId);
+  const [isToken, setToken] = useState(false);
 
   useEffect(() => {
     const refreshToken = localStorage.getItem('sloth-refreshToken');
     if (refreshToken) {
+      setToken(true);
       reloginCustomer(dispatch);
-    } else dispatch(deleteCustomer());
-  }, [dispatch]);
+    } else {
+      setToken(false);
+    }
+  }, [dispatch, customer]);
 
-  return customer === undefined ? (
+  return !customer && isToken ? (
     <Loader />
   ) : (
     <>

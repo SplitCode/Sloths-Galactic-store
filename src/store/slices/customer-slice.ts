@@ -2,12 +2,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Customer } from '@commercetools/platform-sdk';
 export interface customerSliceState {
-  customerId: null | string | undefined;
-  customerName: null | string | undefined;
+  customerId: null | string;
+  customerName: null | string;
 }
 const initialState: customerSliceState = {
-  customerId: undefined,
-  customerName: undefined
+  customerId: null,
+  customerName: null
 };
 export const customerSlice = createSlice({
   name: 'customer_slice',
@@ -15,7 +15,7 @@ export const customerSlice = createSlice({
   reducers: {
     setCustomer(state, action: PayloadAction<Customer>) {
       state.customerId = action.payload.id;
-      state.customerName = action.payload.firstName;
+      state.customerName = action.payload.firstName || null;
     },
     deleteCustomer(state) {
       state.customerId = null;

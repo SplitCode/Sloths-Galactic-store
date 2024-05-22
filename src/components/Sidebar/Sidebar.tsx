@@ -1,9 +1,8 @@
-import { Field, Form, Formik } from 'formik';
 import styles from './Sidebar.module.css';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import type { Planet } from '../../store/slices/planet-slice';
-import { choosePlanet } from '../../store/slices/planet-slice';
+import { choosePlanet, Planets } from '../../store/slices/planet-slice';
+import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
 import arrowIcon from '../../assets/img/arrow.svg';
 import { BgPlanets } from './Bg-planets';
@@ -15,9 +14,9 @@ export function Sidebar() {
   const planet = useAppSelector((state) => state.planet_slice.planet);
   const [isSidebarVisible, setVisibility] = useState<boolean>(false);
 
-  const onPlanetClick = (e: Event) => {
+  const onPlanetClick: MouseEventHandler<HTMLInputElement> = (e) => {
     if (e.target instanceof HTMLInputElement) {
-      const value = e.target.value as Planet;
+      const value = e.target.value as Planets;
       if (value !== planet) {
         setVisibility(false);
         dispatch(choosePlanet(value));
@@ -30,58 +29,46 @@ export function Sidebar() {
       <>
         <BgPlanets />
         <aside className={styles.sidebar + ' ' + (isSidebarVisible ? styles.sidebar__visible : '')}>
-          <Formik
-            initialValues={{
-              picked: planet
-            }}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
-          >
-            <Form className={styles.form}>
-              <div role="group" aria-labelledby="my-radio-group" className={styles.planet_list}>
-                <label className={styles.planet_item}>
-                  <Field
-                    type="radio"
-                    name="picked"
-                    value="Mars"
-                    className={styles.planet + ' ' + styles.mars}
-                    onClick={(e: Event) => {
-                      onPlanetClick(e);
-                    }}
-                  />
-                  _Марс
-                </label>
-                <label className={styles.planet_item}>
-                  <Field
-                    type="radio"
-                    name="picked"
-                    value="Venus"
-                    className={styles.planet + ' ' + styles.venus}
-                    onClick={(e: Event) => {
-                      onPlanetClick(e);
-                    }}
-                  />
-                  _Венера
-                </label>
-                <label className={styles.planet_item}>
-                  <Field
-                    type="radio"
-                    name="picked"
-                    value="Earth"
-                    className={styles.planet + ' ' + styles.earth}
-                    onClick={(e: Event) => {
-                      onPlanetClick(e);
-                    }}
-                  />
-                  _Земля
-                </label>
-              </div>
-              <div onClick={() => setVisibility(!isSidebarVisible)} className={styles.arrow_wrapper}>
-                <img src={arrowIcon} alt="arrow" className={styles.arrow} />
-              </div>
-            </Form>
-          </Formik>
+          <form className={styles.form}>
+            <div className={styles.planet_list}>
+              <label className={styles.planet_item}>
+                <input
+                  type="radio"
+                  name="picked"
+                  value={Planets.mars}
+                  className={styles.planet + ' ' + styles.mars}
+                  defaultChecked={planet === Planets.mars}
+                  onClick={onPlanetClick}
+                />
+                _Марс
+              </label>
+              <label className={styles.planet_item}>
+                <input
+                  type="radio"
+                  name="picked"
+                  value={Planets.venus}
+                  className={styles.planet + ' ' + styles.venus}
+                  defaultChecked={planet === Planets.venus}
+                  onClick={onPlanetClick}
+                />
+                _Венера
+              </label>
+              <label className={styles.planet_item}>
+                <input
+                  type="radio"
+                  name="picked"
+                  value={Planets.earth}
+                  defaultChecked={planet === Planets.earth}
+                  className={styles.planet + ' ' + styles.earth}
+                  onClick={onPlanetClick}
+                />
+                _Земля
+              </label>
+            </div>
+            <div onClick={() => setVisibility(!isSidebarVisible)} className={styles.arrow_wrapper}>
+              <img src={arrowIcon} alt="arrow" className={styles.arrow} />
+            </div>
+          </form>
         </aside>
       </>
     )

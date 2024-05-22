@@ -8,6 +8,7 @@ import { About } from '../components/Main/About/About';
 import { App } from '../App';
 import { ProtectedRoute } from './protected-route';
 import { Profile } from '../components/Main/Profile/Profile';
+import { AnonymousRoute } from './anonymous-route';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -20,11 +21,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <ProtectedRoute element={<Login />} withAuth={false} />
+        element: <AnonymousRoute element={<Login />} />
       },
       {
         path: '/register',
-        element: <ProtectedRoute element={<Register />} withAuth={false} />
+        element: <AnonymousRoute element={<Register />} />
       },
       {
         path: '/catalog',
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <Profile />
+        element: <ProtectedRoute element={<Profile />} />
       }
     ]
   }
