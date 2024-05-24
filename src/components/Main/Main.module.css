@@ -4,16 +4,16 @@
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
-  padding: var(--header-height) 2rem 0;
+  padding: var(--header-height) 1rem 0 16rem;
 }
 @media (max-width: 860px) {
   .main {
-    padding: var(--header-height) 6rem 0;
+    padding: var(--header-height) 1rem 0 6rem;
   }
 }
 
 @media (max-width: 580px) {
   .main {
-    padding: var(--header-height) 4rem 0;
+    padding: var(--header-height) 1rem 0 5rem;
   }
 }

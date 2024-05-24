@@ -25,13 +25,15 @@
 }
 
 .sidebar {
-  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 100dvh;
   padding: 0 2rem;
-  position: fixed;
-  z-index: 1;
 }
 
 .planet_list {
@@ -125,6 +127,7 @@
   .sidebar {
     z-index: 1;
     position: fixed;
+    left: 1rem;
     transform: translateX(calc(-100% + 5rem));
     transition: 0.4s;
   }
@@ -162,6 +165,7 @@
   }
 
   .sidebar {
+    left: 0;
     padding: 0;
     transform: translateX(calc(-100% + 4rem));
   }

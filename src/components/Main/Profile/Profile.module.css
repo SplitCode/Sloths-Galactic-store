@@ -1,0 +1,51 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.profile_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  width: max-content;
+  height: 100%;
+  padding: 2rem;
+  background-color: rgba(6, 6, 6, 0.5);
+  backdrop-filter: blur(0.5rem);
+}
+
+.avatar {
+  width: 6rem;
+}
+
+.personal_data,
+.addresses_data {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 2rem;
+  gap: 1rem;
+}
+
+.address_data {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.legend {
+  padding: 0.5rem;
+}
+
+.address_label {
+  color: var(--highlight-color);
+  font-weight: bold;
+  text-align: center;
+}

@@ -1,14 +1,22 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Customer } from '@commercetools/platform-sdk';
-export interface customerSliceState {
+import { getCustomer } from '../../api/customers/getCustomer';
+
+export interface CustomerSliceState {
   customerId: null | string;
   customerName: null | string;
+  isCustomerLoading: boolean;
+  customerData?: Customer;
+  errorMessage?: string;
 }
-const initialState: customerSliceState = {
+
+const initialState: CustomerSliceState = {
   customerId: null,
-  customerName: null
+  customerName: null,
+  isCustomerLoading: false
 };
+
 export const customerSlice = createSlice({
   name: 'customer_slice',
   initialState,
@@ -21,6 +29,20 @@ export const customerSlice = createSlice({
       state.customerId = null;
       state.customerName = null;
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCustomer.pending, (state: CustomerSliceState) => {
+        state.isCustomerLoading = true;
+      })
+      .addCase(getCustomer.fulfilled, (state: CustomerSliceState, action) => {
+        state.customerData = action.payload;
+        state.isCustomerLoading = false;
+      })
+      .addCase(getCustomer.rejected, (state: CustomerSliceState, action) => {
+        state.errorMessage = action.error.message;
+        state.isCustomerLoading = false;
+      });
   }
 });
 

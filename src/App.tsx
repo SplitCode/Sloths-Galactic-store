@@ -30,9 +30,11 @@ export function App() {
     <>
       <ToastContainer autoClose={4000} draggable limit={5} theme="dark" />
       <Header />
-      <Sidebar />
       <Main>
-        <Outlet />
+        <>
+          <Sidebar />
+          <Outlet />
+        </>
       </Main>
     </>
   );

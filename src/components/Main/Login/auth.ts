@@ -57,7 +57,7 @@ export const formatCustomerData = (values: RegisterValues): CustomerBody => {
   } else if (!values.shipping.isSameAddress) {
     customerBody.addresses.push({
       city: values.billing.city,
-      country: values.shipping.country === 'Russia' ? 'RU' : 'BY',
+      country: values.billing.country === 'Russia' ? 'RU' : 'BY',
       postalCode: values.billing.postalCode,
       streetName: values.billing.street
     });
@@ -69,6 +69,5 @@ export const formatCustomerData = (values: RegisterValues): CustomerBody => {
       customerBody.defaultBillingAddress = billingIndex;
     }
   }
-
   return customerBody;
 };
