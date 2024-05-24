@@ -1,20 +1,39 @@
-import { useEffect } from 'react'; //only for test
 import './App.css';
-import { getProject } from './api/apiRoot'; //only for test
+import { Outlet } from 'react-router-dom';
+import { Main } from './components/Main/Main';
+import { Header } from './components/Header/Header';
+import { Sidebar } from './components/Sidebar/Sidebar';
+import { ToastContainer } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { reloginCustomer } from './api/customers/reloginCustomer';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { Loader } from './components/Main/Loader/Loader';
 
-function App() {
-  // only for test
+export function App() {
+  const dispatch = useAppDispatch();
+  const customer = useAppSelector((state) => state.customer_slice.customerId);
+  const [isToken, setToken] = useState(false);
+
   useEffect(() => {
-    getProject()
-      .then((result) => console.log(result))
-      .catch((error) => console.error('Error:', error));
-  }, []);
+    const refreshToken = localStorage.getItem('sloth-refreshToken');
+    if (refreshToken) {
+      setToken(true);
+      reloginCustomer(dispatch);
+    } else {
+      setToken(false);
+    }
+  }, [dispatch, customer]);
 
-  return (
+  return !customer && isToken ? (
+    <Loader />
+  ) : (
     <>
-      <h1>Final task</h1>
+      <ToastContainer autoClose={4000} draggable limit={5} theme="dark" />
+      <Header />
+      <Sidebar />
+      <Main>
+        <Outlet />
+      </Main>
     </>
   );
 }
-
-export default App;

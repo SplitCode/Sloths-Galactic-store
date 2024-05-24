@@ -1,0 +1,28 @@
+.error_page {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100vw;
+  padding: 25% 0 0 25%;
+  background: url('../../../assets/img/404.png') no-repeat center;
+  background-size: cover;
+}
+
+.error_page a {
+  z-index: 1;
+}
+@media (max-width: 860px) {
+  .error_page {
+    padding: 25% 0 0 15%;
+  }
+}
+@media (max-width: 580px) {
+  .error_page {
+    padding: 45% 0 0 15%;
+  }
+  .error_page a {
+    width: 20rem;
+  }
+}

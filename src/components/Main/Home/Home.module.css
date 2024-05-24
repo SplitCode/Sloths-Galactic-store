@@ -1,0 +1,14 @@
+.home_page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.home_page_title {
+  margin-bottom: 4rem;
+}
+.links_list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}

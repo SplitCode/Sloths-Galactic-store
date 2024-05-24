@@ -1,0 +1,38 @@
+.button {
+  position: relative;
+  display: flex;
+  max-height: 5rem;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: var(--main-font);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  background-color: transparent;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: right;
+  background-color: #ffffff;
+  box-shadow: 0 0 12px 0.5px transparent;
+  border-radius: 1rem;
+  transition:
+    transform 0.3s ease-out,
+    box-shadow 0.3s ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}

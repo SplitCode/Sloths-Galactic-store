@@ -1,0 +1,18 @@
+.header {
+  z-index: 2;
+  position: fixed;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: var(--dark-transparent-background);
+  backdrop-filter: blur(5px);
+}
+
+.header_title {
+  font-size: 1.6rem;
+  font-family: var(--add-font);
+  margin-left: 1rem;
+}

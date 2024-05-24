@@ -1,0 +1,48 @@
+.titleAddition {
+  font-family: var(--decorative-font);
+  font-size: 2.5rem;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #707070 0, white 30%, #707070 40%);
+  background-size: 50%;
+  background-clip: text;
+  color: transparent;
+  animation: shine 2.2s linear infinite;
+}
+
+.titleMain {
+  margin: 2rem 0;
+  font-family: var(--decorative-font);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+
+  100% {
+    background-position: 100%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .titleAddition {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .titleAddition {
+    font-size: 1.8rem;
+  }
+  .titleMain {
+    margin: 1rem 0;
+    font-size: 1.6rem;
+  }
+}

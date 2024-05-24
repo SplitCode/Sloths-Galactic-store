@@ -1,0 +1,22 @@
+.label {
+  display: flex;
+  gap: 10px;
+  letter-spacing: 2px;
+}
+
+.selectField {
+  color: #ffffff;
+  background-color: transparent;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.option {
+  background-color: rgb(65, 65, 65);
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  .selectField:hover {
+    box-shadow: 0 0 6px 1px #ffffff;
+  }
+}

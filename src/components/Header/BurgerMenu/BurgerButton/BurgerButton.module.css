@@ -1,0 +1,12 @@
+.burger_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .burger_button {
+    display: block;
+  }
+}

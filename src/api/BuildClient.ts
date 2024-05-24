@@ -1,37 +1,108 @@
-// import fetch from 'node-fetch';
+import type { AnonymousAuthMiddlewareOptions } from '@commercetools/sdk-client-v2';
 import {
+  type AuthMiddlewareOptions,
   ClientBuilder,
-  type AuthMiddlewareOptions, // Required for auth
-  type HttpMiddlewareOptions // Required for sending HTTP requests
+  type HttpMiddlewareOptions,
+  type PasswordAuthMiddlewareOptions,
+  type RefreshAuthMiddlewareOptions
 } from '@commercetools/sdk-client-v2';
+import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
+import type { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk';
+import { ApiData } from './apiData';
+import { myToken } from './tokenCache';
 
-// const projectKey = '{projectKey}';
-// const scopes = ['{scope}'];
-
-// Configure authMiddlewareOptions
 const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: 'https://auth.europe-west1.gcp.commercetools.com',
-  projectKey: 'sloths_rss_ecommerce',
+  host: ApiData.AUTH_URL,
+  projectKey: ApiData.PROJECT_KEY,
   credentials: {
-    clientId: 'PE4EPZ50GkViS5uM7JVSdwbS',
-    clientSecret: 'NSX6uFd9moie4Yr6Wd0q9pO5767SuDit'
+    clientId: ApiData.CLIENT_ID,
+    clientSecret: ApiData.CLIENT_SECRET
   },
-  scopes: [
-    'manage_my_profile:sloths_rss_ecommerce manage_my_quote_requests:sloths_rss_ecommerce manage_my_business_units:sloths_rss_ecommerce manage_my_shopping_lists:sloths_rss_ecommerce manage_my_orders:sloths_rss_ecommerce view_published_products:sloths_rss_ecommerce manage_my_payments:sloths_rss_ecommerce view_products:sloths_rss_ecommerce create_anonymous_token:sloths_rss_ecommerce manage_my_quotes:sloths_rss_ecommerce view_categories:sloths_rss_ecommerce'
-  ],
-  fetch
+  scopes: ApiData.SCOPES.split(' '),
+  fetch,
+  tokenCache: myToken
 };
 
-// Configure httpMiddlewareOptions
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
-  host: 'https://api.europe-west1.gcp.commercetools.com',
+  host: ApiData.API_URL,
   fetch
 };
 
-// Export the ClientBuilder
 export const ctpClient = new ClientBuilder()
-  //   .withProjectKey('sloths_rss_ecommerce') // .withProjectKey() is not required if the projectKey is included in authMiddlewareOptions
+  .withProjectKey(ApiData.PROJECT_KEY)
   .withClientCredentialsFlow(authMiddlewareOptions)
   .withHttpMiddleware(httpMiddlewareOptions)
-  .withLoggerMiddleware() // Include middleware for logging
   .build();
+
+export const getPasswordFlowClient = (email: string, password: string) => {
+  const options: PasswordAuthMiddlewareOptions = {
+    host: ApiData.AUTH_URL,
+    projectKey: ApiData.PROJECT_KEY,
+    credentials: {
+      clientId: ApiData.CLIENT_ID,
+      clientSecret: ApiData.CLIENT_SECRET,
+      user: {
+        username: email,
+        password
+      }
+    },
+    scopes: ApiData.SCOPES.split(' '),
+    fetch,
+    tokenCache: myToken
+  };
+
+  const client = new ClientBuilder()
+    .withPasswordFlow(options)
+    .withHttpMiddleware(httpMiddlewareOptions)
+    .build();
+
+  const ApiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
+    projectKey: ApiData.PROJECT_KEY
+  });
+  return ApiRoot;
+};
+
+export const getRefreshFlowClient = (): ByProjectKeyRequestBuilder => {
+  const options: RefreshAuthMiddlewareOptions = {
+    host: ApiData.AUTH_URL,
+    projectKey: ApiData.PROJECT_KEY,
+    credentials: {
+      clientId: ApiData.CLIENT_ID,
+      clientSecret: ApiData.CLIENT_SECRET
+    },
+    refreshToken: localStorage.getItem('sloth-refreshToken') || '',
+    fetch,
+    tokenCache: myToken
+  };
+
+  const client = new ClientBuilder()
+    .withRefreshTokenFlow(options)
+    .withHttpMiddleware(httpMiddlewareOptions)
+    .build();
+
+  const ApiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
+    projectKey: ApiData.PROJECT_KEY
+  });
+  return ApiRoot;
+};
+
+export const getAnonymousFlowClient = () => {
+  const options: AnonymousAuthMiddlewareOptions = {
+    host: ApiData.AUTH_URL,
+    projectKey: ApiData.PROJECT_KEY,
+    credentials: {
+      clientId: ApiData.CLIENT_ID,
+      clientSecret: ApiData.CLIENT_SECRET
+    },
+    scopes: ApiData.SCOPES.split(' '),
+    fetch
+  };
+  const client = new ClientBuilder()
+    .withAnonymousSessionFlow(options)
+    .withHttpMiddleware(httpMiddlewareOptions)
+    .build();
+
+  return createApiBuilderFromCtpClient(client).withProjectKey({
+    projectKey: ApiData.PROJECT_KEY
+  });
+};

@@ -1,0 +1,10 @@
+.inputsGroup {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .inputsGroup {
+    width: 90%;
+  }
+}

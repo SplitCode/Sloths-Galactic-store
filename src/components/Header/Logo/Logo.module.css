@@ -1,0 +1,17 @@
+.logo_link {
+  height: 6rem;
+}
+
+.logo {
+  width: 5rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-bottom: 1rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 12px 15px var(--light-shadow-color));
+  }
+}

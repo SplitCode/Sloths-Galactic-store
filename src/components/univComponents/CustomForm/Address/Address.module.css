@@ -1,0 +1,21 @@
+.address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+  width: 100%;
+  padding: 2.5rem 1rem;
+  transition: 0.3s;
+}
+
+.legend {
+  padding: 0.8rem;
+  letter-spacing: 2px;
+}
+
+.hidden {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.4;
+  transform: scale(0.6);
+}
