@@ -1,5 +1,5 @@
 .bg {
-  position: absolute;
+  position: fixed;
   min-width: 100vw;
   min-height: 100vh;
   top: 0;
@@ -30,6 +30,8 @@
   flex-direction: column;
   justify-content: center;
   padding: 0 2rem;
+  position: fixed;
+  z-index: 1;
 }
 
 .planet_list {

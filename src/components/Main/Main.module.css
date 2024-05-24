@@ -3,8 +3,8 @@
   display: flex;
   width: 100%;
   min-height: 100vh;
-  padding-top: var(--header-height);
   overflow-x: hidden;
+  padding: var(--header-height) 2rem 0;
 }
 @media (max-width: 860px) {
   .main {

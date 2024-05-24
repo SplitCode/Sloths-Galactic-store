@@ -12,7 +12,7 @@ export interface planetSliceState {
 }
 
 const initialState: planetSliceState = {
-  planet: null
+  planet: Planets.earth
 };
 export const planetSlice = createSlice({
   name: 'planet_slice',

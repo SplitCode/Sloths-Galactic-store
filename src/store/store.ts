@@ -2,8 +2,9 @@ import type { Action, ThunkAction } from '@reduxjs/toolkit';
 import { combineSlices, configureStore } from '@reduxjs/toolkit';
 import { planetSlice } from './slices/planet-slice';
 import { customerSlice } from './slices/customer-slice';
+import { productsSlice } from './slices/products-slice';
 
-const rootReducer = combineSlices(planetSlice, customerSlice);
+const rootReducer = combineSlices(planetSlice, customerSlice, productsSlice);
 export type RootState = ReturnType<typeof rootReducer>;
 
 export const makeStore = () => {

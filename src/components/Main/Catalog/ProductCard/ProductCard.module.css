@@ -1,0 +1,22 @@
+.product_card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--dark-transparent-background);
+}
+.product_image {
+  height: 20rem;
+  width: 20rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.product_name {
+  font-size: 2rem;
+}
+.product_desc {
+  font-size: 1.4rem;
+}
+.product_price {
+  color: red;
+}
