@@ -57,6 +57,7 @@ a {
 
 h1 {
   font-family: var(--decorative-font);
+  text-transform: uppercase;
 }
 
 #root {

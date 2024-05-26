@@ -2,6 +2,7 @@ export interface ButtonProps {
   children: string;
   type: 'submit' | 'reset' | 'button';
   onClick?: (...args: unknown[]) => unknown;
+  classes?: string[];
 }
 
 export interface InputProps {

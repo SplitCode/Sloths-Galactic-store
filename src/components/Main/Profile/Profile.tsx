@@ -1,18 +1,19 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { getCustomer } from '../../../api/customers/getCustomer';
 import type { Address } from '@commercetools/platform-sdk';
-import { Loader } from '../Loader/Loader';
-import styles from './Profile.module.css';
-import avatarSrc from '../../../assets/img/avatar.svg';
+import { getCustomer } from '../../../api/customers/getCustomer';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import type { CustomerSliceState } from '../../../store/slices/customer-slice';
+import styles from './Profile.module.css';
+import { ProfileEditor } from './ProfileEditor/ProfileEditor';
+import { ProfileViewer } from './ProfileViewer/ProfileViewer';
+import { useEffect, useState } from 'react';
+import { Loader } from '../Loader/Loader';
 
 export function Profile() {
   const dispatch = useAppDispatch();
+  const customerId: string | null = useAppSelector((state) => state.customer_slice.customerId);
   const { isCustomerLoading, customerData, errorMessage }: CustomerSliceState = useAppSelector(
     (state) => state.customer_slice
   );
-  const customerId: string | null = useAppSelector((state) => state.customer_slice.customerId);
 
   useEffect(() => {
     if (customerId) {
@@ -29,46 +30,34 @@ export function Profile() {
     return false;
   });
 
+  const [isEditMode, setEditMode] = useState(false);
+
   return isCustomerLoading ? (
     <Loader />
+  ) : errorMessage ? (
+    <p>Упс... Что-то пошло не так: {errorMessage}</p>
   ) : customerData && shippingAddress && billingAddress ? (
     <div className={styles.profile}>
       <div className={styles.profile_wrapper}>
         <h1>Профиль</h1>
-        <img src={avatarSrc} alt="avatar" className={styles.avatar} />
-        <section className={styles.personal_data}>
-          <p>Имя: {customerData.firstName}</p>
-          <p>Фамилия: {customerData.lastName}</p>
-          <p>Email: {customerData.email}</p>
-          <p>Дата рождения: {customerData.dateOfBirth}</p>
-        </section>
-
-        <section className={styles.addresses_data}>
-          <fieldset className={styles.address_data}>
-            <legend className={styles.legend}>Адрес доставки</legend>
-            <p>Страна: {shippingAddress.country === 'RU' ? 'Россия' : 'Беларусь'}</p>
-            <p>Город: {shippingAddress.city}</p>
-            <p>Улица: {shippingAddress.streetName}</p>
-            <p>Почтовый индекс: {shippingAddress.postalCode}</p>
-            {customerData.defaultShippingAddressId && (
-              <p className={styles.address_label}>Адрес по умолчанию</p>
-            )}
-          </fieldset>
-
-          <fieldset className={styles.address_data}>
-            <legend className={styles.legend}>Адрес выставления счёта</legend>
-            <p>Страна: {billingAddress.country === 'RU' ? 'Россия' : 'Беларусь'}</p>
-            <p>Город: {billingAddress.city}</p>
-            <p>Улица: {billingAddress.streetName}</p>
-            <p>Почтовый индекс: {billingAddress.postalCode}</p>
-            {customerData.defaultBillingAddressId && (
-              <p className={styles.address_label}>Адрес по умолчанию</p>
-            )}
-          </fieldset>
-        </section>
+        {isEditMode ? (
+          <ProfileEditor
+            setEditMode={setEditMode}
+            shippingAddress={shippingAddress}
+            billingAddress={billingAddress}
+            customerData={customerData}
+          />
+        ) : (
+          <ProfileViewer
+            setEditMode={setEditMode}
+            shippingAddress={shippingAddress}
+            billingAddress={billingAddress}
+            customerData={customerData}
+          />
+        )}
       </div>
     </div>
   ) : (
-    <p>Упс... Что-то пошло не так: {errorMessage}</p>
+    <p>Не найдены данные пользователя</p>
   );
 }
