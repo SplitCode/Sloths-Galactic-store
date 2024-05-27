@@ -13,7 +13,6 @@ export function Sidebar() {
   const isShow = ['/catalog', '/', '/about', '/profile'].includes(locationPath);
   const planet = useAppSelector((state) => state.planet_slice.planet);
   const [isSidebarVisible, setVisibility] = useState<boolean>(false);
-
   const onPlanetClick: MouseEventHandler<HTMLInputElement> = (e) => {
     if (e.target instanceof HTMLInputElement) {
       const value = e.target.value as Planets;

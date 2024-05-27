@@ -1,22 +1,70 @@
 .product_card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  justify-content: space-between;
   background-color: var(--dark-transparent-background);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: calc((100dvh - var(--header-height) - 4.2rem) / 2);
+  font-family: var(--main-font);
+  font-weight: 200;
 }
+
 .product_image {
-  height: 20rem;
-  width: 20rem;
-  background-size: cover;
-  background-position: center;
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+.product_info_wrapper {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--header-background);
+  width: 100%;
 }
 
 .product_name {
   font-size: 2rem;
-}
-.product_desc {
-  font-size: 1.4rem;
+  font-weight: 200;
 }
 .product_price {
-  color: red;
+  color: var(--accent-color);
+}
+
+.discount_price {
+  background-color: var(--accent-color);
+  max-width: max-content;
+}
+
+.crossed_price {
+  position: relative;
+  background-color: transparent;
+  max-width: max-content;
+}
+
+.crossed_price::before {
+  position: absolute;
+  content: '';
+  background-color: var(--accent-color);
+  height: 2px;
+  width: 100%;
+  top: 50%;
+}
+
+.product_desc {
+  position: absolute;
+  font-size: 1.4rem;
+  opacity: 0;
+  background-color: transparent;
+  height: 100%;
+  transition: all ease-in 300ms;
+}
+
+.product_card:hover .product_desc {
+  opacity: 1;
+  background-color: var(--header-background);
 }

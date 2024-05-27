@@ -80,3 +80,8 @@ h1 {
 ::-webkit-scrollbar-thumb:active {
   background-color: rgb(16, 80, 145);
 }
+
+.theme_provider {
+  --accent-color: rgba(255, 255, 255, 0);
+  width: 100%;
+}

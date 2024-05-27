@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { reloginCustomer } from './api/customers/reloginCustomer';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { Loader } from './components/Main/Loader/Loader';
+import { ThemeProvider } from './helpers/themeProvider';
 
 export function App() {
   const dispatch = useAppDispatch();
@@ -27,7 +28,7 @@ export function App() {
   return !customer && isToken ? (
     <Loader />
   ) : (
-    <>
+    <ThemeProvider>
       <ToastContainer autoClose={4000} draggable limit={5} theme="dark" />
       <Header />
       <Main>
@@ -36,6 +37,6 @@ export function App() {
           <Outlet />
         </>
       </Main>
-    </>
+    </ThemeProvider>
   );
 }
