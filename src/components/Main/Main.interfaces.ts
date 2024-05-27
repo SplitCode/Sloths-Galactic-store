@@ -13,7 +13,7 @@ interface BillingAddress {
   street: string;
   city: string;
   postalCode: string;
-  country: 'Russia' | 'Belarus';
+  country: 'RU' | 'BY';
   isDefault: boolean;
 }
 
@@ -38,6 +38,7 @@ export interface ProfileComponentsProps {
   customerData: Customer;
   shippingAddress: Address;
   billingAddress: Address;
+  customerId: string;
 }
 
 export interface ProductCardProps {

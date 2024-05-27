@@ -1,4 +1,4 @@
-import type { ErrorResponse } from '@commercetools/platform-sdk';
+import type { CustomerUpdateAction, ErrorResponse } from '@commercetools/platform-sdk';
 
 export interface Login {
   email: string;
@@ -29,4 +29,10 @@ export interface ApiError {
   body: ErrorResponse;
   statusCode: number;
   message: string;
+}
+
+export interface UpdateCustomerData {
+  ID: string;
+  version: number;
+  actions: CustomerUpdateAction[];
 }

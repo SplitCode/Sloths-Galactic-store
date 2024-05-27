@@ -24,12 +24,16 @@
 }
 
 .underline {
-  animation: flashing 1s steps(2) infinite;
+  animation: flashing 1s step-end infinite;
   font-size: 3rem;
 }
 
 @keyframes flashing {
-  from {
-    opacity: 0;
+  from,
+  to {
+    color: transparent;
+  }
+  50% {
+    color: #ffffff;
   }
 }

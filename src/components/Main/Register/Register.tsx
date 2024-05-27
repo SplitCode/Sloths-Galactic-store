@@ -11,8 +11,9 @@ import { showToast } from '../../../helpers/showToast';
 import { createCustomer } from '../../../api/customers/createCustomer';
 import { useAppDispatch } from '../../../store/hooks';
 import { Address } from '../../univComponents/CustomForm/Address/Address';
-import { formatCustomerData, login } from '../Login/auth';
+import { login } from '../Login/auth';
 import { errorHandler } from '../../../helpers/errorHandler';
+import { formatForRegister } from '../../../helpers/formatForRegister';
 
 const initialValues: RegisterValues = {
   email: '',
@@ -24,7 +25,7 @@ const initialValues: RegisterValues = {
     street: '',
     city: '',
     postalCode: '',
-    country: 'Russia',
+    country: 'RU',
     isDefault: false,
     isSameAddress: false
   },
@@ -32,7 +33,7 @@ const initialValues: RegisterValues = {
     street: '',
     city: '',
     postalCode: '',
-    country: 'Russia',
+    country: 'RU',
     isDefault: false
   }
 };
@@ -45,7 +46,7 @@ export function Register() {
         initialValues={initialValues}
         validationSchema={RegisterSchema}
         onSubmit={async (values: RegisterValues) => {
-          const customerPromise = createCustomer(formatCustomerData(values));
+          const customerPromise = createCustomer(formatForRegister(values));
           showToast({
             promise: customerPromise,
             pending: 'Ожидайте...',

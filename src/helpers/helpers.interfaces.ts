@@ -1,4 +1,5 @@
 import type { ErrorResponse } from '@commercetools/platform-sdk';
+import type { ProfileEditorValues } from '../components/Main/Main.interfaces';
 
 export interface SimpleToast {
   text: string;
@@ -17,4 +18,10 @@ export type ToastInfo = SimpleToast | PromiseToast;
 export enum ErrorMessages {
   duplicateField = 'Уже есть существующий клиент с указанным адресом электронной почты.',
   invalidLogin = 'Неверный адрес эл. почты или пароль. Попробуйте снова!'
+}
+
+export interface UpdateDataForFormat {
+  values: ProfileEditorValues;
+  ID: string;
+  version: number;
 }

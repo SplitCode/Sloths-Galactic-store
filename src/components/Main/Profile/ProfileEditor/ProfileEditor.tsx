@@ -7,13 +7,26 @@ import { Input } from '../../../univComponents/CustomForm/Input/Input';
 import { Address } from '../../../univComponents/CustomForm/Address/Address';
 import { showToast } from '../../../../helpers/showToast';
 import { ProfileSchema } from '../../validationSchemes';
+import { isCorrectCountry } from '../../../../helpers/isCorrectCountry';
+import { updateCustomer } from '../../../../api/customers/updateCustomer';
+import { formatForUpdate } from '../../../../helpers/formatForUpdate';
+import { errorHandler } from '../../../../helpers/errorHandler';
+import type { Customer } from '@commercetools/platform-sdk';
+import { useAppDispatch } from '../../../../store/hooks';
+import { getCustomer } from '../../../../api/customers/getCustomer';
 
 export function ProfileEditor({
   setEditMode,
   customerData,
   shippingAddress,
-  billingAddress
+  billingAddress,
+  customerId
 }: ProfileComponentsProps) {
+  if (!isCorrectCountry(shippingAddress.country) || !isCorrectCountry(billingAddress.country)) {
+    throw new Error('incorrect country');
+  }
+  const dispatch = useAppDispatch();
+
   const initialValues: ProfileEditorValues = {
     email: customerData.email,
     firstName: customerData.firstName || '',
@@ -23,14 +36,14 @@ export function ProfileEditor({
       street: shippingAddress.streetName || '',
       city: shippingAddress.city || '',
       postalCode: shippingAddress.postalCode || '',
-      country: shippingAddress.country === 'RU' ? 'Russia' : 'Belarus',
+      country: shippingAddress.country,
       isDefault: Boolean(customerData.defaultShippingAddressId)
     },
     billing: {
       street: billingAddress.streetName || '',
       city: billingAddress.city || '',
       postalCode: billingAddress.postalCode || '',
-      country: billingAddress.country === 'RU' ? 'Russia' : 'Belarus',
+      country: billingAddress.country,
       isDefault: Boolean(customerData.defaultBillingAddressId)
     }
   };
@@ -39,9 +52,20 @@ export function ProfileEditor({
     <Formik
       initialValues={initialValues}
       onSubmit={(values) => {
-        console.log(values);
-        setEditMode((isEditMode) => !isEditMode);
-        showToast({ text: 'Данные сохранены', type: 'success' });
+        const customerPromise: Promise<Customer> = updateCustomer(
+          formatForUpdate({ values, ID: customerId, version: customerData.version })
+        );
+
+        showToast({
+          promise: customerPromise,
+          pending: 'Обновляем...',
+          success: 'Данные обновлены!',
+          errorHandler: errorHandler
+        });
+        customerPromise.then(() => {
+          dispatch(getCustomer(customerId));
+          setEditMode((isEditMode) => !isEditMode);
+        });
       }}
       validationSchema={ProfileSchema}
     >
@@ -49,8 +73,7 @@ export function ProfileEditor({
         return (
           <Form className={styles.profile_editor}>
             <h1 className={styles.editor_title}>
-              Режим редактирования
-              <span className={styles.underline}>_</span>
+              Режим редактирования<span className={styles.underline}>_</span>
             </h1>
             <Input name={'email'} type="email" placeholder="Эл. почта"></Input>
             <div className={styles.inputs_group}>

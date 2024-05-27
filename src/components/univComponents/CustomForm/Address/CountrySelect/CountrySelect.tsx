@@ -6,10 +6,10 @@ export function CountrySelect({ name }: { name: string }) {
     <label className={styles.label}>
       Выберите свою страну
       <Field className={styles.selectField} component="select" name={name} id={`${name}-select`}>
-        <option className={styles.option} value="Russia">
+        <option className={styles.option} value="RU">
           Россия
         </option>
-        <option className={styles.option} value="Belarus">
+        <option className={styles.option} value="BY">
           Беларусь
         </option>
       </Field>

@@ -8,7 +8,7 @@ export function ProfileViewer({
   customerData,
   shippingAddress,
   billingAddress
-}: ProfileComponentsProps) {
+}: Omit<ProfileComponentsProps, 'customerId'>) {
   return (
     <>
       <img src={avatarSrc} alt="avatar" className={styles.avatar} />

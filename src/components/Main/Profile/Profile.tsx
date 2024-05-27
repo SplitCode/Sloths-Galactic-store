@@ -36,7 +36,7 @@ export function Profile() {
     <Loader />
   ) : errorMessage ? (
     <p>Упс... Что-то пошло не так: {errorMessage}</p>
-  ) : customerData && shippingAddress && billingAddress ? (
+  ) : customerData && shippingAddress && billingAddress && customerId ? (
     <div className={styles.profile}>
       <div className={styles.profile_wrapper}>
         <h1>Профиль</h1>
@@ -46,6 +46,7 @@ export function Profile() {
             shippingAddress={shippingAddress}
             billingAddress={billingAddress}
             customerData={customerData}
+            customerId={customerId}
           />
         ) : (
           <ProfileViewer
