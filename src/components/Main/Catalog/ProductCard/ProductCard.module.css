@@ -8,6 +8,7 @@
   min-height: calc((100dvh - var(--header-height) - 4.2rem) / 2);
   font-family: var(--main-font);
   font-weight: 200;
+  cursor: pointer;
 }
 
 .product_image {

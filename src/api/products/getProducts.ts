@@ -1,8 +1,8 @@
 import { apiRoot } from '../apiRoot';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Product } from '@commercetools/platform-sdk';
 import { ApiData } from '../apiData';
 import { Planets } from '../../store/slices/planet-slice';
+import type { Product } from '@commercetools/platform-sdk';
 
 export const getProducts = createAsyncThunk<Product[], Planets>('products/get', async (planet) => {
   const planetId =
@@ -26,3 +26,12 @@ export const getProducts = createAsyncThunk<Product[], Planets>('products/get', 
     throw error;
   }
 });
+
+export const getProduct = async (productKey: string): Promise<Product | undefined> => {
+  try {
+    const response = await apiRoot.products().withKey({ key: productKey }).get().execute();
+    return response.body;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,4 +1,4 @@
-import type { Address, Customer } from '@commercetools/platform-sdk';
+import type { Address, Customer, ProductData } from '@commercetools/platform-sdk';
 
 export interface StringObj {
   [key: string]: string;
@@ -38,4 +38,8 @@ export interface ProfileComponentsProps {
   customerData: Customer;
   shippingAddress: Address;
   billingAddress: Address;
+}
+
+export interface ProductCardProps {
+  product: ProductData;
 }
