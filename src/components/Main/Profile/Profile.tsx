@@ -7,6 +7,7 @@ import { ProfileEditor } from './ProfileEditor/ProfileEditor';
 import { ProfileViewer } from './ProfileViewer/ProfileViewer';
 import { useEffect, useState } from 'react';
 import { Loader } from '../Loader/Loader';
+import { PasswordEditor } from './PasswordEditor/PasswordEditor';
 
 export function Profile() {
   const dispatch = useAppDispatch();
@@ -46,15 +47,17 @@ export function Profile() {
             shippingAddress={shippingAddress}
             billingAddress={billingAddress}
             customerData={customerData}
-            customerId={customerId}
           />
         ) : (
-          <ProfileViewer
-            setEditMode={setEditMode}
-            shippingAddress={shippingAddress}
-            billingAddress={billingAddress}
-            customerData={customerData}
-          />
+          <>
+            <ProfileViewer
+              setEditMode={setEditMode}
+              shippingAddress={shippingAddress}
+              billingAddress={billingAddress}
+              customerData={customerData}
+            />
+            <PasswordEditor customerData={customerData} />
+          </>
         )}
       </div>
     </div>

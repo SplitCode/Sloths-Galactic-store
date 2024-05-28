@@ -8,7 +8,7 @@ import { Address } from '../../../univComponents/CustomForm/Address/Address';
 import { showToast } from '../../../../helpers/showToast';
 import { ProfileSchema } from '../../validationSchemes';
 import { isCorrectCountry } from '../../../../helpers/isCorrectCountry';
-import { updateCustomer } from '../../../../api/customers/updateCustomer';
+import { updateSimpleData } from '../../../../api/customers/updateCustomer';
 import { formatForUpdate } from '../../../../helpers/formatForUpdate';
 import { errorHandler } from '../../../../helpers/errorHandler';
 import type { Customer } from '@commercetools/platform-sdk';
@@ -19,8 +19,7 @@ export function ProfileEditor({
   setEditMode,
   customerData,
   shippingAddress,
-  billingAddress,
-  customerId
+  billingAddress
 }: ProfileComponentsProps) {
   if (!isCorrectCountry(shippingAddress.country) || !isCorrectCountry(billingAddress.country)) {
     throw new Error('incorrect country');
@@ -52,8 +51,8 @@ export function ProfileEditor({
     <Formik
       initialValues={initialValues}
       onSubmit={(values) => {
-        const customerPromise: Promise<Customer> = updateCustomer(
-          formatForUpdate({ values, ID: customerId, version: customerData.version })
+        const customerPromise: Promise<Customer> = updateSimpleData(
+          formatForUpdate({ values, ID: customerData.id, version: customerData.version })
         );
 
         showToast({
@@ -63,7 +62,7 @@ export function ProfileEditor({
           errorHandler: errorHandler
         });
         customerPromise.then(() => {
-          dispatch(getCustomer(customerId));
+          dispatch(getCustomer(customerData.id));
           setEditMode((isEditMode) => !isEditMode);
         });
       }}
@@ -86,7 +85,7 @@ export function ProfileEditor({
             <Address name="billing" />
 
             <Button onClick={submitForm} type="submit">
-              Сохранить изменения
+              Сохранить
             </Button>
             <Button
               classes={[styles.cancel_btn]}

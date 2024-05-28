@@ -2,13 +2,14 @@ import styles from './ProfileViewer.module.css';
 import avatarSrc from '../../../../assets/img/avatar.svg';
 import { Button } from '../../../univComponents/Button/Button';
 import type { ProfileComponentsProps } from '../../Main.interfaces';
+import editIcon from '../../../../assets/img/edit.svg';
 
 export function ProfileViewer({
   setEditMode,
   customerData,
   shippingAddress,
   billingAddress
-}: Omit<ProfileComponentsProps, 'customerId'>) {
+}: ProfileComponentsProps) {
   return (
     <>
       <img src={avatarSrc} alt="avatar" className={styles.avatar} />
@@ -45,7 +46,9 @@ export function ProfileViewer({
         classes={[styles.button]}
         type="button"
       >
-        Редактировать
+        <>
+          Редактировать <img src={editIcon} alt="edit" className={styles.edit_icon} />
+        </>
       </Button>
     </>
   );

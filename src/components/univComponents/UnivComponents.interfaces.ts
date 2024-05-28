@@ -1,5 +1,5 @@
 export interface ButtonProps {
-  children: string;
+  children: string | JSX.Element;
   type: 'submit' | 'reset' | 'button';
   onClick?: (...args: unknown[]) => unknown;
   classes?: string[];

@@ -16,8 +16,9 @@ export interface PromiseToast {
 export type ToastInfo = SimpleToast | PromiseToast;
 
 export enum ErrorMessages {
-  duplicateField = 'Уже есть существующий клиент с указанным адресом электронной почты.',
-  invalidLogin = 'Неверный адрес эл. почты или пароль. Попробуйте снова!'
+  DuplicateField = 'Уже есть существующий клиент с указанным адресом электронной почты.',
+  InvalidLogin = 'Неверный адрес эл. почты или пароль. Попробуйте снова!',
+  InvalidCurrentPassword = 'Текущий пароль не совпадает'
 }
 
 export interface UpdateDataForFormat {

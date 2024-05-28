@@ -36,3 +36,8 @@ export interface UpdateCustomerData {
   version: number;
   actions: CustomerUpdateAction[];
 }
+
+export interface UpdateCustomerPasswordData extends Omit<UpdateCustomerData, 'actions'> {
+  currentPassword: string;
+  newPassword: string;
+}

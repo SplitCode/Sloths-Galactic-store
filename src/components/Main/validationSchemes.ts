@@ -74,3 +74,8 @@ export const ProfileSchema = object().shape({
   shipping: address,
   billing: address
 });
+
+export const PasswordEditorSchema = object().shape({
+  currentPassword: password,
+  newPassword: password
+});
