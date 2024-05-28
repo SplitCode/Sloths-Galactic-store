@@ -36,6 +36,32 @@
   text-align: center;
 }
 
+.product_price {
+  color: var(--accent-color);
+  font-size: 2rem;
+}
+
+.discount_price {
+  background-color: var(--accent-color);
+  max-width: max-content;
+  font-size: 2rem;
+}
+
+.crossed_price {
+  position: relative;
+  background-color: transparent;
+  max-width: max-content;
+}
+
+.crossed_price::before {
+  position: absolute;
+  content: '';
+  background-color: var(--accent-color);
+  height: 2px;
+  width: 100%;
+  top: 50%;
+}
+
 .product_desc {
   text-align: center;
   font-size: clamp(1.2rem, 2.5vw, 2rem);

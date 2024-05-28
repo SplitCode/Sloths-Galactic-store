@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import type { ProductCardProps } from '../../Main.interfaces';
+import { formatPrice } from '../../../../helpers/formatPrice';
 
 export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
-  const bgImageUrl = product.masterVariant?.images ? product.masterVariant?.images[0]?.url : '';
-  const price = product.masterVariant?.prices ? product.masterVariant.prices[0]?.value.centAmount : '';
+  const bgImageUrl = product.masterVariant?.images ? product.masterVariant?.images[0]?.url : null;
+  const price = product.masterVariant?.prices ? product.masterVariant.prices[0]?.value.centAmount : null;
   const discountPrice = product.masterVariant?.prices
     ? product.masterVariant.prices[0]?.discounted?.value.centAmount
     : '';
@@ -27,8 +28,12 @@ export function ProductCard({ product }: ProductCardProps) {
       <p className={styles.product_desc}>{product.description?.ru}</p>
       <div className={styles.product_info_wrapper}>
         <h3 className={styles.product_name}>{product.name.ru}</h3>
-        <span className={discountPrice ? styles.crossed_price : styles.product_price}>{price}</span>
-        {discountPrice && <span className={styles.discount_price}>{discountPrice}</span>}
+        {price && (
+          <span className={discountPrice ? styles.crossed_price : styles.product_price}>
+            {formatPrice(price)}
+          </span>
+        )}
+        {discountPrice && <span className={styles.discount_price}>{formatPrice(discountPrice)}</span>}
       </div>
     </div>
   );
