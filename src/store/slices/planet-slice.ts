@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import type { Subcategories } from '../../components/Sidebar/Subcategories/Subcategories';
 
 export enum Planets {
   earth = 'earth',
@@ -14,21 +15,27 @@ enum PlanetsColor {
 export interface planetSliceState {
   planet: Planets;
   accentColor: PlanetsColor;
+  subcategory: Subcategories | null;
 }
 
 const initialState: planetSliceState = {
   planet: Planets.earth,
-  accentColor: PlanetsColor.earth
+  accentColor: PlanetsColor.earth,
+  subcategory: null
 };
 export const planetSlice = createSlice({
   name: 'planet_slice',
   initialState,
   reducers: {
-    choosePlanet(state, action: PayloadAction<Planets>) {
+    setPlanet(state, action: PayloadAction<Planets>) {
       state.planet = action.payload;
       state.accentColor = PlanetsColor[action.payload];
+    },
+    setSubcategory(state: planetSliceState, action) {
+      state.subcategory = action.payload;
     }
   }
 });
 
-export const choosePlanet = planetSlice.actions.choosePlanet;
+export const setPlanet = planetSlice.actions.setPlanet;
+export const setSubcategory = planetSlice.actions.setSubcategory;

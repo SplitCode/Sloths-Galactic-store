@@ -1,0 +1,45 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-left: 5rem;
+}
+.list_item {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.list_item::before {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: right;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.radio {
+  appearance: none;
+}
+.radio:checked::before {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ffffff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .list_item:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}

@@ -1,0 +1,9 @@
+.filters {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+.filter_item {
+  display: flex;
+  gap: 0.5rem;
+}

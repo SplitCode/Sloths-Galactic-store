@@ -94,6 +94,12 @@
   cursor: pointer;
 }
 
+.catalog_item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 @keyframes animatePlanet {
   0% {
     background-position: 0 0;
