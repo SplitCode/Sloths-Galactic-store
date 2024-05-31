@@ -4,6 +4,7 @@
   gap: 0.8rem;
   padding-left: 5rem;
 }
+
 .list_item {
   position: relative;
   cursor: pointer;
@@ -16,7 +17,7 @@
   bottom: -0.5rem;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 0.1rem;
   transform: scaleX(0);
   transform-origin: right;
   background-color: #ffffff;
@@ -27,14 +28,21 @@
 .radio {
   appearance: none;
 }
+
 .radio:checked::before {
   content: '';
   position: absolute;
   bottom: -0.5rem;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 0.1rem;
   background-color: #ffffff;
+}
+
+@media (max-width: 580px) {
+  .list {
+    padding-left: 8rem;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
