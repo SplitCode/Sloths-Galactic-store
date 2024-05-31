@@ -85,3 +85,7 @@ h1 {
   --accent-color: rgb(31, 163, 240);
   width: 100%;
 }
+
+.no-scroll {
+  overflow: hidden;
+}

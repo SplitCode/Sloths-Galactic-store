@@ -9,11 +9,14 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styles from './ProductDetail.module.css';
 import { BgPlanets } from '../../Sidebar/Bg-planets';
 import { useAppSelector } from '../../../store/hooks';
+import { ImageModal } from './ImageModal/ImageModal';
 
 export function ProductDetail() {
   const { productKey } = useParams<{ productKey: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState<string | null>(null);
   const planet = useAppSelector((state) => state.planet_slice.planet);
 
   useEffect(() => {
@@ -37,6 +40,16 @@ export function ProductDetail() {
 
     fetchData();
   }, [productKey]);
+
+  const openModal = (imageUrl: string) => {
+    setModalImage(imageUrl);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalImage(null);
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -72,7 +85,7 @@ export function ProductDetail() {
           thumbWidth={65}
         >
           {images.map((image) => (
-            <div key={image.url} className={styles.image_container}>
+            <div key={image.url} className={styles.image_container} onClick={() => openModal(image.url)}>
               <img src={image.url} alt={image.label} className={styles.product_image} />
             </div>
           ))}
@@ -85,6 +98,7 @@ export function ProductDetail() {
         </span>
       )}
       {discountPrice && <span className={styles.discount_price}>{formatPrice(discountPrice)}</span>}
+      {isModalOpen && modalImage && <ImageModal imageUrl={modalImage} onClose={closeModal} />}
     </div>
   );
 }

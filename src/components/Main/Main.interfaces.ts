@@ -48,3 +48,8 @@ export interface PasswordEditorValues {
 export interface ProductCardProps {
   product: ProductData;
 }
+
+export interface ImageModalProps {
+  imageUrl: string;
+  onClose: () => void;
+}
