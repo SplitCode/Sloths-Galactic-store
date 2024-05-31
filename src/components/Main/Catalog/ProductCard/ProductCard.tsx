@@ -12,7 +12,7 @@ export function ProductCard({ product }: ProductCardProps) {
     : '';
 
   const handleClick = (productKey: string): void => {
-    navigate({ pathname: `/product/${productKey}` });
+    navigate({ pathname: `/catalog/${productKey}` });
   };
 
   return (
