@@ -1,4 +1,12 @@
-import type { ErrorResponse } from '@commercetools/platform-sdk';
+import type {
+  CustomerAddBillingAddressIdAction,
+  CustomerAddShippingAddressIdAction,
+  CustomerRemoveBillingAddressIdAction,
+  CustomerRemoveShippingAddressIdAction,
+  CustomerSetDefaultBillingAddressAction,
+  CustomerSetDefaultShippingAddressAction,
+  ErrorResponse
+} from '@commercetools/platform-sdk';
 import type { ProfileEditorValues } from '../components/Main/Main.interfaces';
 
 export interface SimpleToast {
@@ -26,3 +34,11 @@ export interface UpdateDataForFormat {
   ID: string;
   version: number;
 }
+
+export type AddressesActions =
+  | CustomerAddShippingAddressIdAction['action']
+  | CustomerRemoveShippingAddressIdAction['action']
+  | CustomerAddBillingAddressIdAction['action']
+  | CustomerRemoveBillingAddressIdAction['action']
+  | CustomerSetDefaultShippingAddressAction['action']
+  | CustomerSetDefaultBillingAddressAction['action'];

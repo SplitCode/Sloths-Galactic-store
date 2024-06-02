@@ -66,16 +66,16 @@ export const LoginSchema = object().shape({
   password
 });
 
-export const ProfileSchema = object().shape({
+export const PersonalDataSchema = object().shape({
   email,
   firstName,
   lastName,
-  dateOfBirth,
-  shipping: address,
-  billing: address
+  dateOfBirth
 });
 
 export const PasswordEditorSchema = object().shape({
   currentPassword: password,
   newPassword: password
 });
+
+export const AddressSchema = address;

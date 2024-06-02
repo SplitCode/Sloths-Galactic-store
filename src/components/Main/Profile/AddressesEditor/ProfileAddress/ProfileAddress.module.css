@@ -1,0 +1,57 @@
+.address {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+  width: 100%;
+  padding: 2.5rem 1rem;
+  border-color: #ffffff;
+  transition: 0.3s;
+}
+
+.address:has(.save_btn) {
+  border-color: var(--accent-color);
+}
+
+.address:has(.save_btn) .legend {
+  color: var(--accent-color);
+}
+
+.legend {
+  padding: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.button {
+  width: 50%;
+}
+
+.delete_btn {
+  position: absolute;
+  right: -2.1rem;
+  top: -2.8em;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.delete_btn:hover {
+  transform: scale(1.15);
+}
+
+.delete_icon {
+  width: 4rem;
+}

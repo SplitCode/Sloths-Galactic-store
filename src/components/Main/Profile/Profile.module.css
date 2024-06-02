@@ -19,7 +19,12 @@
   backdrop-filter: var(--backdrop-blur);
 }
 
-.profile_wrapper:has(div:only-child) {
-  background-color: transparent;
-  backdrop-filter: none;
+.button {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.icon {
+  width: 2rem;
+  margin-left: 0.6rem;
 }

@@ -31,13 +31,13 @@ export interface ApiError {
   message: string;
 }
 
-export interface UpdateCustomerData {
+export interface UpdateSimpleData {
   ID: string;
   version: number;
   actions: CustomerUpdateAction[];
 }
 
-export interface UpdateCustomerPasswordData extends Omit<UpdateCustomerData, 'actions'> {
+export interface UpdatePasswordData extends Omit<UpdateSimpleData, 'actions'> {
   currentPassword: string;
   newPassword: string;
 }

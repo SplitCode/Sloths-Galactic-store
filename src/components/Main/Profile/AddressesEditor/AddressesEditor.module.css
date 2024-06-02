@@ -1,0 +1,51 @@
+.address_form {
+  width: 100%;
+}
+
+.empty_info {
+  max-width: 60rem;
+  margin: 1.5rem 0;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.add_address_btn {
+  margin-top: 2rem;
+}
+
+.search_icon {
+  width: 10rem;
+  margin-bottom: 12rem;
+  animation: search_animation 8s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.add_icon {
+  width: 2rem;
+}
+
+@keyframes search_animation {
+  0% {
+    transform: translate(20%, 50%) scale(1.15) rotate(15deg);
+  }
+  35% {
+    transform: translate(15%, 20%) scale(1) rotate(-10deg);
+  }
+  50% {
+    transform: translate(5%, 5%) scale(1.05) rotate(-5deg);
+  }
+  65% {
+    transform: translate(10%, 25%) scale(1) rotate(5deg);
+  }
+  75% {
+    transform: translate(25%, 15%) scale(0.9) rotate(10deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .search_icon {
+    width: 7rem;
+  }
+}

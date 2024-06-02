@@ -5,7 +5,7 @@ import { PasswordButton } from '../PasswordButton/PasswordButton';
 import styles from './Input.module.css';
 import { ValidError } from './ValidError/ValidError';
 
-export function Input({ name, type, placeholder }: InputProps) {
+export function Input({ name, type, placeholder, disabled }: InputProps) {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
   const { setFieldValue, setFieldTouched } = useFormikContext();
 
@@ -21,7 +21,9 @@ export function Input({ name, type, placeholder }: InputProps) {
 
   return (
     <label className={styles.label}>
+      {disabled && placeholder}
       <Field
+        disabled={disabled}
         className={styles.field}
         name={name}
         type={type === 'password' ? (passwordVisibility ? 'text' : 'password') : type}

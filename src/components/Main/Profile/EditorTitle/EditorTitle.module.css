@@ -1,25 +1,10 @@
-.profile_editor {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-}
-
-.inputs_group {
-  display: flex;
-  gap: 1rem;
-  width: 80%;
-}
-
-.cancel_btn {
-  margin-top: 1rem;
-}
-
 .editor_title {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  text-align: center;
   font-size: 2rem;
 }
 

@@ -1,13 +1,17 @@
-import type { Address } from '@commercetools/platform-sdk';
 import { getCustomer } from '../../../api/customers/getCustomer';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import type { CustomerSliceState } from '../../../store/slices/customer-slice';
 import styles from './Profile.module.css';
-import { ProfileEditor } from './ProfileEditor/ProfileEditor';
+import { PersonalEditor } from './PersonalEditor/PersonalEditor';
 import { ProfileViewer } from './ProfileViewer/ProfileViewer';
 import { useEffect, useState } from 'react';
 import { Loader } from '../Loader/Loader';
 import { PasswordEditor } from './PasswordEditor/PasswordEditor';
+import { AddressesEditor } from './AddressesEditor/AddressesEditor';
+import editIcon from '../../../assets/img/edit.svg';
+import passwordIcon from '../../../assets/img/change_password.svg';
+import addressIcon from '../../../assets/img/address.svg';
+import { Button } from '../../univComponents/Button/Button';
 
 export function Profile() {
   const dispatch = useAppDispatch();
@@ -22,41 +26,81 @@ export function Profile() {
     }
   }, [customerId, dispatch]);
 
-  const shippingAddress = customerData?.addresses.find((address: Address) => {
-    if (customerData.shippingAddressIds) return address.id === customerData.shippingAddressIds[0];
-    return false;
-  });
-  const billingAddress = customerData?.addresses.find((address: Address) => {
-    if (customerData.billingAddressIds) return address.id === customerData.billingAddressIds[0];
-    return false;
+  const [editModes, setEditMode] = useState({
+    isPersonalEdit: false,
+    isAddressesEdit: false,
+    isPasswordEdit: false
   });
 
-  const [isEditMode, setEditMode] = useState(false);
+  if (isCustomerLoading) return <Loader />;
+  if (errorMessage) return <p>Упс... Что-то пошло не так: {errorMessage}</p>;
 
-  return isCustomerLoading ? (
-    <Loader />
-  ) : errorMessage ? (
-    <p>Упс... Что-то пошло не так: {errorMessage}</p>
-  ) : customerData && shippingAddress && billingAddress && customerId ? (
+  return customerData && customerId ? (
     <div className={styles.profile}>
       <div className={styles.profile_wrapper}>
         <h1>Профиль</h1>
-        {isEditMode ? (
-          <ProfileEditor
-            setEditMode={setEditMode}
-            shippingAddress={shippingAddress}
-            billingAddress={billingAddress}
-            customerData={customerData}
-          />
+
+        {editModes.isPersonalEdit ? (
+          <PersonalEditor setEditMode={setEditMode} customerData={customerData} />
+        ) : editModes.isAddressesEdit ? (
+          <AddressesEditor setEditMode={setEditMode} customerData={customerData} />
+        ) : editModes.isPasswordEdit ? (
+          <PasswordEditor setEditMode={setEditMode} customerData={customerData} />
         ) : (
           <>
-            <ProfileViewer
-              setEditMode={setEditMode}
-              shippingAddress={shippingAddress}
-              billingAddress={billingAddress}
-              customerData={customerData}
-            />
-            <PasswordEditor customerData={customerData} />
+            <ProfileViewer setEditMode={setEditMode} customerData={customerData} />
+            <Button
+              onClick={() =>
+                setEditMode((editModes) => {
+                  return {
+                    ...editModes,
+                    isPersonalEdit: true
+                  };
+                })
+              }
+              classes={[styles.button]}
+              type="button"
+            >
+              <>
+                Редактировать <img src={editIcon} alt="personal" className={styles.icon} />
+              </>
+            </Button>
+
+            <Button
+              classes={[styles.button]}
+              type="button"
+              onClick={() =>
+                setEditMode((editModes) => {
+                  return {
+                    ...editModes,
+                    isPasswordEdit: true
+                  };
+                })
+              }
+            >
+              <>
+                Изменить пароль
+                <img className={styles.icon} src={passwordIcon} alt="password" />
+              </>
+            </Button>
+
+            <Button
+              classes={[styles.button]}
+              type="button"
+              onClick={() =>
+                setEditMode((editModes) => {
+                  return {
+                    ...editModes,
+                    isAddressesEdit: true
+                  };
+                })
+              }
+            >
+              <>
+                Управление адресами
+                <img className={styles.icon} src={addressIcon} alt="address" />
+              </>
+            </Button>
           </>
         )}
       </div>
