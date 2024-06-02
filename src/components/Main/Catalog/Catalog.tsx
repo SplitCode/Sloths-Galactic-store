@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { getProducts } from '../../../api/products/getProducts';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { Loader } from '../Loader/Loader';
@@ -8,30 +8,48 @@ import styles from './Catalog.module.css';
 import { Filters } from './Filters/Filters';
 import { Sort } from './Sort/Sort';
 import type { getProductsRequestProps } from '../Main.interfaces';
+import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getPlanetFromLocation, getSubcategoryFromLocation } from '../../../helpers/locationHandlers';
 
 export function Catalog() {
   const dispatch = useAppDispatch();
-  const { isProductsLoading, products, filter, sort, subcategory }: ProductsSliceState = useAppSelector(
+  const { isProductsLoading, products, filter, sort }: ProductsSliceState = useAppSelector(
     (state) => state.products_slice
   );
   const { planet } = useAppSelector((state) => state.planet_slice);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const locationParts = useMemo(() => {
+    const planet = getPlanetFromLocation(location.pathname);
+    const subcategory = getSubcategoryFromLocation(location.pathname);
+    return { planet: planet, subcategory: subcategory };
+  }, [location.pathname]);
 
   useEffect(() => {
-    if (planet) {
+    if (locationParts.planet) {
       const actionPayload: getProductsRequestProps = {
-        planet: planet,
-        subcategory: subcategory ?? undefined,
+        planet: locationParts.planet,
+        subcategory: locationParts.subcategory ?? undefined,
         filter: filter.value && filter.type ? filter : undefined,
         sortValue: sort ?? undefined
       };
       dispatch(getProducts(actionPayload));
     }
-  }, [dispatch, planet, subcategory, sort, filter.value]);
+  }, [dispatch, locationParts, sort, filter]);
+
+  useEffect(() => {
+    if (!locationParts.planet) {
+      navigate(`${planet}`);
+    }
+  }, [locationParts.planet, planet, navigate]);
 
   return isProductsLoading ? (
     <Loader />
   ) : (
     <>
+      <Breadcrumbs />
       <div className={styles.filters_wrapper}>
         <Filters />
         <Sort />

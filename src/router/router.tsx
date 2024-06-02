@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Link } from 'react-router-dom';
 import { Login } from '../components/Main/Login/Login';
 import { Register } from '../components/Main/Register/Register';
 import { ErrorPage } from '../components/Main/Error/Error-page';
@@ -10,6 +10,9 @@ import { ProtectedRoute } from './protected-route';
 import { Profile } from '../components/Main/Profile/Profile';
 import { AnonymousRoute } from './anonymous-route';
 import { ProductDetail } from '../components/Main/ProductDetail/ProductDetail';
+import type { Subcategories } from '../helpers/translationMapper';
+import { getTranslation } from '../helpers/translationMapper';
+import type { Planets } from '../store/slices/planet-slice';
 
 export const router = createBrowserRouter([
   {
@@ -22,27 +25,53 @@ export const router = createBrowserRouter([
         element: <Home />
       },
       {
-        path: '/login',
+        path: 'login',
         element: <AnonymousRoute element={<Login />} />
       },
       {
-        path: '/register',
+        path: 'register',
         element: <AnonymousRoute element={<Register />} />
       },
       {
-        path: '/catalog',
-        element: <Catalog />
+        path: 'catalog',
+        element: <Catalog />,
+        children: [
+          {
+            path: ':planet',
+            element: <Catalog />,
+            loader: ({ params }) => params,
+            handle: {
+              crumb: (data: { planet: Planets }) => (
+                <Link to={`/catalog/${data.planet}`}>{getTranslation(data.planet)}</Link>
+              )
+            },
+            children: [
+              {
+                path: ':subcategory',
+                element: <Catalog />,
+                loader: ({ params }) => params,
+                handle: {
+                  crumb: (data: { planet: Planets; subcategory: Subcategories }) => (
+                    <Link to={`/catalog/${data.planet}/${data.subcategory}`}>
+                      {getTranslation(data.subcategory)}
+                    </Link>
+                  )
+                }
+              }
+            ]
+          }
+        ]
       },
       {
-        path: '/about',
+        path: 'about',
         element: <About />
       },
       {
-        path: '/profile',
+        path: 'profile',
         element: <ProtectedRoute element={<Profile />} />
       },
       {
-        path: '/catalog/:productKey',
+        path: 'catalog/:planet/:subcategory/:productKey',
         element: <ProductDetail />
       }
     ]

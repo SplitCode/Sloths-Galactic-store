@@ -16,5 +16,8 @@ export enum ApiData {
   MARS_TECHNIC_ID = 'f41b19d2-65ce-4a6f-af32-4bb59b3054fd',
   EARTH_PETS_ID = '43ef7ff9-b6c0-4171-bee0-7d8bbe579a96',
   EARTH_FOOD_ID = 'f1e0afe3-dad5-4bda-b3e9-587726ef24b3',
-  EARTH_TECHNIC_ID = '541f2092-693a-4d0d-9003-2d5db1368c02'
+  EARTH_TECHNIC_ID = '541f2092-693a-4d0d-9003-2d5db1368c02',
+  FOOD_ID = '8aedd44f-4a73-4153-ae82-272bf3105c00',
+  TECHNIC_ID = 'fe0dbd6e-a760-4163-ad13-7c9d14728ec8',
+  PETS_ID = '9c944aa3-6a7f-4467-ba56-ec01bb1c9f7a'
 }

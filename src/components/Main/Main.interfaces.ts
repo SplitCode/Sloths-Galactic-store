@@ -1,6 +1,6 @@
 import type { Customer, ProductProjection } from '@commercetools/platform-sdk';
 import type { Planets } from '../../store/slices/planet-slice';
-import type { Subcategories } from '../Sidebar/Subcategories/Subcategories';
+import type { Subcategories } from '../../helpers/translationMapper';
 
 export interface StringObj {
   [key: string]: string;

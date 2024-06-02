@@ -4,13 +4,15 @@ import styles from '../../../univComponents/Checkbox/Checkbox.module.css';
 import style from './Filters.module.css';
 import type { Filter } from '../../Main.interfaces';
 import { setFilter } from '../../../../store/slices/products-slice';
+import { useLocation } from 'react-router-dom';
+import { isSubcategory } from '../../../../helpers/isEnumValue';
 
 export function Filters() {
   const dispatch = useAppDispatch();
   const { products, filter } = useAppSelector((state) => state.products_slice);
-  const { subcategory } = useAppSelector((state) => state.products_slice);
-
+  const location = useLocation();
   const attributes = useMemo(() => {
+    const subcategory = location.pathname.split('/').find((part) => isSubcategory(part));
     if (!subcategory || !products.length) return [];
 
     const attributeSet = new Set<string>();
@@ -27,7 +29,7 @@ export function Filters() {
     });
 
     return uniqueAttributes;
-  }, [products, subcategory]);
+  }, [products, location.pathname]);
 
   const handleClick = (atr: Filter) => {
     const newValue = atr.value === filter?.value ? null : atr.value;

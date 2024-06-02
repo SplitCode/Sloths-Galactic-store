@@ -1,6 +1,6 @@
 import { Planets } from '../store/slices/planet-slice';
-import { Subcategories } from '../components/Sidebar/Subcategories/Subcategories';
 import { ApiData } from '../api/apiData';
+import { Subcategories } from './translationMapper';
 
 const IDs = {
   [Planets.venus]: {
@@ -32,4 +32,13 @@ const CATALOG_IDS: Record<Planets, string> = {
 
 export function getPlanetCatalogId(planet: Planets): string {
   return CATALOG_IDS[planet];
+}
+
+const SUBCATEGORY_IDS: Record<string, Subcategories> = {
+  [ApiData.FOOD_ID]: Subcategories.food,
+  [ApiData.TECHNIC_ID]: Subcategories.appliances,
+  [ApiData.PETS_ID]: Subcategories.pets
+};
+export function getSubcategoryFromProductType(ProductTypeId: string) {
+  return SUBCATEGORY_IDS[ProductTypeId];
 }

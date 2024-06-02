@@ -1,8 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import type { ProductCardProps } from '../../Main.interfaces';
 import { formatPrice } from '../../../../helpers/formatPrice';
+import { getPlanetFromLocation } from '../../../../helpers/locationHandlers';
+import { getSubcategoryFromProductType } from '../../../../helpers/idsMapper';
 import { cutSentence } from '../../../../helpers/cutSentence';
+
 
 export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
@@ -11,9 +14,11 @@ export function ProductCard({ product }: ProductCardProps) {
   const discountPrice = product.masterVariant?.prices
     ? product.masterVariant.prices[0]?.discounted?.value.centAmount
     : '';
-
+  const location = useLocation();
+  const planet = getPlanetFromLocation(location.pathname);
+  const subcategory = getSubcategoryFromProductType(product.productType.id);
   const handleClick = (productKey: string): void => {
-    navigate({ pathname: `/catalog/${productKey}` });
+    navigate({ pathname: `/catalog/${planet}/${subcategory}/${productKey}` });
   };
 
   return (

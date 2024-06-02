@@ -3,12 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { ProductProjection } from '@commercetools/platform-sdk';
 import { getProducts } from '../../api/products/getProducts';
 import type { Filter, SortValues } from '../../components/Main/Main.interfaces';
-import type { Subcategories } from '../../components/Sidebar/Subcategories/Subcategories';
 
 export interface ProductsSliceState {
   isProductsLoading: boolean;
   products: ProductProjection[];
-  subcategory: Subcategories | null;
   filter: Filter;
   sort: SortValues | null;
 }
@@ -16,7 +14,6 @@ export interface ProductsSliceState {
 const initialState: ProductsSliceState = {
   isProductsLoading: false,
   products: [],
-  subcategory: null,
   filter: { type: '', value: '' },
   sort: null
 };
@@ -26,9 +23,6 @@ export const productsSlice = createSlice({
   reducers: {
     deleteProducts(state: ProductsSliceState) {
       state.products = [];
-    },
-    setSubcategory(state: ProductsSliceState, action) {
-      state.subcategory = action.payload;
     },
     setFilter(state: ProductsSliceState, action: PayloadAction<Filter | null>) {
       if (action.payload) {
@@ -60,7 +54,5 @@ export const productsSlice = createSlice({
 });
 
 export const deleteProducts = productsSlice.actions.deleteProducts;
-export const setSubcategory = productsSlice.actions.setSubcategory;
-
 export const setFilter = productsSlice.actions.setFilter;
 export const setSort = productsSlice.actions.setSort;
