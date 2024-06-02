@@ -1,6 +1,6 @@
 import styles from './Subcategories.module.css';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
-import { setSubcategory } from '../../../store/slices/planet-slice';
+import { setFilter, setSubcategory } from '../../../store/slices/products-slice';
 export enum Subcategories {
   food = 'еда',
   pets = 'питомцы',
@@ -12,10 +12,11 @@ export function SubcategoriesList({
 }: {
   setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { subcategory } = useAppSelector((state) => state.planet_slice);
+  const { subcategory } = useAppSelector((state) => state.products_slice);
   const dispatch = useAppDispatch();
   const onSubcategoryClick = (subcategory: Subcategories) => {
     dispatch(setSubcategory(subcategory));
+    dispatch(setFilter(null));
     setVisibility(false);
   };
   return (

@@ -1,59 +1,53 @@
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import styles from '../../../univComponents/Checkbox/Checkbox.module.css';
 import style from './Filters.module.css';
-import { getFilteredProducts } from '../../../../api/products/getProducts';
-import { deleteFilteredProducts } from '../../../../store/slices/products-slice';
+import type { Filter } from '../../Main.interfaces';
+import { setFilter } from '../../../../store/slices/products-slice';
 
 export function Filters() {
   const dispatch = useAppDispatch();
-  const { products, filteredProducts } = useAppSelector((state) => state.products_slice);
-  const [attributes, setAttributes] = useState<string[]>([]);
-  const { planet, subcategory } = useAppSelector((state) => state.planet_slice);
-  const [checkedValue, setCheckedValue] = useState<null | string>(null);
+  const { products, filter } = useAppSelector((state) => state.products_slice);
+  const { subcategory } = useAppSelector((state) => state.products_slice);
 
-  useEffect(() => {
-    if (subcategory && products && products.length) {
-      setAttributes(
-        products.map((product) =>
-          product.masterVariant?.attributes ? product.masterVariant?.attributes[0]?.value[0] : []
-        )
-      );
-    }
+  const attributes = useMemo(() => {
+    if (!subcategory || !products.length) return [];
+
+    const attributeSet = new Set<string>();
+    const uniqueAttributes: Filter[] = [];
+
+    products.forEach((product) => {
+      product.masterVariant?.attributes?.forEach((attribute) => {
+        const attributeString = JSON.stringify({ type: attribute.name, value: attribute.value });
+        if (!attributeSet.has(attributeString)) {
+          attributeSet.add(attributeString);
+          uniqueAttributes.push({ type: attribute.name, value: attribute.value[0] });
+        }
+      });
+    });
+
+    return uniqueAttributes;
   }, [products, subcategory]);
 
-  useEffect(() => {
-    if (filteredProducts && filteredProducts.length) {
-      const value = filteredProducts?.[0]?.masterVariant?.attributes?.[0]?.value?.[0] ?? null;
-      setCheckedValue(value);
-    }
-  }, [filteredProducts]);
-  const onClick = (atr: string) => {
-    if (atr === checkedValue) {
-      dispatch(deleteFilteredProducts());
-    } else {
-      dispatch(
-        getFilteredProducts({
-          planet: planet,
-          filter: atr
-        })
-      );
-    }
+  const handleClick = (atr: Filter) => {
+    const newValue = atr.value === filter?.value ? null : atr.value;
+    dispatch(setFilter(newValue ? { type: atr.type, value: atr.value } : null));
   };
+
   return (
     <div className={style.filters}>
       {attributes.length > 0 &&
-        Array.from(new Set(attributes)).map(
+        attributes.map(
           (atr, index) =>
             atr && (
-              <label key={index} className={style.filter_item} onClick={() => onClick(atr)}>
+              <label key={index} className={style.filter_item} onClick={() => handleClick(atr)}>
                 <input
-                  className={styles.checkbox}
+                  className={`${styles.checkbox} ${filter?.value === atr.value ? styles.checked : ''}`}
                   type="checkbox"
-                  value={atr}
-                  defaultChecked={checkedValue === atr}
+                  value={atr.value}
+                  defaultChecked={filter.value === atr.value}
                 />
-                {atr}
+                {atr.value}
               </label>
             )
         )}
