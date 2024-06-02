@@ -16,7 +16,7 @@ export function ProductDetail() {
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState<string | null>(null);
+  const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
   const planet = useAppSelector((state) => state.planet_slice.planet);
 
   useEffect(() => {
@@ -41,14 +41,14 @@ export function ProductDetail() {
     fetchData();
   }, [productKey]);
 
-  const openModal = (imageUrl: string) => {
-    setModalImage(imageUrl);
+  const openModal = (index: number) => {
+    setModalImageIndex(index);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalImage(null);
+    setModalImageIndex(null);
   };
 
   if (isLoading) {
@@ -84,8 +84,8 @@ export function ProductDetail() {
           useKeyboardArrows
           thumbWidth={65}
         >
-          {images.map((image) => (
-            <div key={image.url} className={styles.image_container} onClick={() => openModal(image.url)}>
+          {images.map((image, index) => (
+            <div key={image.url} className={styles.image_container} onClick={() => openModal(index)}>
               <img src={image.url} alt={image.label} className={styles.product_image} />
             </div>
           ))}
@@ -98,7 +98,9 @@ export function ProductDetail() {
         </span>
       )}
       {discountPrice && <span className={styles.discount_price}>{formatPrice(discountPrice)}</span>}
-      {isModalOpen && modalImage && <ImageModal imageUrl={modalImage} onClose={closeModal} />}
+      {isModalOpen && modalImageIndex !== null && (
+        <ImageModal images={images} startIndex={modalImageIndex} onClose={closeModal} />
+      )}
     </div>
   );
 }
