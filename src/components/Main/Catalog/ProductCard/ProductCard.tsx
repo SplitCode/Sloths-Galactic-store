@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import type { ProductCardProps } from '../../Main.interfaces';
 import { formatPrice } from '../../../../helpers/formatPrice';
+import { cutSentence } from '../../../../helpers/cutSentence';
 
 export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
@@ -24,8 +25,15 @@ export function ProductCard({ product }: ProductCardProps) {
         }
       }}
     >
-      <div className={styles.product_image} style={{ backgroundImage: `url(${bgImageUrl})` }} />
-      <p className={styles.product_desc}>{product.description?.ru}</p>
+      <div className={styles.product_image_wrapper}>
+        <div className={styles.product_image} style={{ backgroundImage: `url(${bgImageUrl})` }} />
+        <div className={styles.product_image_glow_wrapper}>
+          <img src={bgImageUrl || ''} alt="glow" className={styles.product_image_glow} />
+        </div>
+      </div>
+      <div className={styles.product_desc_wrapper}>
+        <p className={styles.product_desc}>{cutSentence(product.description?.ru)}</p>
+      </div>
       <div className={styles.product_info_wrapper}>
         <h3 className={styles.product_name}>{product.name.ru}</h3>
         {price && (

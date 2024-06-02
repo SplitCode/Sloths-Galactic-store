@@ -15,8 +15,8 @@
   width: max-content;
   height: 100%;
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(0.5rem);
+  background-color: var(--transparent-background);
+  backdrop-filter: var(--backdrop-blur);
 }
 
 .profile_wrapper:has(div:only-child) {
