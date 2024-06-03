@@ -81,3 +81,11 @@ export interface ImageModalProps {
   startIndex: number;
   onClose: () => void;
 }
+
+export interface ProfileAddressProps {
+  index?: number;
+  addressId?: string;
+  customerData?: Customer;
+  isNew?: boolean;
+  setAddingAddress?: React.Dispatch<React.SetStateAction<boolean>>;
+}
