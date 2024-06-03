@@ -10,7 +10,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   useEffect(() => {
     if (accentColor && rootRef.current) {
-      rootRef.current.style.setProperty('--accent-color', accentColor);
+      rootRef.current.style.setProperty('--accent-color-dark', accentColor.Dark);
+      rootRef.current.style.setProperty('--accent-color-light', accentColor.Light);
     }
   }, [accentColor]);
   return (

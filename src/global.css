@@ -27,7 +27,6 @@
   --add-font: LogoFont;
   --decorative-font: DecorativeFont;
   --toastify-color-dark: #242424f1;
-  --highlight-color: rgb(31, 163, 240);
   --light-shadow-color: #ffffff88;
   --dark-transparent-background: rgba(20, 20, 20, 0.7);
   --transparent-background: rgba(0, 0, 0, 0.55);
@@ -71,18 +70,19 @@ h1 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: dodgerblue;
+  background-color: rgb(95, 95, 95);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(22, 104, 186);
+  background-color: rgb(85, 85, 85);
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background-color: rgb(16, 80, 145);
+  background-color: rgb(60, 60, 60);
 }
 
 .theme_provider {
-  --accent-color: rgb(31, 163, 240);
+  --accent-color-light: rgb(36 174 255);
+  --accent-color-dark: rgb(23 90 130);
   width: 100%;
 }

@@ -22,14 +22,14 @@
 
 .label[checked],
 .label[value='true'] {
-  background-color: var(--accent-color);
-  box-shadow: 0 0 1rem 0.3rem var(--accent-color);
+  background-color: var(--accent-color-light);
+  box-shadow: 0 0 1rem 0.3rem var(--accent-color-light);
 }
 
 .line {
   width: 0.2rem;
   height: 100%;
-  background-color: var(--accent-color);
+  background-color: var(--accent-color-light);
 }
 
 .shipping {

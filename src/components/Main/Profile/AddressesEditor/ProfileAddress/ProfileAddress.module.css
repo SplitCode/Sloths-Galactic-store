@@ -11,11 +11,11 @@
 }
 
 .address:has(.save_btn) {
-  border-color: var(--accent-color);
+  border-color: var(--accent-color-light);
 }
 
 .address:has(.save_btn) .legend {
-  color: var(--accent-color);
+  color: var(--accent-color-light);
 }
 
 .legend {

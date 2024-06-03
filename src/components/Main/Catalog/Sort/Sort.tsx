@@ -15,10 +15,18 @@ export function Sort() {
 
   return (
     <select id="sort-select" className={styles.select_field} onChange={onHandleClick} value={sort ?? ''}>
-      <option value="">Без сортировки</option>
-      <option value={SortValues.priceUp}>по возрастанию цены</option>
-      <option value={SortValues.priceDown}>по убыванию цены</option>
-      <option value={SortValues.alphabet}>по алфавиту</option>
+      <option className={styles.option} value="">
+        Без сортировки
+      </option>
+      <option className={styles.option} value={SortValues.priceUp}>
+        по возрастанию цены
+      </option>
+      <option className={styles.option} value={SortValues.priceDown}>
+        по убыванию цены
+      </option>
+      <option className={styles.option} value={SortValues.alphabet}>
+        по алфавиту
+      </option>
     </select>
   );
 }

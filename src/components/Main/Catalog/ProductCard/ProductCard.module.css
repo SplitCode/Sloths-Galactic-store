@@ -90,7 +90,7 @@
 }
 
 .product_card:has(.discount_price) .product_name {
-  color: var(--accent-color);
+  color: var(--accent-color-light);
 }
 
 .product_price {
@@ -101,8 +101,8 @@
 
 .discount_price {
   max-width: max-content;
-  color: var(--accent-color);
-  text-shadow: 0 0 2rem var(--accent-color);
+  color: var(--accent-color-light);
+  text-shadow: 0 0 2rem var(--accent-color-light);
   font-weight: bold;
 }
 
@@ -149,7 +149,7 @@
 }
 
 .product_card:hover {
-  box-shadow: 0 0 1.5rem 0.2rem var(--accent-color);
+  box-shadow: 0 0 1.5rem 0.2rem var(--accent-color-light);
 }
 
 .product_card:hover .product_info_wrapper::after {

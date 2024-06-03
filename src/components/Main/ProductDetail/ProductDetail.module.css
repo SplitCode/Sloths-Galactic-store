@@ -10,9 +10,9 @@
   margin: 3rem auto;
   border-radius: 1rem;
   background-color: rgba(20, 20, 20, 0.9);
-  border: 0.1rem solid var(--accent-color);
+  border: 0.1rem solid var(--accent-color-light);
   box-shadow:
-    0 0 1rem var(--accent-color),
+    0 0 1rem var(--accent-color-light),
     0 0 0.3rem white;
 }
 
@@ -41,7 +41,7 @@
 }
 
 :global(.carousel .thumb.selected) {
-  border: 3px solid var(--accent-color);
+  border: 3px solid var(--accent-color-light);
 }
 
 .product_image {
@@ -57,12 +57,12 @@
 }
 
 .product_price {
-  color: var(--accent-color);
+  color: var(--accent-color-light);
   font-size: 3rem;
 }
 
 .discount_price {
-  background-color: var(--accent-color);
+  background-color: var(--accent-color-light);
   max-width: max-content;
   font-size: 3rem;
 }
@@ -102,7 +102,7 @@
 .crossed_price::before {
   position: absolute;
   content: '';
-  background-color: var(--accent-color);
+  background-color: var(--accent-color-light);
   height: 0.2rem;
   width: 100%;
   top: 50%;

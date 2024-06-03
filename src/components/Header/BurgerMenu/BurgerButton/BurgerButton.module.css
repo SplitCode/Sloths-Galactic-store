@@ -47,7 +47,7 @@
   .burger_button::after {
     bottom: 0;
     width: 60%;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-light);
   }
 
   .burger_button.open .line {
@@ -57,7 +57,7 @@
   .burger_button.open::before {
     top: 50%;
     transform: rotate(45deg);
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-light);
   }
 
   .burger_button.open::after {
@@ -65,6 +65,6 @@
     top: 50%;
     width: 100%;
     transform: rotate(-45deg);
-    background-color: var(--accent-color);
+    background-color: var(--accent-color-light);
   }
 }
