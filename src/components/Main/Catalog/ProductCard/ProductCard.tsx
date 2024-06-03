@@ -6,7 +6,6 @@ import { getPlanetFromLocation } from '../../../../helpers/locationHandlers';
 import { getSubcategoryFromProductType } from '../../../../helpers/idsMapper';
 import { cutSentence } from '../../../../helpers/cutSentence';
 
-
 export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
   const bgImageUrl = product.masterVariant?.images ? product.masterVariant?.images[0]?.url : null;

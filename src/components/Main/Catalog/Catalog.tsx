@@ -3,6 +3,7 @@ import { getProducts } from '../../../api/products/getProducts';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { Loader } from '../Loader/Loader';
 import { ProductCard } from './ProductCard/ProductCard';
+import { Search } from './Search/Search';
 import type { ProductsSliceState } from '../../../store/slices/products-slice';
 import styles from './Catalog.module.css';
 import { Filters } from './Filters/Filters';
@@ -14,7 +15,7 @@ import { getPlanetFromLocation, getSubcategoryFromLocation } from '../../../help
 
 export function Catalog() {
   const dispatch = useAppDispatch();
-  const { isProductsLoading, products, filter, sort }: ProductsSliceState = useAppSelector(
+  const { isProductsLoading, products, filter, sort, searchQuery }: ProductsSliceState = useAppSelector(
     (state) => state.products_slice
   );
   const { planet } = useAppSelector((state) => state.planet_slice);
@@ -33,12 +34,12 @@ export function Catalog() {
         planet: locationParts.planet,
         subcategory: locationParts.subcategory ?? undefined,
         filter: filter.value && filter.type ? filter : undefined,
-        sortValue: sort ?? undefined
+        sortValue: sort ?? undefined,
+        searchQuery: searchQuery ?? undefined
       };
       dispatch(getProducts(actionPayload));
     }
-
-  }, [dispatch, locationParts, sort, filter]);
+  }, [dispatch, locationParts, sort, filter, searchQuery]);
 
   useEffect(() => {
     if (!locationParts.planet) {
@@ -52,6 +53,7 @@ export function Catalog() {
     <>
       <Breadcrumbs />
       <div className={styles.filters_wrapper}>
+        <Search />
         <Filters />
         <Sort />
       </div>

@@ -69,6 +69,7 @@ export interface getProductsRequestProps {
   subcategory?: Subcategories;
   filter?: Filter;
   sortValue?: SortValues;
+  searchQuery?: string;
 }
 
 export interface Image {

@@ -7,7 +7,7 @@
   height: fit-content;
   gap: 3rem;
   padding: 3rem;
-  margin: 5rem auto;
+  margin: 3rem auto;
   border-radius: 1rem;
   background-color: rgba(20, 20, 20, 0.9);
   border: 0.1rem solid var(--accent-color);
@@ -86,7 +86,7 @@
   display: inline-block;
   width: 3rem;
   height: 3rem;
-  background-image: url('./../../../assets/img/arrow.svg');
+  background-image: url('./../../../assets/img/sliderArrow.svg');
   border: none;
 }
 
@@ -94,7 +94,7 @@
   display: inline-block;
   width: 3rem;
   height: 3rem;
-  background-image: url('./../../../assets/img/arrow.svg');
+  background-image: url('./../../../assets/img/sliderArrow.svg');
   transform: rotate(180deg);
   border: none;
 }
@@ -114,6 +114,40 @@
   padding: 1rem;
   border-radius: 1rem;
   line-height: 1.2;
+}
+
+.link_back {
+  background-color: transparent;
+  position: relative;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  font-size: 1.5rem;
+  width: 6rem;
+  font-family: var(--Main-font);
+}
+
+.link_back::before {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 0.1rem;
+  transform: scaleX(0);
+  transform-origin: right;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.link_back:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 @media (max-width: 768px) {
