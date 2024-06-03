@@ -1,7 +1,7 @@
 import { Field } from 'formik';
 import styles from './CountrySelect.module.css';
 
-export function CountrySelect({ name, disabled }: { name: string; disabled: boolean }) {
+export function CountrySelect({ name, disabled }: { name: string; disabled?: boolean }) {
   return (
     <label className={styles.label}>
       {disabled ? 'Страна' : 'Выберите страну'}

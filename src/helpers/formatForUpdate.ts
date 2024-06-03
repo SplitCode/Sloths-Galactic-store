@@ -1,7 +1,7 @@
-import type { UpdateCustomerData } from '../api/api.interfaces';
+import type { UpdateSimpleData } from '../api/api.interfaces';
 import type { UpdateDataForFormat } from './helpers.interfaces';
 
-export function formatForUpdate({ ID, values, version }: UpdateDataForFormat): UpdateCustomerData {
+export function formatForUpdate({ ID, values, version }: UpdateDataForFormat): UpdateSimpleData {
   return {
     ID,
     version,
