@@ -1,10 +1,10 @@
-import { getCustomer } from '../../../api/customers/getCustomer';
-import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import type { Address } from '@commercetools/platform-sdk';
+import { useAppSelector } from '../../../store/hooks';
 import type { CustomerSliceState } from '../../../store/slices/customer-slice';
 import styles from './Profile.module.css';
 import { PersonalEditor } from './PersonalEditor/PersonalEditor';
 import { ProfileViewer } from './ProfileViewer/ProfileViewer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Loader } from '../Loader/Loader';
 import { PasswordEditor } from './PasswordEditor/PasswordEditor';
 import { AddressesEditor } from './AddressesEditor/AddressesEditor';
@@ -14,22 +14,19 @@ import addressIcon from '../../../assets/img/address.svg';
 import { Button } from '../../univComponents/Button/Button';
 
 export function Profile() {
-  const dispatch = useAppDispatch();
-  const customerId: string | null = useAppSelector((state) => state.customer_slice.customerId);
-  const { isCustomerLoading, customerData, errorMessage }: CustomerSliceState = useAppSelector(
+  const { customerId, isCustomerLoading, customerData, errorMessage }: CustomerSliceState = useAppSelector(
     (state) => state.customer_slice
   );
 
-  useEffect(() => {
-    if (customerId) {
-      dispatch(getCustomer(customerId));
-    }
-  }, [customerId, dispatch]);
 
-  const [editModes, setEditMode] = useState({
-    isPersonalEdit: false,
-    isAddressesEdit: false,
-    isPasswordEdit: false
+  const shippingAddress = customerData?.addresses.find((address: Address) => {
+    if (customerData.shippingAddressIds) return address.id === customerData.shippingAddressIds[0];
+    return false;
+  });
+  const billingAddress = customerData?.addresses.find((address: Address) => {
+    if (customerData.billingAddressIds) return address.id === customerData.billingAddressIds[0];
+    return false;
+
   });
 
   if (isCustomerLoading) return <Loader />;

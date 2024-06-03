@@ -37,6 +37,7 @@ export function Catalog() {
       };
       dispatch(getProducts(actionPayload));
     }
+
   }, [dispatch, locationParts, sort, filter]);
 
   useEffect(() => {
