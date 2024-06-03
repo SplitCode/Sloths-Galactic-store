@@ -1,4 +1,3 @@
-import type { Address } from '@commercetools/platform-sdk';
 import { useAppSelector } from '../../../store/hooks';
 import type { CustomerSliceState } from '../../../store/slices/customer-slice';
 import styles from './Profile.module.css';
@@ -18,13 +17,10 @@ export function Profile() {
     (state) => state.customer_slice
   );
 
-  const shippingAddress = customerData?.addresses.find((address: Address) => {
-    if (customerData.shippingAddressIds) return address.id === customerData.shippingAddressIds[0];
-    return false;
-  });
-  const billingAddress = customerData?.addresses.find((address: Address) => {
-    if (customerData.billingAddressIds) return address.id === customerData.billingAddressIds[0];
-    return false;
+  const [editModes, setEditMode] = useState({
+    isPersonalEdit: false,
+    isAddressesEdit: false,
+    isPasswordEdit: false
   });
 
   if (isCustomerLoading) return <Loader />;
@@ -43,7 +39,7 @@ export function Profile() {
           <PasswordEditor setEditMode={setEditMode} customerData={customerData} />
         ) : (
           <>
-            <ProfileViewer setEditMode={setEditMode} customerData={customerData} />
+            <ProfileViewer customerData={customerData} />
             <Button
               onClick={() =>
                 setEditMode((editModes) => {
