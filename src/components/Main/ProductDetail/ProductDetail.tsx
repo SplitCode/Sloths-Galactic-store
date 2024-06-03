@@ -66,51 +66,52 @@ export function ProductDetail() {
 
   return (
     <>
-      <button
-        className={styles.link_back}
-        type="button"
-        onClick={() => {
-          window.history.back();
-        }}
-      >
-        НАЗАД
-      </button>
-      <div className={styles.product_detail}>
-        {planet && <BgPlanets />}
-        <h1 className={styles.product_name}>{name?.ru}</h1>
-        <div className={styles.images_gallery}>
-          <Carousel
-            className={styles.images_carousel}
-            centerMode={true}
-            centerSlidePercentage={100}
-            showArrows
-            showIndicators={false}
-            showStatus={false}
-            autoPlay={true}
-            infiniteLoop={true}
-            interval={5000}
-            stopOnHover
-            swipeable
-            useKeyboardArrows
-            thumbWidth={65}
-          >
-            {images.map((image, index) => (
-              <div key={image.url} className={styles.image_container} onClick={() => openModal(index)}>
-                <img src={image.url} alt={image.label} className={styles.product_image} />
-              </div>
-            ))}
-          </Carousel>
+      <div className={styles.product_wrapper}>
+        <button
+          className={styles.link_back}
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          НАЗАД
+        </button>
+        <div className={styles.product_detail}>
+          {planet && <BgPlanets />}
+          <h1 className={styles.product_name}>{name?.ru}</h1>
+          <div className={styles.images_gallery}>
+            <Carousel
+              className={styles.images_carousel}
+              centerMode={true}
+              centerSlidePercentage={100}
+              showArrows
+              showIndicators={false}
+              showStatus={false}
+              autoPlay={true}
+              infiniteLoop={true}
+              interval={5000}
+              stopOnHover
+              swipeable
+              useKeyboardArrows
+              thumbWidth={65}
+            >
+              {images.map((image, index) => (
+                <div key={image.url} className={styles.image_container} onClick={() => openModal(index)}>
+                  <img src={image.url} alt={image.label} className={styles.product_image} />
+                </div>
+              ))}
+            </Carousel>
+          </div>
+          <p className={styles.product_desc}>{description?.ru}</p>
+          {price && (
+            <span className={discountPrice ? styles.crossed_price : styles.product_price}>
+              {formatPrice(price)}
+            </span>
+          )}
+          {discountPrice && <span className={styles.discount_price}>{formatPrice(discountPrice)}</span>}
+          {isModalOpen && modalImageIndex !== null && (
+            <ImageModal images={images} startIndex={modalImageIndex} onClose={closeModal} />
+          )}
         </div>
-        <p className={styles.product_desc}>{description?.ru}</p>
-        {price && (
-          <span className={discountPrice ? styles.crossed_price : styles.product_price}>
-            {formatPrice(price)}
-          </span>
-        )}
-        {discountPrice && <span className={styles.discount_price}>{formatPrice(discountPrice)}</span>}
-        {isModalOpen && modalImageIndex !== null && (
-          <ImageModal images={images} startIndex={modalImageIndex} onClose={closeModal} />
-        )}
       </div>
     </>
   );

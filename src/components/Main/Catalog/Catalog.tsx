@@ -12,6 +12,7 @@ import type { getProductsRequestProps } from '../Main.interfaces';
 import { Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getPlanetFromLocation, getSubcategoryFromLocation } from '../../../helpers/locationHandlers';
+import { Sidebar } from '../../Sidebar/Sidebar';
 
 export function Catalog() {
   const dispatch = useAppDispatch();
@@ -51,6 +52,7 @@ export function Catalog() {
     <Loader />
   ) : (
     <>
+      <Sidebar />
       <Breadcrumbs />
       <div className={styles.filters_wrapper}>
         <Search />
