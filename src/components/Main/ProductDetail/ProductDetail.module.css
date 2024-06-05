@@ -32,8 +32,8 @@
 
 .discount_price {
   max-width: max-content;
-  color: var(--accent-color);
-  text-shadow: 0 0 2rem var(--accent-color);
+  color: var(--accent-color-light);
+  text-shadow: 0 0 2rem var(--accent-color-light);
   font-weight: bold;
   font-size: 3rem;
 }
