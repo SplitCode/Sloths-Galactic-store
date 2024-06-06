@@ -13,6 +13,7 @@ import { ProductDetail } from '../components/Main/ProductDetail/ProductDetail';
 import type { Subcategories } from '../helpers/translationMapper';
 import { getTranslation } from '../helpers/translationMapper';
 import type { Planets } from '../store/slices/planet-slice';
+import { Basket } from '../components/Main/Basket/Basket';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: 'catalog/:planet/:subcategory/:productKey',
         element: <ProductDetail />
+      },
+      {
+        path: 'basket',
+        element: <Basket />
       }
     ]
   }
