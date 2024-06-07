@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 import type { ProductCardProps } from '../../Main.interfaces';
-import { formatPrice } from '../../../../helpers/formatPrice';
 import { getPlanetFromLocation } from '../../../../helpers/locationHandlers';
 import { getSubcategoryFromProductType } from '../../../../helpers/idsMapper';
 import { cutSentence } from '../../../../helpers/cutSentence';
@@ -13,6 +12,7 @@ import { createCart } from '../../../../api/cart/createCart';
 import { addItemToCart } from '../../../../api/cart/addItemToCart';
 import { setCart } from '../../../../store/slices/cart-slice';
 import { MiniLoader } from '../../Loader/Loader';
+import { Price } from '../../../univComponents/Price/Price';
 
 export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
@@ -76,20 +76,18 @@ export function ProductCard({ product }: ProductCardProps) {
           <img src={bgImageUrl || ''} alt="glow" className={styles.product_image_glow} />
         </div>
       </div>
+
       <div className={styles.product_desc_wrapper}>
         <p className={styles.product_desc}>{cutSentence(product.description?.ru)}</p>
       </div>
+
       <div className={styles.product_info_wrapper}>
-        <h3 className={styles.product_name}>{product.name.ru}</h3>
-        <div className={styles.product_price_wrapper}>
-          {price && (
-            <span className={discountPrice ? styles.crossed_price : styles.product_price}>
-              {formatPrice(price)}
-            </span>
-          )}
-          {discountPrice && <span className={styles.discount_price}>{formatPrice(discountPrice)}</span>}
-        </div>
+        <h3 className={`${styles.product_name} ${discountPrice && styles.product_discount_name}`}>
+          {product.name.ru}
+        </h3>
+        <Price price={price} discountPrice={discountPrice} />
       </div>
+
       <button className={styles.cart_button} disabled={isInCart || isLoading} onClick={addToCart}>
         {isLoading ? (
           <MiniLoader />

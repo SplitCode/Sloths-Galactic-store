@@ -24,35 +24,8 @@
   text-align: center;
 }
 
-.product_price {
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 3rem;
-}
-
-.discount_price {
-  max-width: max-content;
-  color: var(--accent-color-light);
-  text-shadow: 0 0 2rem var(--accent-color-light);
-  font-weight: bold;
-  font-size: 3rem;
-}
-
-.crossed_price {
-  position: relative;
-  background-color: transparent;
-  max-width: max-content;
-  font-size: 2rem;
-  color: rgb(220, 220, 220);
-}
-
-.crossed_price::before {
-  position: absolute;
-  content: '';
-  background-color: rgb(220, 220, 220);
-  height: 0.1rem;
-  width: 100%;
-  top: 55%;
+.product_price_wrapper {
+  font-size: 2.5rem;
 }
 
 .product_desc {

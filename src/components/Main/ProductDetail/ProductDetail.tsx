@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import { getProduct } from '../../../api/products/getProducts';
 import type { Product } from '@commercetools/platform-sdk';
 import { Loader } from '../Loader/Loader';
-import { formatPrice } from '../../../helpers/formatPrice';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styles from './ProductDetail.module.css';
 import { BgPlanets } from '../../Sidebar/Bg-planets';
 import { useAppSelector } from '../../../store/hooks';
 import { ImageModal } from './ImageModal/ImageModal';
+import { Price } from '../../univComponents/Price/Price';
 
 export function ProductDetail() {
   const { productKey } = useParams<{ productKey: string }>();
@@ -102,12 +102,7 @@ export function ProductDetail() {
             </Carousel>
           </div>
           <p className={styles.product_desc}>{description?.ru}</p>
-          {price && (
-            <span className={discountPrice ? styles.crossed_price : styles.product_price}>
-              {formatPrice(price)}
-            </span>
-          )}
-          {discountPrice && <span className={styles.discount_price}>{formatPrice(discountPrice)}</span>}
+          <Price classes={[styles.product_price_wrapper]} price={price} discountPrice={discountPrice || ''} />
           {isModalOpen && modalImageIndex !== null && (
             <ImageModal images={images} startIndex={modalImageIndex} onClose={closeModal} />
           )}

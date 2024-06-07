@@ -13,7 +13,7 @@ import { ProductDetail } from '../components/Main/ProductDetail/ProductDetail';
 import type { Subcategories } from '../helpers/translationMapper';
 import { getTranslation } from '../helpers/translationMapper';
 import type { Planets } from '../store/slices/planet-slice';
-import { Basket } from '../components/Main/Basket/Basket';
+import { Cart } from '../components/Main/Cart/Cart';
 
 export const router = createBrowserRouter([
   {
@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'cart',
-        element: <Basket />
+        element: <Cart />
       }
     ]
   }

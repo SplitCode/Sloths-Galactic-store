@@ -1,0 +1,32 @@
+.products_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.product {
+  outline: 1px solid #ffffff;
+  width: 100%;
+}
+
+.product_image {
+  width: 25rem;
+  height: 25rem;
+  background-position: center;
+  background-size: 105%;
+  background-repeat: no-repeat;
+  outline: 1px solid #ffffff;
+  transition: 0.3s;
+}
+
+.product_price_wrapper {
+  gap: 0.3rem;
+  font-size: 1.8rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product:hover .product_image {
+    background-size: 120%;
+  }
+}

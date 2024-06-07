@@ -1,0 +1,34 @@
+.product_price_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product_price {
+  color: #ffffff;
+  text-align: left;
+  font-weight: 500;
+}
+
+.discount_price {
+  max-width: max-content;
+  color: var(--accent-color-light);
+  text-shadow: 0 0 2rem var(--accent-color-light);
+  font-weight: bold;
+}
+
+.crossed_price {
+  position: relative;
+  background-color: transparent;
+  max-width: max-content;
+  color: rgb(220, 220, 220);
+}
+
+.crossed_price::before {
+  position: absolute;
+  content: '';
+  background-color: rgb(220, 220, 220);
+  height: 0.1rem;
+  width: 100%;
+  top: 55%;
+}
