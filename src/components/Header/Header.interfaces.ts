@@ -4,7 +4,7 @@ export interface ToggleMenuProps {
 
 export interface CustomNavLinkProps extends ToggleMenuProps {
   text: string;
-  to: '/login' | '/register' | '/catalog' | '/about' | '/' | '/profile' | '/basket';
+  to: '/login' | '/register' | '/catalog' | '/about' | '/' | '/profile' | '/cart';
 }
 
 export interface NavigationProps extends ToggleMenuProps {

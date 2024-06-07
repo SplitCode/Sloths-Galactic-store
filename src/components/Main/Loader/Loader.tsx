@@ -6,3 +6,11 @@ export function Loader() {
     </div>
   );
 }
+
+export function MiniLoader() {
+  return (
+    <div className={styles.loader_wrapper}>
+      <div className={styles.mini_loader}></div>
+    </div>
+  );
+}

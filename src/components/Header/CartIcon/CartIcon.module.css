@@ -1,14 +1,14 @@
-.basket_icon {
+.cart_icon {
   width: 4rem;
   transition: 0.3s;
 }
 
-.basket_link {
+.cart_link {
   position: relative;
   display: flex;
 }
 
-.basket_quantity {
+.cart_quantity {
   position: absolute;
   top: -0.5rem;
   right: -0.5rem;
@@ -26,11 +26,11 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .basket_link:hover .basket_icon {
+  .cart_link:hover .cart_icon {
     transform: scale(1.05);
     filter: drop-shadow(0 12px 15px var(--light-shadow-color));
   }
-  .basket_link:hover .basket_quantity {
+  .cart_link:hover .cart_quantity {
     transform: scale(1.05);
   }
 }
