@@ -6,10 +6,10 @@ import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import type { CustomNavLinkProps } from '../Header.interfaces';
 import { useEffect, useMemo } from 'react';
 import { getCart } from '../../../api/cart/getCart';
-import { setCart } from '../../../store/slices/cart-slice';
+import { MiniLoader } from '../../Main/Loader/Loader';
 
 export function CartIcon({ toggleMenuOpen }: CustomNavLinkProps) {
-  const cart = useAppSelector((state) => state.cart_slice.cart);
+  const { cart, isLoading } = useAppSelector((state) => state.cart_slice);
   const customerId = useAppSelector((state) => state.customer_slice.customerId);
   const dispatch = useAppDispatch();
 
@@ -18,20 +18,12 @@ export function CartIcon({ toggleMenuOpen }: CustomNavLinkProps) {
   }, [cart]);
 
   useEffect(() => {
-    const fetchCart = async () => {
-      if (customerId && !cart) {
-        try {
-          const response = await getCart(customerId);
-          const cartData = response.body;
-          dispatch(setCart(cartData));
-        } catch (error) {
-          console.error('Error fetching cart:', error);
-        }
-      }
-    };
-
-    fetchCart();
+    if (customerId && !cart) {
+      dispatch(getCart(customerId));
+    }
   }, [customerId, cart, dispatch]);
+
+  if (isLoading) return <MiniLoader />;
 
   return (
     <NavLink to={'/cart'} className={styles.cart_link}>

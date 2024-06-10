@@ -9,10 +9,9 @@ import cartIcon from './../../../../assets/img/cartIcon.png';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { createCart } from '../../../../api/cart/createCart';
-import { addItemToCart } from '../../../../api/cart/addItemToCart';
-import { setCart } from '../../../../store/slices/cart-slice';
 import { MiniLoader } from '../../Loader/Loader';
 import { Price } from '../../../univComponents/Price/Price';
+import { updateCart } from '../../../../api/cart/updateCart';
 
 export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
@@ -29,9 +28,9 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   const [isInCart, setIsInCart] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart_slice.cart);
+  const { cart } = useAppSelector((state) => state.cart_slice);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (cart) {
@@ -47,11 +46,21 @@ export function ProductCard({ product }: ProductCardProps) {
     try {
       if (!cart) {
         const newCart = await createCart();
-        const updatedCart = await addItemToCart(newCart.id, product.id, newCart.version);
-        dispatch(setCart(updatedCart));
+        await dispatch(
+          updateCart({
+            actions: [{ action: 'addLineItem', quantity: 1, productId: product.id }],
+            version: newCart.version,
+            ID: newCart.id
+          })
+        );
       } else {
-        const updatedCart = await addItemToCart(cart.id, product.id, cart.version);
-        dispatch(setCart(updatedCart));
+        await dispatch(
+          updateCart({
+            actions: [{ action: 'addLineItem', quantity: 1, productId: product.id }],
+            version: cart.version,
+            ID: cart.id
+          })
+        );
       }
       setIsInCart(true);
     } catch (error) {

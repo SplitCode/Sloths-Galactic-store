@@ -1,16 +1,19 @@
 import type { Cart } from '@commercetools/platform-sdk';
 import { getClientFlow } from '../BuildClient';
 
-export const createCart = async (): Promise<Cart> => {
-  const client = await getClientFlow();
-  const response = await client
-    .me()
-    .carts()
-    .post({
-      body: {
-        currency: 'RUB'
-      }
-    })
-    .execute();
-  return response.body;
-};
+export async function createCart(): Promise<Cart> {
+  try {
+    const client = await getClientFlow();
+    const cart = (
+      await client
+        .me()
+        .carts()
+        .post({ body: { currency: 'RUB' } })
+        .execute()
+    ).body;
+    return cart;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

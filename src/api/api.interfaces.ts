@@ -1,4 +1,4 @@
-import type { CustomerUpdateAction, ErrorResponse } from '@commercetools/platform-sdk';
+import type { CartUpdateAction, CustomerUpdateAction, ErrorResponse } from '@commercetools/platform-sdk';
 
 export interface Login {
   email: string;
@@ -31,13 +31,23 @@ export interface ApiError {
   message: string;
 }
 
-export interface UpdateSimpleData {
+interface UpdateData<T> {
   ID: string;
   version: number;
-  actions: CustomerUpdateAction[];
+  actions: T[];
 }
+
+export type UpdateSimpleData = UpdateData<CustomerUpdateAction>;
+
+export type UpdateCartData = UpdateData<CartUpdateAction>;
 
 export interface UpdatePasswordData extends Omit<UpdateSimpleData, 'actions'> {
   currentPassword: string;
   newPassword: string;
+}
+
+export interface AddCartInfo {
+  cartId: string;
+  productId: string;
+  version: number;
 }
