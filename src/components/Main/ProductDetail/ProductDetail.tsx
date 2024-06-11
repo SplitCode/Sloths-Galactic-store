@@ -6,8 +6,6 @@ import { Loader } from '../Loader/Loader';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styles from './ProductDetail.module.css';
-import { BgPlanets } from '../../Sidebar/Bg-planets';
-import { useAppSelector } from '../../../store/hooks';
 import { ImageModal } from './ImageModal/ImageModal';
 import { Price } from '../../univComponents/Price/Price';
 
@@ -17,7 +15,6 @@ export function ProductDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
-  const planet = useAppSelector((state) => state.planet_slice.planet);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +73,6 @@ export function ProductDetail() {
           НАЗАД
         </button>
         <div className={styles.product_detail}>
-          {planet && <BgPlanets />}
           <h1 className={styles.product_name}>{name?.ru}</h1>
           <div className={styles.images_gallery}>
             <Carousel

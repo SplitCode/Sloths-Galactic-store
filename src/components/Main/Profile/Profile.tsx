@@ -11,13 +11,11 @@ import editIcon from '../../../assets/img/edit.svg';
 import passwordIcon from '../../../assets/img/change_password.svg';
 import addressIcon from '../../../assets/img/address.svg';
 import { Button } from '../../univComponents/Button/Button';
-import { BgPlanets } from '../../Sidebar/Bg-planets';
 
 export function Profile() {
   const { customerId, isCustomerLoading, customerData, errorMessage }: CustomerSliceState = useAppSelector(
     (state) => state.customer_slice
   );
-  const planet = useAppSelector((state) => state.planet_slice.planet);
 
   const [editModes, setEditMode] = useState({
     isPersonalEdit: false,
@@ -30,7 +28,6 @@ export function Profile() {
 
   return customerData && customerId ? (
     <div className={styles.profile}>
-      {planet && <BgPlanets />}
       <div className={styles.profile_wrapper}>
         <h1>Профиль</h1>
 

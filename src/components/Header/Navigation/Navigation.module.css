@@ -54,10 +54,10 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     position: fixed;
-    top: 7.35rem;
+    top: 8rem;
     right: -100%;
     opacity: 0;
     visibility: hidden;
