@@ -1,33 +1,22 @@
-import { useEffect, useState } from 'react';
 import styles from './ImageModal.module.css';
 import { Button } from '../../../univComponents/Button/Button';
 import type { ImageModalProps } from '../../Main.interfaces';
 import { Carousel } from 'react-responsive-carousel';
+import { useState } from 'react';
 
-const animationTime = 500;
-
-export function ImageModal({ images, startIndex, onClose }: ImageModalProps) {
+export function ImageModal({ images, startIndex, active, setActive }: ImageModalProps) {
   const [closing, setClosing] = useState(false);
-  const [opening, setOpening] = useState(false);
 
-  useEffect(() => {
-    setOpening(true);
-  }, []);
-
-  const handleClose = () => {
-    setClosing(true);
-    setTimeout(() => {
-      onClose();
-    }, animationTime);
+  const handleAnimationEnd: React.AnimationEventHandler<HTMLDivElement> = (event) => {
+    if (event.animationName === styles['close-stripe']) {
+      setActive(false);
+    }
   };
 
   return (
-    <div
-      className={`${styles.modal_overlay} ${closing ? styles.closing : ''} ${opening ? styles.opening : ''}`}
-      onClick={(e) => e.stopPropagation()}
-    >
+    <div className={`${styles.modal} ${active ? styles.active : ''} ${closing ? styles.closing : ''}`}>
       <div className={styles.starry_background}></div>
-      <div className={styles.modal_content} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.modal_content} onAnimationEnd={handleAnimationEnd}>
         <Carousel
           className={styles.images_carousel}
           selectedItem={startIndex}
@@ -47,7 +36,7 @@ export function ImageModal({ images, startIndex, onClose }: ImageModalProps) {
             </div>
           ))}
         </Carousel>
-        <Button onClick={handleClose} type="button">
+        <Button type="button" onClick={() => setClosing(true)}>
           Закрыть
         </Button>
       </div>

@@ -75,7 +75,8 @@ export interface Image {
 export interface ImageModalProps {
   images: Image[];
   startIndex: number;
-  onClose: () => void;
+  active: boolean;
+  setActive: (isActive: boolean) => void;
 }
 
 export interface ProfileAddressProps {

@@ -63,6 +63,11 @@
     box-shadow 0.3s;
 }
 
+.noproduct_message {
+  margin-top: 2rem;
+  text-align: center;
+}
+
 :global(.carousel .thumb) {
   border: none;
 }
