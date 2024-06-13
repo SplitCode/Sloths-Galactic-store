@@ -1,5 +1,5 @@
 import { Form, Formik } from 'formik';
-import type { BillingAddress, EditorProps } from '../../Main.interfaces';
+import { ProfileMode, type BillingAddress, type EditorProps } from '../../Main.interfaces';
 import { Button } from '../../../univComponents/Button/Button';
 import { ProfileAddress } from './ProfileAddress/ProfileAddress';
 import { EditorTitle } from '../EditorTitle/EditorTitle';
@@ -13,8 +13,9 @@ import { showToast } from '../../../../helpers/showToast';
 import { errorHandler } from '../../../../helpers/errorHandler';
 import { getCustomer } from '../../../../api/customers/getCustomer';
 import { useAppDispatch } from '../../../../store/hooks';
+import { NewAddress } from './NewAddress';
 
-export function AddressesEditor({ customerData, setEditMode }: EditorProps) {
+export function AddressesEditor({ customerData, setMode }: EditorProps) {
   const dispatch = useAppDispatch();
   const addresses = customerData.addresses;
   const [isAddingAddress, setAddingAddress] = useState(false);
@@ -25,12 +26,7 @@ export function AddressesEditor({ customerData, setEditMode }: EditorProps) {
       <Button
         type="button"
         onClick={() => {
-          setEditMode((editModes) => {
-            return {
-              ...editModes,
-              isAddressesEdit: false
-            };
-          });
+          setMode(ProfileMode.Default);
         }}
       >
         Вернуться назад
@@ -39,46 +35,13 @@ export function AddressesEditor({ customerData, setEditMode }: EditorProps) {
       <Button onClick={() => setAddingAddress(true)} classes={[styles.add_address_btn]} type="button">
         Добавить адрес
       </Button>
+
       {isAddingAddress && (
-        <Formik
-          initialValues={{
-            country: 'RU',
-            city: '',
-            street: '',
-            postalCode: ''
-          }}
-          onSubmit={(values: Omit<BillingAddress, 'isDefault'>) => {
-            const customerPromise: Promise<Customer> = updateSimpleData({
-              version: customerData.version,
-              ID: customerData.id,
-              actions: [
-                {
-                  action: 'addAddress',
-                  address: {
-                    country: values.country,
-                    city: values.city,
-                    streetName: values.street,
-                    postalCode: values.postalCode
-                  }
-                }
-              ]
-            });
-            showToast({
-              promise: customerPromise,
-              pending: 'Добавляем...',
-              success: 'Адрес добавлен!',
-              errorHandler: errorHandler
-            });
-            customerPromise.then(() => {
-              dispatch(getCustomer(customerData.id));
-            });
-          }}
-          validationSchema={AddressSchema}
-        >
-          <Form className={styles.address_form}>
-            <ProfileAddress isNew={true} setAddingAddress={setAddingAddress} />
-          </Form>
-        </Formik>
+        <NewAddress
+          customerData={customerData}
+          setAddingAddress={setAddingAddress}
+          formStyles={styles.address_form}
+        />
       )}
 
       {!addresses.length ? (

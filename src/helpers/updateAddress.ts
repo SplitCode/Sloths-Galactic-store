@@ -6,7 +6,7 @@ import { getCustomer } from '../api/customers/getCustomer';
 import { errorHandler } from './errorHandler';
 import type { AddressesActions } from './helpers.interfaces';
 
-export function updateAddressType({
+export function updateAddress({
   action,
   version,
   addressId,
@@ -31,8 +31,8 @@ export function updateAddressType({
   });
   showToast({
     promise: customerPromise,
-    pending: 'Изменяем...',
-    success: 'Изменено!',
+    pending: 'В процессе...',
+    success: 'Сделано!',
     errorHandler: errorHandler
   });
   customerPromise.then(() => {

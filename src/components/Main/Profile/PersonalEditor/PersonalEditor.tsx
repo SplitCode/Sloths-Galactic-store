@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import { Button } from '../../../univComponents/Button/Button';
-import type { EditorProps, ProfileEditorValues } from '../../Main.interfaces';
+import { ProfileMode, type EditorProps, type ProfileEditorValues } from '../../Main.interfaces';
 import styles from './PersonalEditor.module.css';
 import { Form } from 'react-router-dom';
 import { Input } from '../../../univComponents/CustomForm/Input/Input';
@@ -14,7 +14,7 @@ import { useAppDispatch } from '../../../../store/hooks';
 import { getCustomer } from '../../../../api/customers/getCustomer';
 import { EditorTitle } from '../EditorTitle/EditorTitle';
 
-export function PersonalEditor({ setEditMode, customerData }: EditorProps) {
+export function PersonalEditor({ setMode, customerData }: EditorProps) {
   const dispatch = useAppDispatch();
 
   const initialValues: ProfileEditorValues = {
@@ -40,12 +40,7 @@ export function PersonalEditor({ setEditMode, customerData }: EditorProps) {
         });
         customerPromise.then(() => {
           dispatch(getCustomer(customerData.id));
-          setEditMode((editModes) => {
-            return {
-              ...editModes,
-              isPersonalEdit: false
-            };
-          });
+          setMode(ProfileMode.Default);
         });
       }}
       validationSchema={PersonalDataSchema}
@@ -67,14 +62,7 @@ export function PersonalEditor({ setEditMode, customerData }: EditorProps) {
               <Button
                 minimal
                 classes={[styles.button]}
-                onClick={() =>
-                  setEditMode((editModes) => {
-                    return {
-                      ...editModes,
-                      isPersonalEdit: false
-                    };
-                  })
-                }
+                onClick={() => setMode(ProfileMode.Default)}
                 type="button"
               >
                 Отмена

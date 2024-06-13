@@ -1,6 +1,7 @@
 import type { Customer, ProductProjection } from '@commercetools/platform-sdk';
 import type { Planets } from '../../store/slices/planet-slice';
 import type { Subcategories } from '../../helpers/translationMapper';
+import type { AddressesActions } from '../../helpers/helpers.interfaces';
 
 export interface StringObj {
   [key: string]: string;
@@ -34,13 +35,7 @@ export interface RegisterValues extends LoginValues {
 export type ProfileEditorValues = Pick<RegisterValues, 'email' | 'firstName' | 'lastName' | 'dateOfBirth'>;
 
 export interface EditorProps {
-  setEditMode: React.Dispatch<
-    React.SetStateAction<{
-      isPersonalEdit: boolean;
-      isAddressesEdit: boolean;
-      isPasswordEdit: boolean;
-    }>
-  >;
+  setMode: React.Dispatch<React.SetStateAction<ProfileMode>>;
   customerData: Customer;
 }
 
@@ -89,4 +84,20 @@ export interface ProfileAddressProps {
   customerData?: Customer;
   isNew?: boolean;
   setAddingAddress?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export enum ProfileMode {
+  Default,
+  PersonalEdit,
+  AddressesEdit,
+  PasswordEdit
+}
+
+export type AddressType = 'shipping' | 'billing' | 'defaultShipping' | 'defaultBilling';
+
+export interface AddressFlag {
+  action: AddressesActions;
+  checked: boolean;
+  styles: string[];
+  addressId?: string;
 }

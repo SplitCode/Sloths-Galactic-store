@@ -18,7 +18,7 @@
   backdrop-filter: blur(1rem);
   border-radius: 2rem;
   transform: translateY(0) scale(0);
-  transition: 0.25s;
+  transition: 0.5s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
 .hint_wrapper:hover .hint_text {

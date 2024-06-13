@@ -1,6 +1,7 @@
 import type {
   CustomerAddBillingAddressIdAction,
   CustomerAddShippingAddressIdAction,
+  CustomerRemoveAddressAction,
   CustomerRemoveBillingAddressIdAction,
   CustomerRemoveShippingAddressIdAction,
   CustomerSetDefaultBillingAddressAction,
@@ -41,4 +42,5 @@ export type AddressesActions =
   | CustomerAddBillingAddressIdAction['action']
   | CustomerRemoveBillingAddressIdAction['action']
   | CustomerSetDefaultShippingAddressAction['action']
-  | CustomerSetDefaultBillingAddressAction['action'];
+  | CustomerSetDefaultBillingAddressAction['action']
+  | CustomerRemoveAddressAction['action'];
