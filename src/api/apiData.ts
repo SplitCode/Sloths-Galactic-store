@@ -4,5 +4,20 @@ export enum ApiData {
   CLIENT_ID = 'IaWH1QpcohieLnE_B0UMY-ri',
   AUTH_URL = 'https://auth.europe-west1.gcp.commercetools.com',
   API_URL = 'https://api.europe-west1.gcp.commercetools.com',
-  SCOPES = 'manage_my_profile:sloths_rss_ecommerce manage_my_quote_requests:sloths_rss_ecommerce manage_my_business_units:sloths_rss_ecommerce manage_my_shopping_lists:sloths_rss_ecommerce manage_my_orders:sloths_rss_ecommerce manage_customers:sloths_rss_ecommerce view_published_products:sloths_rss_ecommerce manage_my_payments:sloths_rss_ecommerce view_products:sloths_rss_ecommerce create_anonymous_token:sloths_rss_ecommerce view_categories:sloths_rss_ecommerce manage_order_edits:sloths_rss_ecommerce manage_orders:sloths_rss_ecommerce manage_my_quotes:sloths_rss_ecommerce view_messages:sloths_rss_ecommerce'
+  SCOPES = 'manage_my_profile:sloths_rss_ecommerce manage_my_quote_requests:sloths_rss_ecommerce manage_my_business_units:sloths_rss_ecommerce manage_my_shopping_lists:sloths_rss_ecommerce manage_my_orders:sloths_rss_ecommerce manage_customers:sloths_rss_ecommerce view_published_products:sloths_rss_ecommerce manage_my_payments:sloths_rss_ecommerce view_products:sloths_rss_ecommerce create_anonymous_token:sloths_rss_ecommerce view_categories:sloths_rss_ecommerce manage_order_edits:sloths_rss_ecommerce manage_orders:sloths_rss_ecommerce manage_my_quotes:sloths_rss_ecommerce view_messages:sloths_rss_ecommerce',
+  VENUS_CATALOG_ID = '69710c3f-5893-4ab0-91cd-048764840cca',
+  MARS_CATALOG_ID = '5f13a4d5-c1ac-4a96-8724-3de756e62f93',
+  EARTH_CATALOG_ID = '7edc90b1-a15e-456c-865c-4f2184052347',
+  VENUS_PETS_ID = '37a0ebf5-e0c1-456f-ad55-993b244d8d78',
+  VENUS_FOOD_ID = 'dc06dfeb-52a2-4ea8-86a1-abbe15ebaaf4',
+  VENUS_TECHNIC_ID = 'b4347ed5-0f97-4531-80b0-d76973729f93',
+  MARS_PETS_ID = 'ce818306-798e-4203-9e95-8a701cddfcf9',
+  MARS_FOOD_ID = '1d174a49-49bf-4706-abe3-b7477f475bb3',
+  MARS_TECHNIC_ID = 'f41b19d2-65ce-4a6f-af32-4bb59b3054fd',
+  EARTH_PETS_ID = '43ef7ff9-b6c0-4171-bee0-7d8bbe579a96',
+  EARTH_FOOD_ID = 'f1e0afe3-dad5-4bda-b3e9-587726ef24b3',
+  EARTH_TECHNIC_ID = '541f2092-693a-4d0d-9003-2d5db1368c02',
+  FOOD_ID = '8aedd44f-4a73-4153-ae82-272bf3105c00',
+  TECHNIC_ID = 'fe0dbd6e-a760-4163-ad13-7c9d14728ec8',
+  PETS_ID = '9c944aa3-6a7f-4467-ba56-ec01bb1c9f7a'
 }

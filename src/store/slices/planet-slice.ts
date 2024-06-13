@@ -2,26 +2,54 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 export enum Planets {
-  earth = 'Earth',
-  venus = 'Venus',
-  mars = 'Mars'
+  earth = 'earth',
+  venus = 'venus',
+  mars = 'mars'
 }
 
-export interface planetSliceState {
-  planet: null | Planets;
+enum VenusColors {
+  Light = 'rgb(234 188 0)',
+  Dark = 'rgb(126 104 16)'
 }
 
-const initialState: planetSliceState = {
-  planet: null
+enum EarthColors {
+  Light = 'rgb(36 174 255)',
+  Dark = 'rgb(23 90 130)'
+}
+
+enum MarsColors {
+  Light = 'rgb(237 52 12)',
+  Dark = 'rgb(140 33 9)'
+}
+
+const PlanetsColor = {
+  venus: VenusColors,
+  earth: EarthColors,
+  mars: MarsColors
 };
+
+export interface PlanetSliceState {
+  planet: Planets;
+  accentColor: typeof VenusColors | typeof EarthColors | typeof MarsColors;
+}
+export const defaultPlanet: Planets = Planets.earth;
+const savedPlanet = localStorage.getItem('sloth-selectedPlanet') as Planets | null;
+
+const initialState: PlanetSliceState = {
+  planet: savedPlanet ?? defaultPlanet,
+  accentColor: savedPlanet ? PlanetsColor[savedPlanet] : PlanetsColor[defaultPlanet]
+};
+
 export const planetSlice = createSlice({
   name: 'planet_slice',
   initialState,
   reducers: {
-    choosePlanet(state, action: PayloadAction<Planets>) {
+    setPlanet(state, action: PayloadAction<Planets>) {
       state.planet = action.payload;
+      state.accentColor = PlanetsColor[action.payload];
+      localStorage.setItem('sloth-selectedPlanet', action.payload);
     }
   }
 });
 
-export const choosePlanet = planetSlice.actions.choosePlanet;
+export const setPlanet = planetSlice.actions.setPlanet;

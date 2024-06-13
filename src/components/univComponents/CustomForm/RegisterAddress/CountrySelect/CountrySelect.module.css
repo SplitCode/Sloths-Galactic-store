@@ -11,12 +11,17 @@
   cursor: pointer;
 }
 
+.selectField[disabled] {
+  cursor: default;
+}
+
 .option {
   background-color: rgb(65, 65, 65);
   cursor: pointer;
 }
+
 @media (hover: hover) and (pointer: fine) {
-  .selectField:hover {
+  .selectField:not([disabled]):hover {
     box-shadow: 0 0 6px 1px #ffffff;
   }
 }

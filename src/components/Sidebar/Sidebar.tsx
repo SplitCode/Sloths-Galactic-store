@@ -1,36 +1,38 @@
 import styles from './Sidebar.module.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { choosePlanet, Planets } from '../../store/slices/planet-slice';
+import { setPlanet, Planets } from '../../store/slices/planet-slice';
 import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
 import arrowIcon from '../../assets/img/arrow.svg';
 import { BgPlanets } from './Bg-planets';
+import { SubcategoriesList } from './Subcategories/Subcategories';
+import { setFilter } from '../../store/slices/products-slice';
 
 export function Sidebar() {
   const dispatch = useAppDispatch();
   const locationPath = useLocation().pathname;
-  const isShow = ['/catalog', '/', '/about', '/profile'].includes(locationPath);
-  const planet = useAppSelector((state) => state.planet_slice.planet);
+  const isShowSubcategory = locationPath.startsWith('/catalog');
+  const { planet } = useAppSelector((state) => state.planet_slice);
   const [isSidebarVisible, setVisibility] = useState<boolean>(false);
-
+  const navigation = useNavigate();
   const onPlanetClick: MouseEventHandler<HTMLInputElement> = (e) => {
     if (e.target instanceof HTMLInputElement) {
       const value = e.target.value as Planets;
-      if (value !== planet) {
-        setVisibility(false);
-        dispatch(choosePlanet(value));
-      }
+      setVisibility(false);
+      dispatch(setPlanet(value));
+      navigation(`/catalog/${value}`);
+      dispatch(setFilter(null));
     }
   };
 
   return (
-    isShow && (
-      <>
-        <BgPlanets />
-        <aside className={styles.sidebar + ' ' + (isSidebarVisible ? styles.sidebar__visible : '')}>
-          <form className={styles.form}>
-            <div className={styles.planet_list}>
+    <>
+      <BgPlanets />
+      <aside className={styles.sidebar + ' ' + (isSidebarVisible ? styles.sidebar__visible : '')}>
+        <form className={styles.form}>
+          <div className={styles.planet_list}>
+            <div className={styles.catalog_item}>
               <label className={styles.planet_item}>
                 <input
                   type="radio"
@@ -42,6 +44,11 @@ export function Sidebar() {
                 />
                 _Марс
               </label>
+              {planet === Planets.mars && isShowSubcategory && (
+                <SubcategoriesList setVisibility={setVisibility} />
+              )}
+            </div>
+            <div className={styles.catalog_item}>
               <label className={styles.planet_item}>
                 <input
                   type="radio"
@@ -53,6 +60,11 @@ export function Sidebar() {
                 />
                 _Венера
               </label>
+              {planet === Planets.venus && isShowSubcategory && (
+                <SubcategoriesList setVisibility={setVisibility} />
+              )}
+            </div>
+            <div className={styles.catalog_item}>
               <label className={styles.planet_item}>
                 <input
                   type="radio"
@@ -64,13 +76,16 @@ export function Sidebar() {
                 />
                 _Земля
               </label>
+              {planet === Planets.earth && isShowSubcategory && (
+                <SubcategoriesList setVisibility={setVisibility} />
+              )}
             </div>
-            <div onClick={() => setVisibility(!isSidebarVisible)} className={styles.arrow_wrapper}>
-              <img src={arrowIcon} alt="arrow" className={styles.arrow} />
-            </div>
-          </form>
-        </aside>
-      </>
-    )
+          </div>
+          <div onClick={() => setVisibility(!isSidebarVisible)} className={styles.arrow_wrapper}>
+            <img src={arrowIcon} alt="arrow" className={styles.arrow} />
+          </div>
+        </form>
+      </aside>
+    </>
   );
 }

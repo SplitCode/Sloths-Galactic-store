@@ -1,14 +1,37 @@
 .home_page {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: 1rem;
+  margin: 1rem;
+  padding: 2rem;
+  background-color: var(--transparent-background);
+  border-radius: 1rem;
 }
+
 .home_page_title {
-  margin-bottom: 4rem;
+  font-size: 5vmin;
 }
+
+.home_page_subtitle {
+  font-family: var(--main-font);
+  font-size: 2.5vmin;
+  letter-spacing: 0.2rem;
+}
+
 .links_list {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin-top: 2rem;
+}
+
+.home_text {
+  line-height: 1.5;
+}
+
+.accent_text {
+  color: var(--accent-color-light);
 }

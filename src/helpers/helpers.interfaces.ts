@@ -1,4 +1,13 @@
-import type { ErrorResponse } from '@commercetools/platform-sdk';
+import type {
+  CustomerAddBillingAddressIdAction,
+  CustomerAddShippingAddressIdAction,
+  CustomerRemoveBillingAddressIdAction,
+  CustomerRemoveShippingAddressIdAction,
+  CustomerSetDefaultBillingAddressAction,
+  CustomerSetDefaultShippingAddressAction,
+  ErrorResponse
+} from '@commercetools/platform-sdk';
+import type { ProfileEditorValues } from '../components/Main/Main.interfaces';
 
 export interface SimpleToast {
   text: string;
@@ -15,6 +24,21 @@ export interface PromiseToast {
 export type ToastInfo = SimpleToast | PromiseToast;
 
 export enum ErrorMessages {
-  duplicateField = 'Уже есть существующий клиент с указанным адресом электронной почты.',
-  invalidLogin = 'Неверный адрес эл. почты или пароль. Попробуйте снова!'
+  DuplicateField = 'Уже есть существующий клиент с указанным адресом электронной почты.',
+  InvalidLogin = 'Неверный адрес эл. почты или пароль. Попробуйте снова!',
+  InvalidCurrentPassword = 'Текущий пароль не совпадает'
 }
+
+export interface UpdateDataForFormat {
+  values: ProfileEditorValues;
+  ID: string;
+  version: number;
+}
+
+export type AddressesActions =
+  | CustomerAddShippingAddressIdAction['action']
+  | CustomerRemoveShippingAddressIdAction['action']
+  | CustomerAddBillingAddressIdAction['action']
+  | CustomerRemoveBillingAddressIdAction['action']
+  | CustomerSetDefaultShippingAddressAction['action']
+  | CustomerSetDefaultBillingAddressAction['action'];

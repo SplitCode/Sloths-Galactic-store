@@ -1,11 +1,11 @@
 import { Input } from '../Input/Input';
 import { Checkbox } from '../../Checkbox/Checkbox';
 import { CountrySelect } from './CountrySelect/CountrySelect';
-import styles from './Address.module.css';
+import styles from './RegisterAddress.module.css';
 import { useFormikContext } from 'formik';
 import type { RegisterValues } from '../../../Main/Main.interfaces';
 
-export function Address({ name }: { name: 'shipping' | 'billing' }) {
+export function RegisterAddress({ name, inProfile }: { name: 'shipping' | 'billing'; inProfile?: boolean }) {
   const { values }: { values: RegisterValues } = useFormikContext();
 
   return (
@@ -21,7 +21,7 @@ export function Address({ name }: { name: 'shipping' | 'billing' }) {
       <Input name={`${name}.postalCode`} type="text" placeholder="Почтовый индекс"></Input>
       <Checkbox name={`${name}.isDefault`}>Использовать по умолчанию</Checkbox>
 
-      {name === 'shipping' && (
+      {name === 'shipping' && !inProfile && (
         <Checkbox name={'shipping.isSameAddress'}>Использовать как адрес выставления счёта</Checkbox>
       )}
     </fieldset>

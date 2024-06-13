@@ -26,8 +26,8 @@
   box-shadow: 0 0 12px 0.5px transparent;
   border-radius: 1rem;
   transition:
-    transform 0.3s ease-out,
-    box-shadow 0.3s ease-out;
+    transform 0.5s cubic-bezier(0.2, 1, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {

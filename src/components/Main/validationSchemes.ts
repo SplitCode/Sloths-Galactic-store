@@ -16,6 +16,25 @@ const password = string()
     return !(/^\s/.test(value) || /\s$/.test(value));
   });
 
+const firstName = string()
+  .min(1, 'Слишком коротко')
+  .matches(/^[a-zA-Zа-яА-Я]+$/, 'Уберите специальные символы и числа')
+  .trim()
+  .required('Обязательное поле');
+
+const lastName = string()
+  .min(1, 'Слишком коротко')
+  .matches(/^[a-zA-Zа-яА-Я]+$/, 'Уберите специальные символы и числа')
+  .trim()
+  .required('Обязательное поле');
+
+const dateOfBirth = date()
+  .required('Обязательное поле')
+  .test('dateOfBirth', 'Допускаются пользователи от 13 лет', function (value: Date | undefined) {
+    if (!value) return false;
+    return new Date().getFullYear() - value.getFullYear() >= 13;
+  });
+
 const address = object({
   street: string().min(1, 'Слишком коротко').required('Обязательное поле'),
   city: string()
@@ -31,22 +50,9 @@ const address = object({
 export const RegisterSchema = object().shape({
   email,
   password,
-  firstName: string()
-    .min(1, 'Слишком коротко')
-    .matches(/^[a-zA-Zа-яА-Я]+$/, 'Уберите специальные символы и числа')
-    .trim()
-    .required('Обязательное поле'),
-  lastName: string()
-    .min(1, 'Слишком коротко')
-    .matches(/^[a-zA-Zа-яА-Я]+$/, 'Уберите специальные символы и числа')
-    .trim()
-    .required('Обязательное поле'),
-  dateOfBirth: date()
-    .required('Обязательное поле')
-    .test('dateOfBirth', 'Допускаются пользователи от 13 лет', function (value: Date | undefined) {
-      if (!value) return false;
-      return new Date().getFullYear() - value.getFullYear() >= 13;
-    }),
+  firstName,
+  lastName,
+  dateOfBirth,
   shipping: address,
   billing: address.when('shipping.isSameAddress', {
     is: true,
@@ -59,3 +65,17 @@ export const LoginSchema = object().shape({
   email,
   password
 });
+
+export const PersonalDataSchema = object().shape({
+  email,
+  firstName,
+  lastName,
+  dateOfBirth
+});
+
+export const PasswordEditorSchema = object().shape({
+  currentPassword: password,
+  newPassword: password
+});
+
+export const AddressSchema = address;

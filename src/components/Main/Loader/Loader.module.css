@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 100%;
+  min-width: 100%;
 }
+
 .loader {
   height: 8rem;
   width: 8rem;

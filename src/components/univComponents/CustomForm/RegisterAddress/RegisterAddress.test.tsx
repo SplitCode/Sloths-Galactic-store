@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { Address } from './Address';
+import { RegisterAddress } from './RegisterAddress';
 import { Formik } from 'formik';
 
 describe('Address', () => {
   it('The billing address is displayed correctly', () => {
     render(
       <Formik initialValues={{ shipping: { isSameAddress: true } }} onSubmit={() => {}}>
-        <Address name="billing" />
+        <RegisterAddress name="billing" />
       </Formik>
     );
     const fieldset = screen.getByRole('group');
@@ -24,7 +24,7 @@ describe('Address', () => {
   it('The shipping address is displayed correctly', () => {
     render(
       <Formik initialValues={{ shipping: { isSameAddress: false } }} onSubmit={() => {}}>
-        <Address name="shipping" />
+        <RegisterAddress name="shipping" />
       </Formik>
     );
 

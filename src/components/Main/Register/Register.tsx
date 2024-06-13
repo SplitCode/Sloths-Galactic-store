@@ -10,9 +10,10 @@ import { CustomLink } from '../../univComponents/CustomForm/CustomLink/CustomLin
 import { showToast } from '../../../helpers/showToast';
 import { createCustomer } from '../../../api/customers/createCustomer';
 import { useAppDispatch } from '../../../store/hooks';
-import { Address } from '../../univComponents/CustomForm/Address/Address';
-import { formatCustomerData, login } from '../Login/auth';
+import { RegisterAddress } from '../../univComponents/CustomForm/RegisterAddress/RegisterAddress';
+import { login } from '../Login/auth';
 import { errorHandler } from '../../../helpers/errorHandler';
+import { formatForRegister } from '../../../helpers/formatForRegister';
 
 const initialValues: RegisterValues = {
   email: '',
@@ -24,7 +25,7 @@ const initialValues: RegisterValues = {
     street: '',
     city: '',
     postalCode: '',
-    country: 'Russia',
+    country: 'RU',
     isDefault: false,
     isSameAddress: false
   },
@@ -32,7 +33,7 @@ const initialValues: RegisterValues = {
     street: '',
     city: '',
     postalCode: '',
-    country: 'Russia',
+    country: 'RU',
     isDefault: false
   }
 };
@@ -45,7 +46,7 @@ export function Register() {
         initialValues={initialValues}
         validationSchema={RegisterSchema}
         onSubmit={async (values: RegisterValues) => {
-          const customerPromise = createCustomer(formatCustomerData(values));
+          const customerPromise = createCustomer(formatForRegister(values));
           showToast({
             promise: customerPromise,
             pending: 'Ожидайте...',
@@ -68,8 +69,8 @@ export function Register() {
             </div>
             <Input name={'dateOfBirth'} type="date" placeholder="Дата рождения"></Input>
 
-            <Address name="shipping" />
-            <Address name="billing" />
+            <RegisterAddress name="shipping" />
+            <RegisterAddress name="billing" />
 
             <Button type="submit">Создать аккаунт</Button>
             <CustomLink text="Уже есть аккаунт?" to="/login">

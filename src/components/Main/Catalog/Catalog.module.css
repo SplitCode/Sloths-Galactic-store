@@ -1,0 +1,30 @@
+.cards_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2rem 5vh 2rem;
+  margin-top: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--transparent-background);
+  backdrop-filter: var(--backdrop-blur);
+  border-radius: 1rem;
+}
+
+.filters_wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  background-color: var(--transparent-background);
+  border-radius: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .filters_wrapper {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+}

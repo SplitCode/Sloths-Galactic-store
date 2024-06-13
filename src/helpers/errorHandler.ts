@@ -12,9 +12,11 @@ export function errorHandler(error: ErrorResponse): string {
 
   const errorCode = error.errors[0].code as string;
   if (errorCode === 'invalid_customer_account_credentials') {
-    return ErrorMessages.invalidLogin;
+    return ErrorMessages.InvalidLogin;
   } else if (errorCode === 'DuplicateField') {
-    return ErrorMessages.duplicateField;
+    return ErrorMessages.DuplicateField;
+  } else if (errorCode === 'InvalidCurrentPassword') {
+    return ErrorMessages.InvalidCurrentPassword;
   } else {
     return error.message;
   }

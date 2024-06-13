@@ -1,0 +1,12 @@
+.avatar {
+  width: 6rem;
+}
+
+.personal_data {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 2rem;
+  gap: 1rem;
+}
