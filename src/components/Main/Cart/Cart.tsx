@@ -25,7 +25,7 @@ export function Cart() {
         <div className={styles.cart_content}>
           <div className={styles.products_wrapper}>
             {cart.lineItems.map((item: LineItem) => {
-              return <Item key={item.id} itemData={item} cart={cart} />;
+              return <Item key={item.id} itemData={item} />;
             })}
           </div>
           <div className={styles.cart_total}>

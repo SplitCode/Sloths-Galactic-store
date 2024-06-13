@@ -1,26 +1,24 @@
-import type { Cart, LineItem } from '@commercetools/platform-sdk';
-import { updateCart } from '../../../../api/cart/updateCart';
+import type { LineItem } from '@commercetools/platform-sdk';
 import { formatPrice } from '../../../../helpers/formatPrice';
 import { Price } from '../../../univComponents/Price/Price';
 import styles from './Item.module.css';
-import { useAppDispatch } from '../../../../store/hooks';
-import { useState } from 'react';
 import { Loader } from '../../Loader/Loader';
-import { formatForQuantityUpdate } from '../../../../helpers/formatForQuantityUpdate';
 import deleteIcon from '../../../../assets/img/delete.svg';
 import { productHeaders } from '../../../../helpers/cartConfig';
+import { useCart } from '../../../../helpers/useCart';
+import { useState } from 'react';
 
-export function Item({ itemData, cart }: { itemData: LineItem; cart: Cart }) {
-  const dispatch = useAppDispatch();
+export function Item({ itemData }: { itemData: LineItem }) {
+  const { updateQuantity } = useCart();
   const [isUpdating, setIsUpdating] = useState(false);
   const price = itemData.price.value.centAmount;
   const discountPrice = itemData.price.discounted?.value.centAmount;
   const bgImageUrl = itemData.variant?.images?.length ? itemData.variant.images[0].url : '';
 
-  const updateQuantity = async (actionName: 'increment' | 'decrement' | 'remove') => {
+  const handleUpdateQuantity = async (actionName: 'increment' | 'decrement' | 'remove') => {
     setIsUpdating(true);
     try {
-      await dispatch(updateCart(formatForQuantityUpdate({ actionName, cart, itemData })));
+      await updateQuantity(actionName, itemData);
     } catch (error) {
       console.error(error);
       throw error;
@@ -40,7 +38,7 @@ export function Item({ itemData, cart }: { itemData: LineItem; cart: Cart }) {
       </div>
 
       <button
-        onClick={() => updateQuantity('remove')}
+        onClick={() => handleUpdateQuantity('remove')}
         title="Удалить из корзины"
         className={styles.delete_btn}
         type="button"
@@ -82,12 +80,16 @@ export function Item({ itemData, cart }: { itemData: LineItem; cart: Cart }) {
               type="button"
               className={styles.decrement}
               disabled={itemData.quantity < 2}
-              onClick={() => updateQuantity('decrement')}
+              onClick={() => handleUpdateQuantity('decrement')}
             >
               &ndash;
             </button>
             <span className={styles.quantity}>{itemData.quantity}</span>
-            <button onClick={() => updateQuantity('increment')} type="button" className={styles.increment}>
+            <button
+              onClick={() => handleUpdateQuantity('increment')}
+              type="button"
+              className={styles.increment}
+            >
               +
             </button>
           </div>

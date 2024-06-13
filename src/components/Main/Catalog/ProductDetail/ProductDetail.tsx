@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getProduct } from '../../../api/products/getProducts';
+import { getProduct } from '../../../../api/products/getProducts';
 import type { Product } from '@commercetools/platform-sdk';
-import { Loader, MiniLoader } from '../Loader/Loader';
+import { Loader, MiniLoader } from '../../Loader/Loader';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styles from './ProductDetail.module.css';
 import { ImageModal } from './ImageModal/ImageModal';
-import { Price } from '../../univComponents/Price/Price';
-import { Button } from '../../univComponents/Button/Button';
-import { useCart } from '../../../helpers/useCart';
+import { Price } from '../../../univComponents/Price/Price';
+import { Button } from '../../../univComponents/Button/Button';
+import { useCart } from '../../../../helpers/useCart';
 
 export function ProductDetail() {
   const { productKey } = useParams<{ productKey: string }>();
@@ -19,7 +19,7 @@ export function ProductDetail() {
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
-  const { cart, isCartLoading, addToCart } = useCart();
+  const { cart, isCartLoading, updateQuantity, addToCart } = useCart();
   const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
@@ -49,11 +49,23 @@ export function ProductDetail() {
     setModalActive(true);
   };
 
-  const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleAddToCart = async () => {
     if (product) {
-      e.stopPropagation();
       await addToCart(product.id);
       setIsInCart(true);
+    }
+  };
+
+  const handleRemoveFromCart = async () => {
+    if (cart && product) {
+      const itemData = cart.lineItems.find((item) => item.productId === product.id);
+      if (!itemData) return;
+      try {
+        await updateQuantity('remove', itemData);
+        setIsInCart(false);
+      } catch (error) {
+        console.error('Error removing from cart:', error);
+      }
     }
   };
 
@@ -123,7 +135,7 @@ export function ProductDetail() {
               type="button"
               classes={[styles.cart_button]}
               disabled={isCartLoading}
-              onClick={() => setIsInCart(false)}
+              onClick={handleRemoveFromCart}
             >
               {isCartLoading ? <MiniLoader /> : 'Удалить из корзины'}
             </Button>

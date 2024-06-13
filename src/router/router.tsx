@@ -9,7 +9,7 @@ import { App } from '../App';
 import { ProtectedRoute } from './protected-route';
 import { Profile } from '../components/Main/Profile/Profile';
 import { AnonymousRoute } from './anonymous-route';
-import { ProductDetail } from '../components/Main/ProductDetail/ProductDetail';
+import { ProductDetail } from '../components/Main/Catalog/ProductDetail/ProductDetail';
 import type { Subcategories } from '../helpers/translationMapper';
 import { getTranslation } from '../helpers/translationMapper';
 import type { Planets } from '../store/slices/planet-slice';
