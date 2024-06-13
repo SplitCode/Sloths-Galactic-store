@@ -7,6 +7,8 @@ import { useAppDispatch } from '../../../../store/hooks';
 import { useState } from 'react';
 import { Loader } from '../../Loader/Loader';
 import { formatForQuantityUpdate } from '../../../../helpers/formatForQuantityUpdate';
+import deleteIcon from '../../../../assets/img/delete.svg';
+import { productHeaders } from '../../../../helpers/cartConfig';
 
 export function Item({ itemData, cart }: { itemData: LineItem; cart: Cart }) {
   const dispatch = useAppDispatch();
@@ -15,10 +17,10 @@ export function Item({ itemData, cart }: { itemData: LineItem; cart: Cart }) {
   const discountPrice = itemData.price.discounted?.value.centAmount;
   const bgImageUrl = itemData.variant?.images?.length ? itemData.variant.images[0].url : '';
 
-  const updateQuantity = async (action: 'increment' | 'decrement') => {
+  const updateQuantity = async (actionName: 'increment' | 'decrement' | 'remove') => {
     setIsUpdating(true);
     try {
-      await dispatch(updateCart(formatForQuantityUpdate({ action, cart, itemData })));
+      await dispatch(updateCart(formatForQuantityUpdate({ actionName, cart, itemData })));
     } catch (error) {
       console.error(error);
       throw error;
@@ -30,14 +32,32 @@ export function Item({ itemData, cart }: { itemData: LineItem; cart: Cart }) {
   return (
     <div className={styles.product}>
       {isUpdating && <Loader classes={[styles.product_loader]} />}
+      <div className={styles.left_line_wrapper}>
+        <div className={styles.left_line}></div>
+      </div>
+      <div className={styles.right_line_wrapper}>
+        <div className={styles.right_line}></div>
+      </div>
+
+      <button
+        onClick={() => updateQuantity('remove')}
+        title="Удалить из корзины"
+        className={styles.delete_btn}
+        type="button"
+      >
+        <img className={styles.delete_icon} src={deleteIcon} alt="delete" />
+      </button>
+
       <table className={styles.product_table}>
         <thead className={styles.product_head}>
           <tr className={styles.product_props_wrapper}>
-            <th className={styles.product_prop}>Товар</th>
-            <th className={styles.product_prop}>Название</th>
-            <th className={styles.product_prop}>Цена</th>
-            <th className={styles.product_prop}>Количество</th>
-            <th className={styles.product_prop}>Итого</th>
+            {productHeaders.map((header) => {
+              return (
+                <th key={header} className={styles.product_prop}>
+                  {header}
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody className={styles.product_body}>
@@ -64,17 +84,13 @@ export function Item({ itemData, cart }: { itemData: LineItem; cart: Cart }) {
                   type="button"
                   className={styles.decrement}
                   disabled={itemData.quantity < 2}
-                  onClick={() => {
-                    updateQuantity('decrement');
-                  }}
+                  onClick={() => updateQuantity('decrement')}
                 >
                   &ndash;
                 </button>
                 <span className={styles.quantity}>{itemData.quantity}</span>
                 <button
-                  onClick={() => {
-                    updateQuantity('increment');
-                  }}
+                  onClick={() => updateQuantity('increment')}
                   type="button"
                   className={styles.increment}
                 >

@@ -102,7 +102,7 @@
 }
 @media (hover: hover) and (pointer: fine) {
   .button:hover .buttonText {
-    text-shadow: 0.2rem 0.2rem #000000;
+    text-shadow: 0 0 0.4rem #000000;
   }
 
   .button_standart .buttonText:hover::after {
