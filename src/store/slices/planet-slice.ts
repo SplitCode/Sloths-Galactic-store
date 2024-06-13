@@ -37,7 +37,7 @@ const savedPlanet = localStorage.getItem('sloth-selectedPlanet') as Planets | nu
 
 const initialState: PlanetSliceState = {
   planet: savedPlanet ?? defaultPlanet,
-  accentColor: savedPlanet ? PlanetsColor[savedPlanet] : PlanetsColor[defaultPlanet]
+  accentColor: PlanetsColor[savedPlanet ?? defaultPlanet]
 };
 
 export const planetSlice = createSlice({
@@ -47,7 +47,6 @@ export const planetSlice = createSlice({
     setPlanet(state, action: PayloadAction<Planets>) {
       state.planet = action.payload;
       state.accentColor = PlanetsColor[action.payload];
-      localStorage.setItem('sloth-selectedPlanet', action.payload);
     }
   }
 });

@@ -23,8 +23,10 @@ export function ProductCard({ product }: ProductCardProps) {
   const location = useLocation();
   const planet = getPlanetFromLocation(location.pathname);
   const subcategory = getSubcategoryFromProductType(product.productType.id);
-  const handleClick = (productKey: string): void => {
-    navigate({ pathname: `/catalog/${planet}/${subcategory}/${productKey}` });
+  const handleClick = (): void => {
+    if (product.masterVariant.key) {
+      navigate({ pathname: `/catalog/${planet}/${subcategory}/${product.masterVariant.key}` });
+    }
   };
 
   const [isInCart, setIsInCart] = useState(false);
@@ -71,14 +73,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div
-      className={styles.product_card}
-      onClick={() => {
-        if (product.masterVariant.key) {
-          handleClick(product.masterVariant.key);
-        }
-      }}
-    >
+    <div className={styles.product_card} onClick={handleClick}>
       <div className={styles.product_image_wrapper}>
         <div className={styles.product_image} style={{ backgroundImage: `url(${bgImageUrl})` }} />
         <div className={styles.product_image_glow_wrapper}>

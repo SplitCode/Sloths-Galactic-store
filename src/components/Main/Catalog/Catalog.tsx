@@ -33,10 +33,10 @@ export function Catalog() {
     if (locationParts.planet) {
       const actionPayload: getProductsRequestProps = {
         planet: locationParts.planet,
-        subcategory: locationParts.subcategory ?? undefined,
-        filter: filter.value && filter.type ? filter : undefined,
-        sortValue: sort ?? undefined,
-        searchQuery: searchQuery ?? undefined
+        ...(locationParts.subcategory && { subcategory: locationParts.subcategory }),
+        ...(filter?.value && filter?.type && { filter }),
+        ...(sort && { sortValue: sort }),
+        ...(searchQuery && { searchQuery })
       };
       dispatch(getProducts(actionPayload));
     }

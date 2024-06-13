@@ -19,15 +19,18 @@ export function Breadcrumbs() {
     CrumbData,
     BreadcrumbsHandler
   >[];
-  const crumbs = matches
+  const crumbs: { id: string; crumb: ReactNode }[] = matches
     .filter((match) => Boolean(match.handle?.crumb))
-    .map((match) => match.handle.crumb(match.data));
+    .map((match) => ({
+      id: JSON.stringify(match.pathname),
+      crumb: match.handle.crumb(match.data)
+    }));
 
   return (
     <ol className={styles.crumbs}>
-      {crumbs.map((crumb, index) => (
-        <li key={index} className={styles.crumb}>
-          {crumb}
+      {crumbs.map((crumb: { id: string; crumb: ReactNode }, index) => (
+        <li key={crumb.id} className={styles.crumb}>
+          {crumb.crumb}
           {index !== crumbs.length - 1 && ' /'}
         </li>
       ))}

@@ -31,28 +31,29 @@ export function Filters() {
     return uniqueAttributes;
   }, [products, location.pathname]);
 
+  const filterValue = filter?.value;
+
   const handleClick = (atr: Filter) => {
-    const newValue = atr.value === filter?.value ? null : atr.value;
-    dispatch(setFilter(newValue ? { type: atr.type, value: atr.value } : null));
+    dispatch(setFilter(atr.value === filterValue ? null : { type: atr.type, value: atr.value }));
   };
 
   return (
     <div className={style.filters}>
-      {attributes.length > 0 &&
-        attributes.map(
-          (atr, index) =>
-            atr && (
-              <label key={index} className={style.filter_item} onClick={() => handleClick(atr)}>
-                <input
-                  className={`${styles.checkbox} ${filter?.value === atr.value ? styles.checked : ''}`}
-                  type="checkbox"
-                  value={atr.value}
-                  defaultChecked={filter.value === atr.value}
-                />
-                {atr.value}
-              </label>
-            )
-        )}
+      {attributes.map((atr) => (
+        <label
+          key={`${atr.type}-${atr.value}`}
+          className={style.filter_item}
+          onClick={() => handleClick(atr)}
+        >
+          <input
+            className={styles.checkbox}
+            type="checkbox"
+            value={atr.value}
+            defaultChecked={filterValue === atr.value}
+          />
+          {atr.value}
+        </label>
+      ))}
     </div>
   );
 }

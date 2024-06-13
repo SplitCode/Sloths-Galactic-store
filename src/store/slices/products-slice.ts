@@ -7,7 +7,7 @@ import type { Filter, SortValues } from '../../components/Main/Main.interfaces';
 export interface ProductsSliceState {
   isProductsLoading: boolean;
   products: ProductProjection[];
-  filter: Filter;
+  filter: Filter | null;
   sort: SortValues | null;
   searchQuery: string;
 }
@@ -15,7 +15,7 @@ export interface ProductsSliceState {
 const initialState: ProductsSliceState = {
   isProductsLoading: false,
   products: [],
-  filter: { type: '', value: '' },
+  filter: null,
   sort: null,
   searchQuery: ''
 };
@@ -28,12 +28,7 @@ export const productsSlice = createSlice({
       state.products = [];
     },
     setFilter(state: ProductsSliceState, action: PayloadAction<Filter | null>) {
-      if (action.payload) {
-        state.filter.type = action.payload.type;
-        state.filter.value = action.payload.value;
-      } else {
-        state.filter = initialState.filter;
-      }
+      state.filter = action.payload;
     },
     setSort(state: ProductsSliceState, action: PayloadAction<SortValues | null>) {
       state.sort = action.payload;
@@ -51,7 +46,7 @@ export const productsSlice = createSlice({
     };
 
     const setProducts = (state: ProductsSliceState, action: PayloadAction<ProductProjection[]>) => {
-      state.products = action.payload.map((product) => product);
+      state.products = action.payload;
       state.isProductsLoading = false;
     };
 
