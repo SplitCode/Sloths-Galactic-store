@@ -6,16 +6,24 @@
   min-height: 100vh;
   height: 100%;
   overflow-x: hidden;
-  padding: var(--header-height) 16rem 0 16rem;
+  padding-top: var(--header-height);
 }
+
+.main:has(aside) {
+  padding-left: 16rem;
+  padding-right: 16rem;
+}
+
 @media (max-width: 860px) {
-  .main {
-    padding: var(--header-height) 6rem 0 6rem;
+  .main:has(aside) {
+    padding-left: 6rem;
+    padding-right: 6rem;
   }
 }
 
 @media (max-width: 580px) {
-  .main {
-    padding: var(--header-height) 1rem 0 5rem;
+  .main:has(aside) {
+    padding-left: 5rem;
+    padding-right: 1rem;
   }
 }

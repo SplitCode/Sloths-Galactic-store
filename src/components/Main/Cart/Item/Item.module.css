@@ -4,8 +4,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 85%;
   padding: 0.5rem;
+  border-radius: 0.6rem;
   background-color: var(--bg-color);
   text-align: center;
   box-shadow: 0 0 1rem 0.1rem #000000;
@@ -27,7 +28,7 @@
   z-index: -1;
   position: absolute;
   top: 50%;
-  width: 15vw;
+  width: calc(100vw - 100%);
   height: 0.2rem;
   background-color: rgb(36, 36, 36);
 }
@@ -60,17 +61,27 @@
   transform-origin: right;
 }
 
-.product_table {
+.product_content {
   width: 100%;
+  height: 100%;
 }
 
-.product_prop {
+.product_head,
+.product_body {
+  display: grid;
+  grid-template: 1fr / repeat(5, 1fr);
+  padding: 0.7rem;
+}
+
+.product_column_name {
   font-family: var(--decorative-font);
+  font-weight: bold;
 }
 
-.product td,
-.product_prop {
-  padding: 1rem;
+.product_cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .product_image_wrapper {
@@ -114,13 +125,6 @@
   color: var(--accent-color-light);
 }
 
-.product_main_info_cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
 .product_price_wrapper {
   gap: 0.3rem;
   width: max-content;
@@ -130,10 +134,7 @@
 }
 
 .quantity_wrapper {
-  display: flex;
   gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
 }
 
 .quantity {
@@ -219,44 +220,24 @@
   }
 }
 
-@media screen and (min-width: 1500px) {
-  .left_line_wrapper,
-  .right_line_wrapper {
-    width: 20vw;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  .left_line_wrapper,
-  .right_line_wrapper {
-    width: 25vw;
-  }
-}
-
-@media screen and (min-width: 2150px) {
-  .left_line_wrapper,
-  .right_line_wrapper {
-    width: 30vw;
-  }
-}
-
-@media screen and (min-width: 2680px) {
-  .left_line_wrapper,
-  .right_line_wrapper {
-    width: 35vw;
-  }
-}
-
-@media screen and (min-width: 3080px) {
-  .left_line_wrapper,
-  .right_line_wrapper {
-    width: 50vw;
-  }
-}
-
 @media screen and (max-width: 1300px) {
-  .product {
-    width: 85%;
+  .product_content,
+  .product_price_wrapper,
+  .quantity,
+  .product_name {
+    font-size: 1.4rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.8rem;
+  }
+
+  .product_image_wrapper {
+    width: 7rem;
+    height: 7rem;
   }
 }
 
@@ -270,10 +251,10 @@
     font-size: 1.4rem;
   }
 
-  .product_table,
+  .product_content,
   .product_price_wrapper,
   .quantity {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .quantity_wrapper {
@@ -282,17 +263,85 @@
 
   .increment,
   .decrement {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.8rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.6rem;
   }
 }
 
 @media screen and (max-width: 980px) {
-  .product_table,
+  .product_content {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .product_head,
+  .product_body {
+    display: grid;
+    grid-template: repeat(5, 1fr) / 1fr;
+    align-items: center;
+    width: 50%;
+  }
+
+  .product_cell,
+  .product_column_name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-bottom: 0.1rem solid rgb(36, 36, 36);
+  }
+
+  .product_content,
   .product_price_wrapper,
-  .quantity {
-    font-size: 1.2rem;
+  .quantity,
+  .product_name {
+    font-size: 1.7rem;
+  }
+
+  .product_image_wrapper {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 2rem;
+    outline-width: 0.2rem;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .product_content,
+  .product_price_wrapper,
+  .quantity,
+  .product_name {
+    font-size: 1.5rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.8rem;
+    outline-width: 0.2rem;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .product_content {
+    gap: 1rem;
+  }
+
+  .product_content,
+  .product_price_wrapper,
+  .quantity,
+  .product_name {
+    font-size: 1.3rem;
   }
 
   .increment,
@@ -301,134 +350,5 @@
     height: 2.2rem;
     font-size: 1.6rem;
     outline-width: 0.1rem;
-  }
-}
-
-@media screen and (max-width: 950px) {
-  .product td {
-    padding: 0.5rem;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .product {
-    box-shadow: 0 0 0.5rem 0.1rem #000000;
-  }
-
-  .left_line_wrapper,
-  .right_line_wrapper {
-    display: none;
-  }
-
-  .product_table,
-  .product_price_wrapper,
-  .quantity,
-  .product_name {
-    font-size: 1rem;
-  }
-
-  .increment,
-  .decrement {
-    width: 1.9rem;
-    height: 1.9rem;
-    font-size: 1.4rem;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .product {
-    width: 90%;
-    padding: 1rem;
-  }
-
-  .product_table {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-  }
-
-  .product_prop {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    font-size: 1.3rem;
-    padding-left: 0;
-  }
-
-  .product_props_wrapper,
-  .product_info_wrapper {
-    display: grid;
-    grid-template: repeat(5, 1fr) / 1fr;
-    height: 100%;
-  }
-
-  .product td,
-  .product th {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .product td::after,
-  .product th::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff7c;
-    height: 0.1rem;
-  }
-
-  .product_head {
-    width: 50%;
-  }
-
-  .product_body {
-    width: 50%;
-  }
-
-  .product_image_wrapper {
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-
-  .increment,
-  .decrement {
-    width: 2.6rem;
-    height: 2.6rem;
-    font-size: 2.2rem;
-  }
-
-  .product_table,
-  .product_price_wrapper,
-  .quantity,
-  .product_name {
-    font-size: 1.6rem;
-  }
-}
-
-@media screen and (max-width: 490px) {
-  .product_table {
-    gap: 1rem;
-  }
-
-  .product_prop {
-    font-size: 1.1rem;
-  }
-
-  .product_table,
-  .product_price_wrapper,
-  .quantity,
-  .product_name {
-    font-size: 1.3rem;
-  }
-
-  .increment,
-  .decrement {
-    width: 2.3rem;
-    height: 2.3rem;
-    font-size: 2rem;
   }
 }
