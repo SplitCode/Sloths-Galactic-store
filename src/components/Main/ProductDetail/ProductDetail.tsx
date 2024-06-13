@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProduct } from '../../../api/products/getProducts';
 import type { Product } from '@commercetools/platform-sdk';
-import { Loader } from '../Loader/Loader';
+import { Loader, MiniLoader } from '../Loader/Loader';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styles from './ProductDetail.module.css';
 import { ImageModal } from './ImageModal/ImageModal';
 import { Price } from '../../univComponents/Price/Price';
+import { Button } from '../../univComponents/Button/Button';
+import { useCart } from '../../../helpers/useCart';
 
 export function ProductDetail() {
   const { productKey } = useParams<{ productKey: string }>();
@@ -15,6 +17,9 @@ export function ProductDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState<number | null>(null);
+
+  const { cart, isCartLoading, addToCart } = useCart();
+  const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +43,13 @@ export function ProductDetail() {
     fetchData();
   }, [productKey]);
 
+  useEffect(() => {
+    if (cart && product) {
+      const isProductInCart = cart.lineItems.some((item) => item.productId === product.id);
+      setIsInCart(isProductInCart);
+    }
+  }, [cart, product]);
+
   const openModal = (index: number) => {
     setModalImageIndex(index);
     setIsModalOpen(true);
@@ -46,6 +58,14 @@ export function ProductDetail() {
   const closeModal = () => {
     setIsModalOpen(false);
     setModalImageIndex(null);
+  };
+
+  const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (product) {
+      e.stopPropagation();
+      await addToCart(product.id);
+      setIsInCart(true);
+    }
   };
 
   if (isLoading) {
@@ -99,6 +119,28 @@ export function ProductDetail() {
           </div>
           <p className={styles.product_desc}>{description?.ru}</p>
           <Price classes={[styles.product_price_wrapper]} price={price} discountPrice={discountPrice || ''} />
+          <div className={styles.button_wrapper}>
+            <Button
+              minimal
+              type="button"
+              classes={[styles.cart_button]}
+              disabled={isInCart || isCartLoading}
+              onClick={handleAddToCart}
+            >
+              {isCartLoading ? <MiniLoader /> : isInCart ? 'В корзине' : 'Добавить в корзину'}
+            </Button>
+            {isInCart && (
+              <Button
+                minimal
+                type="button"
+                classes={[styles.cart_button]}
+                disabled={isCartLoading}
+                onClick={() => setIsInCart(false)}
+              >
+                {isCartLoading ? <MiniLoader /> : 'Удалить из корзины'}
+              </Button>
+            )}
+          </div>
           {isModalOpen && modalImageIndex !== null && (
             <ImageModal images={images} startIndex={modalImageIndex} onClose={closeModal} />
           )}

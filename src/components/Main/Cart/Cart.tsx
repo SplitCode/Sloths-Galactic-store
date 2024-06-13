@@ -7,7 +7,7 @@ import { Item } from './Item/Item';
 export function Cart() {
   const { cart, isLoading, errorMessage } = useAppSelector((state) => state.cart_slice);
   if (isLoading) return <Loader />;
-  if (errorMessage) {
+  if (errorMessage && !cart) {
     return (
       <section className={styles.cart}>
         <h1 className={styles.title}>Корзина</h1>

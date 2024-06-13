@@ -131,6 +131,26 @@
     box-shadow 0.5s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
+.button_wrapper {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+
+.cart_button {
+  width: 50%;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.cart_button[disabled] {
+  cursor: default;
+  pointer-events: none;
+  background-color: var(--accent-color-light);
+  opacity: 0.9;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .link_back:hover::before {
     transform: scaleX(1);

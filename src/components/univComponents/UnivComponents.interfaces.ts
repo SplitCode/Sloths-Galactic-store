@@ -1,9 +1,10 @@
 export interface ButtonProps {
   children: string | JSX.Element;
   type: 'submit' | 'reset' | 'button';
-  onClick?: (...args: unknown[]) => unknown;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   classes?: string[];
   minimal?: boolean;
+  disabled?: boolean;
 }
 
 export interface InputProps {
