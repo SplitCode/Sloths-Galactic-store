@@ -34,4 +34,5 @@
 
 .accent_text {
   color: var(--accent-color-light);
+  text-decoration: line-through;
 }

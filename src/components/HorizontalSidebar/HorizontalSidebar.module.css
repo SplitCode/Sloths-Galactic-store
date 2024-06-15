@@ -1,16 +1,40 @@
 .sidebar {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 120rem;
   gap: 5rem;
-  margin-top: 10rem;
-  margin-bottom: 10rem;
+  margin: 0 auto;
+  padding: 5rem;
+}
+
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 5rem;
+  height: 5rem;
+  border-left: 0.2rem solid var(--accent-color-light);
+  border-top: 0.2rem solid var(--accent-color-light);
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 5rem;
+  height: 5rem;
+  border-right: 0.2rem solid var(--accent-color-light);
+  border-bottom: 0.2rem solid var(--accent-color-light);
 }
 
 .subtitle {
   font-family: var(--main-font);
-  font-size: 2.5vmin;
+  font-size: 3rem;
   letter-spacing: 0.2rem;
 }
 
@@ -20,63 +44,8 @@
   gap: 10vmin;
 }
 
-.planet_item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  gap: 2rem;
-  letter-spacing: 0.2rem;
-}
-
-.planet {
-  appearance: none;
-  width: 20vmin;
-  height: 20vmin;
-  border-radius: 50%;
-  background-repeat: repeat-x;
-  background-size: cover;
-  filter: grayscale(1);
-  animation-fill-mode: both;
-  animation: animatePlanet 10s linear infinite reverse paused;
-  transition: all 0.3s ease-in;
-  box-shadow: inset 0 0 0.7rem 0.7rem rgba(0, 0, 0, 1);
-  cursor: pointer;
-}
-
-.mars:checked,
-.venus:checked,
-.earth:checked {
-  filter: grayscale(0);
-  animation-play-state: running;
-}
-
-.mars {
-  background-image: url('../../assets/img/planets/marsSmall.jpg');
-}
-
-.venus {
-  background-image: url('../../assets/img/planets/venusSmall.jpg');
-}
-
-.earth {
-  background-image: url('../../assets/img/planets/earthSmall.webp');
-}
-
-@keyframes animatePlanet {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .planet_item:hover .planet {
-    filter: grayscale(0);
-    animation-play-state: running;
+@media screen and (max-width: 800px) {
+  .subtitle {
+    font-size: 2.2rem;
   }
 }

@@ -1,27 +1,18 @@
 import styles from './HorizontalSidebar.module.css';
-import { useAppSelector } from '../../store/hooks';
 import { planetsConfig, usePlanetClickHandler } from '../../helpers/planetsConfig';
+import { Planet } from '../univComponents/Planet/Planet';
 
 export function HorizontalSidebar() {
-  const { planet } = useAppSelector((state) => state.planet_slice);
   const onPlanetClick = usePlanetClickHandler();
 
   return (
     <div className={styles.sidebar}>
-      <h2 className={styles.subtitle}>КАТАЛОГ ТОВАРОВ С РАЗНЫХ ПЛАНЕТ</h2>
+      <h2 className={styles.subtitle}>
+        Погрузитесь в космический каталог - найдётся всё, о чём мечтаете среди звёзд.
+      </h2>
       <div className={styles.planet_list}>
         {planetsConfig.map((planetItem) => (
-          <label key={planetItem.value} className={styles.planet_item}>
-            <input
-              type="radio"
-              name="picked"
-              value={planetItem.value}
-              className={`${styles.planet} ${styles[planetItem.className]}`}
-              defaultChecked={planetItem.value === planet}
-              onClick={onPlanetClick}
-            />
-            {planetItem.label}
-          </label>
+          <Planet key={planetItem.value} planetItem={planetItem} onClick={onPlanetClick} />
         ))}
       </div>
     </div>

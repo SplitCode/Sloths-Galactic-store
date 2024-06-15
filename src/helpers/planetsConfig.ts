@@ -5,9 +5,9 @@ import type { MouseEventHandler } from 'react';
 import { setFilter } from '../store/slices/products-slice';
 
 export const planetsConfig = [
-  { value: Planets.mars, label: '_Марс', className: 'mars' },
-  { value: Planets.venus, label: '_Венера', className: 'venus' },
-  { value: Planets.earth, label: '_Земля', className: 'earth' }
+  { value: Planets.mars, label: 'Марс', className: 'mars' },
+  { value: Planets.venus, label: 'Венера', className: 'venus' },
+  { value: Planets.earth, label: 'Земля', className: 'earth' }
 ];
 
 export const usePlanetClickHandler = () => {

@@ -7,6 +7,7 @@ import arrowIcon from '../../assets/img/arrow.svg';
 import { BgPlanets } from './Bg-planets';
 import { SubcategoriesList } from './Subcategories/Subcategories';
 import { planetsConfig, usePlanetClickHandler } from '../../helpers/planetsConfig';
+import { Planet } from '../univComponents/Planet/Planet';
 
 export function Sidebar() {
   const locationPath = useLocation().pathname;
@@ -29,20 +30,15 @@ export function Sidebar() {
           <div className={styles.planet_list}>
             {planetsConfig.map((planetItem) => (
               <div className={styles.catalog_item} key={planetItem.value}>
-                <label className={styles.planet_item}>
-                  <input
-                    type="radio"
-                    name="picked"
-                    value={planetItem.value}
-                    className={`${styles.planet} ${styles[planetItem.className]}`}
-                    defaultChecked={planetItem.value === planet}
-                    onClick={(e) => {
-                      onPlanetClick(e);
-                      setVisibility(false);
-                    }}
-                  />
-                  {planetItem.label}
-                </label>
+                <Planet
+                  key={planetItem.value}
+                  planetItem={planetItem}
+                  onClick={(e) => {
+                    onPlanetClick(e);
+                    setVisibility(false);
+                  }}
+                  classes={[styles.planet]}
+                />
                 {planetItem.value === planet && isShowSubcategory && (
                   <SubcategoriesList setVisibility={setVisibility} />
                 )}

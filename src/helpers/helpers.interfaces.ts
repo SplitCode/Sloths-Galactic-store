@@ -9,6 +9,7 @@ import type {
   ErrorResponse
 } from '@commercetools/platform-sdk';
 import type { ProfileEditorValues } from '../components/Main/Main.interfaces';
+import type { Planets } from '../store/slices/planet-slice';
 
 export interface SimpleToast {
   text: string;
@@ -44,3 +45,9 @@ export type AddressesActions =
   | CustomerSetDefaultShippingAddressAction['action']
   | CustomerSetDefaultBillingAddressAction['action']
   | CustomerRemoveAddressAction['action'];
+
+export interface PlanetConfig {
+  value: Planets;
+  label: string;
+  className: string;
+}

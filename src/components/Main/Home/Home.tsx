@@ -9,8 +9,8 @@ export function Home() {
       <HorizontalSidebar />
       <h2 className={styles.home_text}>
         Действуют скидки на товары для кроссчека и сладенькое!
-        <br /> Ищите
-        <span className={styles.accent_text}> перечеркнутые ценники</span> на страницах нашего магазина!
+        <br /> Ищите&nbsp;
+        <span className={styles.accent_text}>перечеркнутые</span> ценники!
       </h2>
     </section>
   );
