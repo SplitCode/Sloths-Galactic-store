@@ -25,7 +25,7 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <ToastContainer autoClose={4000} draggable limit={5} theme="dark" />
+      <ToastContainer autoClose={2000} draggable theme="dark" />
       {isCustomerLoading ? (
         <Loader />
       ) : (

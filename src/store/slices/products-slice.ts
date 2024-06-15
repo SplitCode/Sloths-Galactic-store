@@ -1,6 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { ProductProjection } from '@commercetools/platform-sdk';
+import type { GetProductsResponse } from '../../api/api.interfaces';
 import { getProducts } from '../../api/products/getProducts';
 import type { Filter, SortValues } from '../../components/Main/Main.interfaces';
 
@@ -10,6 +11,7 @@ export interface ProductsSliceState {
   filter: Filter | null;
   sort: SortValues | null;
   searchQuery: string;
+  total: number;
 }
 
 const initialState: ProductsSliceState = {
@@ -17,7 +19,8 @@ const initialState: ProductsSliceState = {
   products: [],
   filter: null,
   sort: null,
-  searchQuery: ''
+  searchQuery: '',
+  total: 0
 };
 
 export const productsSlice = createSlice({
@@ -45,11 +48,11 @@ export const productsSlice = createSlice({
       state.isProductsLoading = isLoading;
     };
 
-    const setProducts = (state: ProductsSliceState, action: PayloadAction<ProductProjection[]>) => {
-      state.products = action.payload;
+    const setProducts = (state: ProductsSliceState, action: PayloadAction<GetProductsResponse>) => {
+      state.products = action.payload.products;
+      state.total = action.payload.total;
       state.isProductsLoading = false;
     };
-
     builder
       .addCase(getProducts.pending, (state) => setLoading(state, true))
       .addCase(getProducts.fulfilled, (state, action) => setProducts(state, action))

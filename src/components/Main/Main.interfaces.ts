@@ -65,6 +65,8 @@ export interface getProductsRequestProps {
   filter?: Filter;
   sortValue?: SortValues;
   searchQuery?: string;
+  limit?: number;
+  offset?: number;
 }
 
 export interface Image {

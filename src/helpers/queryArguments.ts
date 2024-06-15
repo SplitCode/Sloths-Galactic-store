@@ -28,7 +28,9 @@ export const mapQueryArguments = ({
   subcategory,
   filter,
   sortValue,
-  searchQuery
+  searchQuery,
+  limit,
+  offset
 }: getProductsRequestProps) => {
   return {
     filter: getSearchConditions(planet, subcategory, filter),
@@ -36,6 +38,8 @@ export const mapQueryArguments = ({
     ...(searchQuery && {
       'text.ru': searchQuery.toLowerCase(),
       fuzzy: true
-    })
+    }),
+    ...(limit && { limit }),
+    ...(offset && { offset })
   };
 };

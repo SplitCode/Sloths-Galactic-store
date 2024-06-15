@@ -1,4 +1,9 @@
-import type { CartUpdateAction, CustomerUpdateAction, ErrorResponse } from '@commercetools/platform-sdk';
+import type {
+  CartUpdateAction,
+  CustomerUpdateAction,
+  ErrorResponse,
+  ProductProjection
+} from '@commercetools/platform-sdk';
 
 export interface Login {
   email: string;
@@ -50,4 +55,9 @@ export interface AddCartInfo {
   cartId: string;
   productId: string;
   version: number;
+}
+
+export interface GetProductsResponse {
+  products: ProductProjection[];
+  total: number;
 }
