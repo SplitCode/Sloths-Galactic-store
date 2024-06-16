@@ -1,5 +1,4 @@
 import type { LineItem } from '@commercetools/platform-sdk';
-import { formatPrice } from '../../../../helpers/formatPrice';
 import { Price } from '../../../univComponents/Price/Price';
 import styles from './Item.module.css';
 import { Loader } from '../../Loader/Loader';
@@ -17,9 +16,9 @@ export function Item({ itemData }: { itemData: LineItem }) {
 
   const price = itemData.price.value.centAmount;
   const discountPrice = itemData.price.discounted?.value.centAmount;
-  const promoCodePrice: number | undefined =
+  const promoCodePrice =
     itemData.discountedPricePerQuantity[0] &&
-    itemData.discountedPricePerQuantity[0].discountedPrice.value.centAmount;
+    (itemData.discountedPricePerQuantity[0].discountedPrice.value.centAmount as number | undefined);
 
   const handleUpdateQuantity = async (actionName: 'increment' | 'decrement' | 'remove') => {
     try {
@@ -105,9 +104,12 @@ export function Item({ itemData }: { itemData: LineItem }) {
             </button>
           </div>
 
-          <p className={`${styles.total} ${styles.product_cell}`}>
-            {formatPrice(itemData.totalPrice.centAmount)}
-          </p>
+          <Price
+            classes={[styles.product_price_wrapper, styles.product_cell]}
+            price={price * itemData.quantity}
+            discountPrice={discountPrice && discountPrice * itemData.quantity}
+            promoCodePrice={promoCodePrice && promoCodePrice * itemData.quantity}
+          />
         </div>
       </div>
     </div>

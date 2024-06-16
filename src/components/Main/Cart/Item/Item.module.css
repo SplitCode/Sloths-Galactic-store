@@ -45,12 +45,12 @@
 
 .left_line_wrapper {
   left: 0;
-  transform: translateX(-100%);
+  transform: translateX(-75%) scaleX(0.5);
 }
 
 .right_line_wrapper {
   right: 0;
-  transform: translateX(100%);
+  transform: translateX(75%) scaleX(0.5);
 }
 
 .left_line,
@@ -60,7 +60,7 @@
   background-color: var(--accent-color-light);
   transform: scaleX(0);
   box-shadow: 0 0 1rem 0.1rem var(--accent-color-light);
-  transition: transform 0.9s cubic-bezier(0.2, 1, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
 .left_line {

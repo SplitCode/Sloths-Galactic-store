@@ -24,6 +24,7 @@
   background-color: transparent;
   max-width: max-content;
   color: var(--dull-color);
+  text-shadow: none;
 }
 
 .crossed_price::before {
