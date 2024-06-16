@@ -86,3 +86,8 @@ h1 {
   --accent-color-dark: rgb(23 90 130);
   width: 100%;
 }
+
+.theme_provider *::selection {
+  color: #ffffff;
+  background-color: var(--accent-color-light);
+}

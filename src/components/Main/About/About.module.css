@@ -106,7 +106,7 @@
   transition: all ease-in 300ms;
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
   .footer_link img {
     width: 5rem;
   }

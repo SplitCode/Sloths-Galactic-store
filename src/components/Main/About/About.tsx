@@ -9,7 +9,6 @@ import { members } from '../../../helpers/membersConfig';
 import rssLogo from '../../../assets/img/rss-logo.svg';
 import { Link } from 'react-router-dom';
 
-
 export function About() {
   const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);
 
