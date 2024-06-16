@@ -3,7 +3,7 @@ import { useAppSelector } from '../../../store/hooks';
 import styles from './Cart.module.css';
 import { Loader } from '../Loader/Loader';
 import { Item } from './Item/Item';
-import { formatPrice } from '../../../helpers/formatPrice';
+import { CartSummary } from './CartSummary/CartSummary';
 import { HorizontalSidebar } from '../../HorizontalSidebar/HorizontalSidebar';
 
 export function Cart() {
@@ -32,10 +32,7 @@ export function Cart() {
               return <Item key={item.id} itemData={item} />;
             })}
           </div>
-          <div className={styles.cart_total}>
-            <p>Цена товаров в корзине: {formatPrice(cart.totalPrice.centAmount)}</p>
-            <p>Общее количество: {cart.totalLineItemQuantity}</p>
-          </div>
+          <CartSummary cart={cart} />
         </div>
       ) : (
         <div className={styles.empty_message}>

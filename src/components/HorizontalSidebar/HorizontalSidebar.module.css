@@ -41,11 +41,26 @@
 .planet_list {
   display: flex;
   flex-direction: row;
-  gap: 10vmin;
+  gap: 3rem;
 }
 
 @media screen and (max-width: 800px) {
   .subtitle {
     font-size: 2.2rem;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .sidebar {
+    gap: 2.5rem;
+    padding: 2rem;
+  }
+
+  .planet_list {
+    gap: 2rem;
   }
 }

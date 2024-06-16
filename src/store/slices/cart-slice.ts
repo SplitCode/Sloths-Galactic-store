@@ -6,12 +6,14 @@ import { updateCart } from '../../api/cart/updateCart';
 export interface CartSliceState {
   cart: Cart | null;
   isLoading: boolean;
+  isUpdating: boolean;
   errorMessage?: string;
 }
 
 const initialState: CartSliceState = {
   cart: null,
-  isLoading: false
+  isLoading: false,
+  isUpdating: false
 };
 
 export const cartSlice = createSlice({
@@ -36,9 +38,14 @@ export const cartSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(updateCart.fulfilled, (state: CartSliceState, action) => {
+        state.isUpdating = false;
         state.cart = action.payload;
       })
+      .addCase(updateCart.pending, (state: CartSliceState) => {
+        state.isUpdating = true;
+      })
       .addCase(updateCart.rejected, (state: CartSliceState, action) => {
+        state.isUpdating = false;
         state.errorMessage = action.error.message;
       });
   }

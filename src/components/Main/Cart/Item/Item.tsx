@@ -6,30 +6,37 @@ import { Loader } from '../../Loader/Loader';
 import deleteIcon from '../../../../assets/img/delete.svg';
 import { productHeaders } from '../../../../helpers/cartConfig';
 import { useCart } from '../../../../helpers/useCart';
+import { useAppSelector } from '../../../../store/hooks';
 import { useState } from 'react';
 
 export function Item({ itemData }: { itemData: LineItem }) {
   const { updateQuantity } = useCart();
-  const [isUpdating, setIsUpdating] = useState(false);
-  const price = itemData.price.value.centAmount;
-  const discountPrice = itemData.price.discounted?.value.centAmount;
+  const isUpdating = useAppSelector((state) => state.cart_slice.isUpdating);
+  const [isCurrentUpdating, setCurrentUpdating] = useState(false);
   const bgImageUrl = itemData.variant?.images?.length ? itemData.variant.images[0].url : '';
 
+  const price = itemData.price.value.centAmount;
+  const discountPrice = itemData.price.discounted?.value.centAmount;
+  const promoCodePrice: number | undefined =
+    itemData.discountedPricePerQuantity[0] &&
+    itemData.discountedPricePerQuantity[0].discountedPrice.value.centAmount;
+
   const handleUpdateQuantity = async (actionName: 'increment' | 'decrement' | 'remove') => {
-    setIsUpdating(true);
     try {
+      setCurrentUpdating(true);
       await updateQuantity(actionName, itemData);
     } catch (error) {
       console.error(error);
-      throw error;
     } finally {
-      setIsUpdating(false);
+      setCurrentUpdating(false);
     }
   };
 
   return (
     <div className={styles.product}>
-      {isUpdating && <Loader classes={[styles.product_loader]} />}
+      {isUpdating && <div className={styles.updating}></div>}
+      {isCurrentUpdating && <Loader classes={[styles.product_loader]} />}
+
       <div className={styles.left_line_wrapper}>
         <div className={styles.left_line}></div>
       </div>
@@ -65,16 +72,20 @@ export function Item({ itemData }: { itemData: LineItem }) {
               </div>
             </div>
           </div>
+
           <p
-            className={`${styles.product_name} ${discountPrice && styles.discount_name} ${styles.product_cell}`}
+            className={`${styles.product_name} ${(discountPrice || promoCodePrice) && styles.discount_name} ${styles.product_cell}`}
           >
             {itemData.name.ru}
           </p>
+
           <Price
             classes={[styles.product_price_wrapper, styles.product_cell]}
             price={price}
             discountPrice={discountPrice}
+            promoCodePrice={promoCodePrice}
           />
+
           <div className={`${styles.quantity_wrapper} ${styles.product_cell}`}>
             <button
               type="button"
@@ -93,6 +104,7 @@ export function Item({ itemData }: { itemData: LineItem }) {
               +
             </button>
           </div>
+
           <p className={`${styles.total} ${styles.product_cell}`}>
             {formatPrice(itemData.totalPrice.centAmount)}
           </p>

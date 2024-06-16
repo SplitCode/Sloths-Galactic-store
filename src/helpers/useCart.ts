@@ -4,8 +4,6 @@ import { updateCart } from '../api/cart/updateCart';
 import { createCart } from '../api/cart/createCart';
 import { formatForQuantityUpdate } from './formatForQuantityUpdate';
 import type { LineItem } from '@commercetools/platform-sdk';
-import { showToast } from './showToast';
-import { errorHandler } from './errorHandler';
 
 export const useCart = () => {
   const dispatch = useAppDispatch();
@@ -16,14 +14,7 @@ export const useCart = () => {
     if (!cart) return;
     setIsCartLoading(true);
     try {
-      const updatePromise = dispatch(updateCart(formatForQuantityUpdate({ actionName, cart, itemData })));
-      showToast({
-        promise: updatePromise,
-        pending: 'В процессе...',
-        success: 'Сделано!',
-        errorHandler
-      });
-      await updatePromise;
+      await dispatch(updateCart(formatForQuantityUpdate({ actionName, cart, itemData })));
     } catch (error) {
       console.error(error);
       throw error;
@@ -54,12 +45,6 @@ export const useCart = () => {
           })
         );
       }
-      showToast({
-        promise: updatePromise,
-        pending: 'В процессе...',
-        success: 'Сделано!',
-        errorHandler
-      });
       await updatePromise;
     } catch (error) {
       console.error('Error adding to cart:', error);
