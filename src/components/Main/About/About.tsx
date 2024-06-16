@@ -4,7 +4,8 @@ import { useCallback, useState } from 'react';
 import { Member } from './Member';
 import { Accordion } from './Accordion/Accordion';
 import type { MemberData } from '../../../helpers/membersConfig';
-import { AboutUsInfo, members } from '../../../helpers/membersConfig';
+import { AboutUsInfo } from '../../../helpers/aboutProjectConfig';
+import { members } from '../../../helpers/membersConfig';
 
 export function About() {
   const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);
