@@ -1,22 +1,13 @@
 import styles from './ImageModal.module.css';
-import { Button } from '../../../../univComponents/Button/Button';
-import type { ImageModalProps } from '../../../Main.interfaces';
 import { Carousel } from 'react-responsive-carousel';
-import { useState } from 'react';
+import type { ImageModalProps } from '../../../Main.interfaces';
+import { Modal } from '../../../../Modal/Modal';
 
 export function ImageModal({ images, startIndex, active, setActive }: ImageModalProps) {
-  const [closing, setClosing] = useState(false);
-
-  const handleAnimationEnd: React.AnimationEventHandler<HTMLDivElement> = (event) => {
-    if (event.animationName === styles['close-stripe']) {
-      setActive(false);
-    }
-  };
-
+  const bg = <div className={styles.starry_background} />;
   return (
-    <div className={`${styles.modal} ${active ? styles.active : ''} ${closing ? styles.closing : ''}`}>
-      <div className={styles.starry_background}></div>
-      <div className={styles.modal_content} onAnimationEnd={handleAnimationEnd}>
+    <>
+      <Modal modalState={active} modalCallback={setActive} className={styles.image_modal} bg={bg}>
         <Carousel
           className={styles.images_carousel}
           selectedItem={startIndex}
@@ -36,10 +27,7 @@ export function ImageModal({ images, startIndex, active, setActive }: ImageModal
             </div>
           ))}
         </Carousel>
-        <Button type="button" onClick={() => setClosing(true)}>
-          Закрыть
-        </Button>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 }

@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 
 export function BgPlanets() {
   const locationPath = useLocation().pathname;
-  const notShow = ['/login', '/register', '/cart'].includes(locationPath);
+  const notShow = ['/login', '/register', '/cart', '/about'].includes(locationPath);
   const planet = useAppSelector((state) => state.planet_slice.planet);
 
   const srcBig = planet === Planets.earth ? earthBig : planet === Planets.mars ? marsBig : venusBig;
