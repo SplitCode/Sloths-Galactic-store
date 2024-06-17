@@ -25,6 +25,10 @@
   transition: 0.3s;
 }
 
+.cart_quantity_big {
+  font-size: 0.9rem;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .cart_link:hover .cart_icon {
     transform: scale(1.05);

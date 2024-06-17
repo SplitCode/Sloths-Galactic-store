@@ -113,6 +113,27 @@
   }
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.footer_link img {
+  width: 4rem;
+  transition: all ease-in 300ms;
+}
+
+@media (min-width: 1200px){
+  .footer_link img {
+    width: 5rem;
+  }
+}
+
 @media (max-width: 860px) {
   .member_info {
     max-width: 40%;

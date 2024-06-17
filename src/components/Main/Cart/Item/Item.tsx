@@ -7,6 +7,9 @@ import { productHeaders } from '../../../../helpers/cartConfig';
 import { useCart } from '../../../../helpers/useCart';
 import { useAppSelector } from '../../../../store/hooks';
 import { useState } from 'react';
+import { getProduct } from '../../../../api/products/getProducts';
+import { getPlanetByCatalogId, getSubcategoryFromProductType } from '../../../../helpers/idsMapper';
+import { useNavigate } from 'react-router-dom';
 
 export function Item({ itemData }: { itemData: LineItem }) {
   const { updateQuantity } = useCart();
@@ -20,7 +23,13 @@ export function Item({ itemData }: { itemData: LineItem }) {
     itemData.discountedPricePerQuantity[0] &&
     (itemData.discountedPricePerQuantity[0].discountedPrice.value.centAmount as number | undefined);
 
-  const handleUpdateQuantity = async (actionName: 'increment' | 'decrement' | 'remove') => {
+  const navigate = useNavigate();
+
+  const handleUpdateQuantity = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    actionName: 'increment' | 'decrement' | 'remove'
+  ) => {
+    e.stopPropagation();
     try {
       setCurrentUpdating(true);
       await updateQuantity(actionName, itemData);
@@ -31,8 +40,23 @@ export function Item({ itemData }: { itemData: LineItem }) {
     }
   };
 
+  const handleProductClick = async () => {
+    if (!itemData.productKey) return;
+
+    const product = await getProduct(itemData.productKey);
+    if (!product) return;
+    const categoryIds = product.masterData.current.categories.map((category) => category.id);
+    const planet = getPlanetByCatalogId(categoryIds[1]) || getPlanetByCatalogId(categoryIds[0]);
+    const subcategory = getSubcategoryFromProductType(product.productType.id);
+    const productKey = product.key;
+
+    if (planet && subcategory && productKey) {
+      navigate(`/catalog/${planet}/${subcategory}/${productKey}`);
+    }
+  };
+
   return (
-    <div className={styles.product}>
+    <div className={styles.product} onClick={handleProductClick}>
       {isUpdating && <div className={styles.updating}></div>}
       {isCurrentUpdating && <Loader classes={[styles.product_loader]} />}
 
@@ -44,7 +68,7 @@ export function Item({ itemData }: { itemData: LineItem }) {
       </div>
 
       <button
-        onClick={() => handleUpdateQuantity('remove')}
+        onClick={(e) => handleUpdateQuantity(e, 'remove')}
         title="Удалить из корзины"
         className={styles.delete_btn}
         type="button"
@@ -90,13 +114,13 @@ export function Item({ itemData }: { itemData: LineItem }) {
               type="button"
               className={styles.decrement}
               disabled={itemData.quantity < 2}
-              onClick={() => handleUpdateQuantity('decrement')}
+              onClick={(e) => handleUpdateQuantity(e, 'decrement')}
             >
               &ndash;
             </button>
             <span className={styles.quantity}>{itemData.quantity}</span>
             <button
-              onClick={() => handleUpdateQuantity('increment')}
+              onClick={(e) => handleUpdateQuantity(e, 'increment')}
               type="button"
               className={styles.increment}
             >
