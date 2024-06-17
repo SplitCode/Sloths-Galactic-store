@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 import { reloginCustomer } from './api/customers/reloginCustomer';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { Loader } from './components/Main/Loader/Loader';
-import { ThemeProvider } from './helpers/themeProvider';
 import { deleteCustomer } from './store/slices/customer-slice';
 import { BgPlanets } from './components/Sidebar/Bg-planets';
+import { ThemeProvider } from './helpers/themeProvider';
 
 export function App() {
   const dispatch = useAppDispatch();
