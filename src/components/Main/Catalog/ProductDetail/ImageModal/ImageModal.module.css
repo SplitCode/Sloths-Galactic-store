@@ -46,15 +46,3 @@
     background-position: -10000px 5000px;
   }
 }
-
-@media (max-width: 1200px) {
-  .modal_content {
-    width: 75vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .modal_content {
-    width: 90vw;
-  }
-}
