@@ -87,12 +87,15 @@ export const getRefreshFlowClient = () => {
 };
 
 export const getAnonymousFlowClient = () => {
+  const anonymousId = crypto.randomUUID();
+  localStorage.setItem('sloth-anonymousId', anonymousId);
   const options: AnonymousAuthMiddlewareOptions = {
     host: ApiData.AUTH_URL,
     projectKey: ApiData.PROJECT_KEY,
     credentials: {
       clientId: ApiData.CLIENT_ID,
-      clientSecret: ApiData.CLIENT_SECRET
+      clientSecret: ApiData.CLIENT_SECRET,
+      anonymousId: anonymousId
     },
     scopes: ApiData.SCOPES.split(' '),
     fetch

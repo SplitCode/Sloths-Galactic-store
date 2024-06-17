@@ -5,6 +5,7 @@ import { setCustomer } from '../../../store/slices/customer-slice';
 import { loginCustomer } from '../../../api/customers/loginCustomer';
 import type { FormikState } from 'formik';
 import { errorHandler } from '../../../helpers/errorHandler';
+import { getCart } from '../../../api/cart/getCart';
 
 export const login = async (
   values: LoginValues,
@@ -21,6 +22,7 @@ export const login = async (
   });
   loginPromise.then((response) => {
     dispatch(setCustomer(response.customer));
+    dispatch(getCart(response.customer.id));
     if (resetForm) {
       resetForm();
     }

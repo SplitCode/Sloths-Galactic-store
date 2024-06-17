@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { Cart } from '@commercetools/platform-sdk';
-import { getCart } from '../../api/cart/getCart';
+import { getCart, getCartById } from '../../api/cart/getCart';
 import { updateCart } from '../../api/cart/updateCart';
 
 export interface CartSliceState {
@@ -47,6 +47,17 @@ export const cartSlice = createSlice({
       .addCase(updateCart.rejected, (state: CartSliceState, action) => {
         state.isUpdating = false;
         state.errorMessage = action.error.message;
+      })
+      .addCase(getCartById.pending, (state: CartSliceState) => {
+        state.isLoading = true;
+      })
+      .addCase(getCartById.fulfilled, (state: CartSliceState, action) => {
+        state.cart = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getCartById.rejected, (state: CartSliceState, action) => {
+        state.errorMessage = action.error.message;
+        state.isLoading = false;
       });
   }
 });

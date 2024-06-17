@@ -14,3 +14,8 @@ export const getCart = createAsyncThunk<Cart, string>('cart/get', async (custome
     } else throw error;
   }
 });
+
+export const getCartById = createAsyncThunk<Cart, string>('cart/getById', async (cartId: string) => {
+  const cart = await apiRoot.carts().withId({ ID: cartId }).get().execute();
+  return cart.body;
+});

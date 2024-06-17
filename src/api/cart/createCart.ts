@@ -11,6 +11,7 @@ export async function createCart(): Promise<Cart> {
         .post({ body: { currency: 'RUB' } })
         .execute()
     ).body;
+    localStorage.setItem('sloth-CartId', cart.id);
     return cart;
   } catch (error) {
     console.error(error);

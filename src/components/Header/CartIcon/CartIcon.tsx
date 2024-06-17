@@ -5,12 +5,13 @@ import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import type { CustomNavLinkProps } from '../Header.interfaces';
 import { useEffect, useMemo } from 'react';
-import { getCart } from '../../../api/cart/getCart';
+import { getCart, getCartById } from '../../../api/cart/getCart';
 import { MiniLoader } from '../../Main/Loader/Loader';
 
 export function CartIcon({ toggleMenuOpen }: CustomNavLinkProps) {
   const { cart, isLoading } = useAppSelector((state) => state.cart_slice);
   const customerId = useAppSelector((state) => state.customer_slice.customerId);
+  const cartId = localStorage.getItem('sloth-CartId');
   const dispatch = useAppDispatch();
 
   const totalLineItemQuantity = useMemo(() => {
@@ -20,10 +21,14 @@ export function CartIcon({ toggleMenuOpen }: CustomNavLinkProps) {
   const largeNumber = 99;
 
   useEffect(() => {
-    if (customerId && !cart) {
-      dispatch(getCart(customerId));
+    if (!cart) {
+      if (customerId) {
+        dispatch(getCart(customerId));
+      } else if (cartId) {
+        dispatch(getCartById(cartId));
+      }
     }
-  }, [customerId, cart, dispatch]);
+  }, [customerId, cartId, cart, dispatch]);
 
   if (isLoading) return <MiniLoader />;
 
