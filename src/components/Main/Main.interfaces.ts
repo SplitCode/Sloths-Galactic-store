@@ -127,6 +127,7 @@ export interface AccordionItem {
 export interface AccordionItemWithState extends AccordionItem {
   open: boolean;
 }
+
 export interface AccordionProps {
   data: AccordionItem[];
 }
