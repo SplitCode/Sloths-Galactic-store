@@ -58,7 +58,7 @@ nav {
     width: 100%;
     height: calc(100dvh - var(--header-height));
     position: fixed;
-    overflow: auto;
+    overflow: hidden auto;
     top: var(--header-height);
     right: 0;
     opacity: 0.2;

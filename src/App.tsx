@@ -25,7 +25,12 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <ToastContainer autoClose={2000} draggable theme="dark" />
+      <ToastContainer
+        style={{ zIndex: 8, top: 'var(--header-height)' }}
+        autoClose={2000}
+        draggable
+        theme="dark"
+      />
       {isCustomerLoading ? (
         <Loader />
       ) : (

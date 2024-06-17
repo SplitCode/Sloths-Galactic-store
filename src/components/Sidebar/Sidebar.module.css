@@ -84,6 +84,7 @@
     z-index: 1;
     position: fixed;
     left: 1rem;
+    padding-left: 0;
     transform: translateX(calc(-100% + 5rem));
     transition: 0.4s;
   }

@@ -16,8 +16,6 @@ export function ImageModal({ images, startIndex, active, setActive }: ImageModal
           showStatus={false}
           infiniteLoop={true}
           useKeyboardArrows
-          autoPlay={true}
-          stopOnHover
           swipeable
           showThumbs={false}
         >
