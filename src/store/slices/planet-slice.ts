@@ -22,7 +22,7 @@ enum MarsColors {
   Dark = 'rgb(140 33 9)'
 }
 
-const PlanetsColor = {
+export const PlanetsColor = {
   venus: VenusColors,
   earth: EarthColors,
   mars: MarsColors
