@@ -1,23 +1,26 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { ProductProjection } from '@commercetools/platform-sdk';
+import type { GetProductsResponse } from '../../api/api.interfaces';
 import { getProducts } from '../../api/products/getProducts';
 import type { Filter, SortValues } from '../../components/Main/Main.interfaces';
 
 export interface ProductsSliceState {
   isProductsLoading: boolean;
   products: ProductProjection[];
-  filter: Filter;
+  filter: Filter | null;
   sort: SortValues | null;
   searchQuery: string;
+  total: number;
 }
 
 const initialState: ProductsSliceState = {
   isProductsLoading: false,
   products: [],
-  filter: { type: '', value: '' },
+  filter: null,
   sort: null,
-  searchQuery: ''
+  searchQuery: '',
+  total: 0
 };
 
 export const productsSlice = createSlice({
@@ -28,12 +31,7 @@ export const productsSlice = createSlice({
       state.products = [];
     },
     setFilter(state: ProductsSliceState, action: PayloadAction<Filter | null>) {
-      if (action.payload) {
-        state.filter.type = action.payload.type;
-        state.filter.value = action.payload.value;
-      } else {
-        state.filter = initialState.filter;
-      }
+      state.filter = action.payload;
     },
     setSort(state: ProductsSliceState, action: PayloadAction<SortValues | null>) {
       state.sort = action.payload;
@@ -50,11 +48,11 @@ export const productsSlice = createSlice({
       state.isProductsLoading = isLoading;
     };
 
-    const setProducts = (state: ProductsSliceState, action: PayloadAction<ProductProjection[]>) => {
-      state.products = action.payload.map((product) => product);
+    const setProducts = (state: ProductsSliceState, action: PayloadAction<GetProductsResponse>) => {
+      state.products = action.payload.products;
+      state.total = action.payload.total;
       state.isProductsLoading = false;
     };
-
     builder
       .addCase(getProducts.pending, (state) => setLoading(state, true))
       .addCase(getProducts.fulfilled, (state, action) => setProducts(state, action))

@@ -2,7 +2,7 @@ import { Button } from '../../../univComponents/Button/Button';
 import { Form, Formik } from 'formik';
 import styles from './PasswordEditor.module.css';
 import { Input } from '../../../univComponents/CustomForm/Input/Input';
-import type { EditorProps, PasswordEditorValues } from '../../Main.interfaces';
+import { ProfileMode, type EditorProps, type PasswordEditorValues } from '../../Main.interfaces';
 import { PasswordEditorSchema } from '../../validationSchemes';
 import type { Customer } from '@commercetools/platform-sdk';
 import { showToast } from '../../../../helpers/showToast';
@@ -13,7 +13,7 @@ import { getCustomer } from '../../../../api/customers/getCustomer';
 import { EditorTitle } from '../EditorTitle/EditorTitle';
 import { updatePassword } from '../../../../api/customers/updatePassword';
 
-export function PasswordEditor({ customerData, setEditMode }: EditorProps) {
+export function PasswordEditor({ customerData, setMode }: EditorProps) {
   const initialValues: PasswordEditorValues = {
     currentPassword: '',
     newPassword: ''
@@ -44,12 +44,7 @@ export function PasswordEditor({ customerData, setEditMode }: EditorProps) {
             .then(() => {
               loginCustomer(customerData.email, values.newPassword);
               dispatch(getCustomer(customerData.id));
-              setEditMode((editModes) => {
-                return {
-                  ...editModes,
-                  isPasswordEdit: false
-                };
-              });
+              setMode(ProfileMode.Default);
             })
             .catch((error: Error) => console.error(error));
         }}
@@ -67,12 +62,7 @@ export function PasswordEditor({ customerData, setEditMode }: EditorProps) {
               minimal
               classes={[styles.button]}
               onClick={() => {
-                setEditMode((editModes) => {
-                  return {
-                    ...editModes,
-                    isPasswordEdit: false
-                  };
-                });
+                setMode(ProfileMode.Default);
               }}
               type="button"
             >

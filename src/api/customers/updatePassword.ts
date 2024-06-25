@@ -2,7 +2,12 @@ import type { Customer } from '@commercetools/platform-sdk';
 import type { UpdatePasswordData } from '../api.interfaces';
 import { apiRoot } from '../apiRoot';
 
-export async function updatePassword(customerData: UpdatePasswordData): Promise<Customer> {
+export async function updatePassword({
+  ID,
+  version,
+  currentPassword,
+  newPassword
+}: UpdatePasswordData): Promise<Customer> {
   try {
     const customer = (
       await apiRoot
@@ -10,10 +15,10 @@ export async function updatePassword(customerData: UpdatePasswordData): Promise<
         .password()
         .post({
           body: {
-            id: customerData.ID,
-            version: customerData.version,
-            currentPassword: customerData.currentPassword,
-            newPassword: customerData.newPassword
+            id: ID,
+            version,
+            currentPassword,
+            newPassword
           }
         })
         .execute()

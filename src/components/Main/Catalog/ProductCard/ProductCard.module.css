@@ -58,7 +58,7 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 2rem;
   width: 100%;
   padding: 1.4rem;
   text-align: center;
@@ -70,7 +70,7 @@
   content: '';
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 100%;
   opacity: 0;
   width: 2.2rem;
   height: 2.2rem;
@@ -89,37 +89,8 @@
   font-weight: bold;
 }
 
-.product_card:has(.discount_price) .product_name {
+.product_discount_name {
   color: var(--accent-color-light);
-}
-
-.product_price {
-  color: #ffffff;
-  text-align: left;
-  font-weight: 500;
-}
-
-.discount_price {
-  max-width: max-content;
-  color: var(--accent-color-light);
-  text-shadow: 0 0 2rem var(--accent-color-light);
-  font-weight: bold;
-}
-
-.crossed_price {
-  position: relative;
-  background-color: transparent;
-  max-width: max-content;
-  color: rgb(220, 220, 220);
-}
-
-.crossed_price::before {
-  position: absolute;
-  content: '';
-  background-color: rgb(220, 220, 220);
-  height: 0.1rem;
-  width: 100%;
-  top: 55%;
 }
 
 .product_desc_wrapper {
@@ -172,6 +143,37 @@
 
 .product_card:hover .product_image_glow_wrapper {
   opacity: 0;
+}
+
+.cart_button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  z-index: 2;
+}
+
+.cart_icon {
+  width: 3rem;
+  height: auto;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cart_icon:hover {
+    transform: scale(1.1);
+  }
+}
+
+.cart_button[disabled] .cart_icon {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.cart_button[disabled] {
+  cursor: default;
 }
 
 @media screen and (max-width: 560px) {

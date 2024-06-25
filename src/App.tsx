@@ -7,8 +7,9 @@ import { useEffect } from 'react';
 import { reloginCustomer } from './api/customers/reloginCustomer';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { Loader } from './components/Main/Loader/Loader';
-import { ThemeProvider } from './helpers/themeProvider';
 import { deleteCustomer } from './store/slices/customer-slice';
+import { BgPlanets } from './components/Sidebar/Bg-planets';
+import { ThemeProvider } from './helpers/themeProvider';
 
 export function App() {
   const dispatch = useAppDispatch();
@@ -24,7 +25,12 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <ToastContainer autoClose={4000} draggable limit={5} theme="dark" />
+      <ToastContainer
+        style={{ zIndex: 8, top: 'var(--header-height)' }}
+        autoClose={2000}
+        draggable
+        theme="dark"
+      />
       {isCustomerLoading ? (
         <Loader />
       ) : (
@@ -32,6 +38,7 @@ export function App() {
           <Header />
           <Main>
             <>
+              <BgPlanets />
               <Outlet />
             </>
           </Main>

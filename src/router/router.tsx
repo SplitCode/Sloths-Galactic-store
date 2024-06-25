@@ -9,10 +9,11 @@ import { App } from '../App';
 import { ProtectedRoute } from './protected-route';
 import { Profile } from '../components/Main/Profile/Profile';
 import { AnonymousRoute } from './anonymous-route';
-import { ProductDetail } from '../components/Main/ProductDetail/ProductDetail';
+import { ProductDetail } from '../components/Main/Catalog/ProductDetail/ProductDetail';
 import type { Subcategories } from '../helpers/translationMapper';
 import { getTranslation } from '../helpers/translationMapper';
 import type { Planets } from '../store/slices/planet-slice';
+import { Cart } from '../components/Main/Cart/Cart';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: 'catalog/:planet/:subcategory/:productKey',
         element: <ProductDetail />
+      },
+      {
+        path: 'cart',
+        element: <Cart />
       }
     ]
   }

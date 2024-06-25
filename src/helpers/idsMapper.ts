@@ -42,3 +42,13 @@ const SUBCATEGORY_IDS: Record<string, Subcategories> = {
 export function getSubcategoryFromProductType(ProductTypeId: string) {
   return SUBCATEGORY_IDS[ProductTypeId];
 }
+
+const PLANETS_IDS: Record<string, Planets> = {
+  [ApiData.MARS_CATALOG_ID]: Planets.mars,
+  [ApiData.VENUS_CATALOG_ID]: Planets.venus,
+  [ApiData.EARTH_CATALOG_ID]: Planets.earth
+};
+
+export function getPlanetByCatalogId(planetId: string) {
+  return PLANETS_IDS[planetId];
+}

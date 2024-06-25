@@ -1,7 +1,7 @@
 import styles from './Header.module.css';
 import { Navigation } from './Navigation/Navigation';
 import { Logo } from './Logo/Logo';
-import { BurgerButton } from './BurgerMenu/BurgerButton/BurgerButton';
+import { BurgerButton } from './BurgerButton/BurgerButton';
 import { useMenuToggle } from '../../helpers/useMenuToggle';
 
 export function Header() {

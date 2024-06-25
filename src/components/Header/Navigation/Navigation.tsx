@@ -3,6 +3,7 @@ import { CustomNavLink } from './NavLink';
 import { useAppSelector } from '../../../store/hooks';
 import { Logout } from '../Logout/Logout';
 import type { NavigationProps } from '../Header.interfaces';
+import { CartIcon } from '../CartIcon/CartIcon';
 
 export function Navigation({ menuOpen, toggleMenuOpen }: Required<NavigationProps>) {
   const isAuth = useAppSelector((state) => state.customer_slice.customerId);
@@ -36,6 +37,9 @@ export function Navigation({ menuOpen, toggleMenuOpen }: Required<NavigationProp
             </li>
           </>
         )}
+        <li>
+          <CartIcon toggleMenuOpen={toggleMenuOpen} text={''} to={'/cart'} />
+        </li>
       </ul>
     </nav>
   );

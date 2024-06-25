@@ -1,6 +1,10 @@
 import type { ErrorResponse } from '@commercetools/platform-sdk';
 import { ErrorMessages } from './helpers.interfaces';
 
+function isInErrorMessages(errorCode: string): errorCode is keyof typeof ErrorMessages {
+  return errorCode in ErrorMessages;
+}
+
 export function errorHandler(error: ErrorResponse): string {
   if (error.statusCode.toString()[0] === '5') {
     return `Ошибка сервера. Код: ${error.statusCode}`;
@@ -11,12 +15,8 @@ export function errorHandler(error: ErrorResponse): string {
   }
 
   const errorCode = error.errors[0].code as string;
-  if (errorCode === 'invalid_customer_account_credentials') {
-    return ErrorMessages.InvalidLogin;
-  } else if (errorCode === 'DuplicateField') {
-    return ErrorMessages.DuplicateField;
-  } else if (errorCode === 'InvalidCurrentPassword') {
-    return ErrorMessages.InvalidCurrentPassword;
+  if (isInErrorMessages(errorCode)) {
+    return ErrorMessages[errorCode];
   } else {
     return error.message;
   }

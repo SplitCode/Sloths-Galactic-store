@@ -11,6 +11,7 @@ export function Filters() {
   const dispatch = useAppDispatch();
   const { products, filter } = useAppSelector((state) => state.products_slice);
   const location = useLocation();
+
   const attributes = useMemo(() => {
     const subcategory = location.pathname.split('/').find((part) => isSubcategory(part));
     if (!subcategory || !products.length) return [];
@@ -31,28 +32,26 @@ export function Filters() {
     return uniqueAttributes;
   }, [products, location.pathname]);
 
-  const handleClick = (atr: Filter) => {
-    const newValue = atr.value === filter?.value ? null : atr.value;
-    dispatch(setFilter(newValue ? { type: atr.type, value: atr.value } : null));
+  const filterValue = filter?.value;
+
+  const handleChange = (atr: Filter) => {
+    dispatch(setFilter(atr.value === filterValue ? null : atr));
   };
 
   return (
     <div className={style.filters}>
-      {attributes.length > 0 &&
-        attributes.map(
-          (atr, index) =>
-            atr && (
-              <label key={index} className={style.filter_item} onClick={() => handleClick(atr)}>
-                <input
-                  className={`${styles.checkbox} ${filter?.value === atr.value ? styles.checked : ''}`}
-                  type="checkbox"
-                  value={atr.value}
-                  defaultChecked={filter.value === atr.value}
-                />
-                {atr.value}
-              </label>
-            )
-        )}
+      {attributes.map((atr) => (
+        <label key={`${atr.type}-${atr.value}`} className={style.filter_item}>
+          <input
+            className={styles.checkbox}
+            type="checkbox"
+            value={atr.value}
+            checked={filterValue === atr.value}
+            onChange={() => handleChange(atr)}
+          />
+          {atr.value}
+        </label>
+      ))}
     </div>
   );
 }

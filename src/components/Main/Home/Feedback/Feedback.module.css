@@ -1,0 +1,93 @@
+.feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.carousel {
+  width: 95%;
+  margin-top: 5rem;
+}
+
+.avatar {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.avatar::after,
+.avatar::before {
+  content: '';
+  position: absolute;
+  width: 3rem;
+  height: 0.2rem;
+  background-color: var(--accent-color-light);
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+.avatar::after {
+  right: 100%;
+  transform: translateX(-80%);
+}
+
+.avatar::before {
+  left: 100%;
+  transform: translateX(80%);
+}
+
+.name {
+  font-weight: bold;
+  color: var(--accent-color-light);
+}
+
+.text {
+  width: 90%;
+  font-size: 1.8rem;
+}
+
+.star {
+  margin: 0 3px;
+  padding: 0;
+  font-size: 32px;
+  line-height: 1;
+  color: lightgrey;
+  text-shadow: 1px 1px #bbb;
+}
+
+.star::after {
+  content: '★';
+}
+
+.star[data-active] {
+  color: gold;
+  text-shadow: 1px 1px #c60;
+}
+
+@media screen and (max-width: 1000px) {
+  .carousel {
+    width: 100%;
+  }
+
+  .text {
+    width: 80%;
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .carousel {
+    width: 100%;
+  }
+
+  .text {
+    width: 70%;
+    font-size: 1.4rem;
+  }
+}

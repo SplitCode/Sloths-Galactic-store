@@ -1,0 +1,365 @@
+.product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  background-color: var(--bg-color);
+  text-align: center;
+  box-shadow: 0 0 1rem 0.1rem #000000;
+  transition: 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+  cursor: pointer;
+}
+
+.updating {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--transparent-background);
+}
+
+.product_loader {
+  z-index: 3;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background-color: var(--dark-transparent-background);
+}
+
+.left_line_wrapper,
+.right_line_wrapper {
+  z-index: -1;
+  position: absolute;
+  top: 50%;
+  width: calc(100vw - 100%);
+  height: 0.2rem;
+  background-color: rgb(36, 36, 36);
+}
+
+.left_line_wrapper {
+  left: 0;
+  transform: translateX(-75%) scaleX(0.5);
+}
+
+.right_line_wrapper {
+  right: 0;
+  transform: translateX(75%) scaleX(0.5);
+}
+
+.left_line,
+.right_line {
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-color-light);
+  transform: scaleX(0);
+  box-shadow: 0 0 1rem 0.1rem var(--accent-color-light);
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.left_line {
+  transform-origin: left;
+}
+
+.right_line {
+  transform-origin: right;
+}
+
+.product_content {
+  width: 100%;
+  height: 100%;
+}
+
+.product_head,
+.product_body {
+  display: grid;
+  grid-template: 1fr / repeat(5, 1fr);
+  padding: 0.7rem;
+}
+
+.product_column_name {
+  font-family: var(--decorative-font);
+  font-weight: bold;
+}
+
+.product_cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product_image_wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 10rem;
+}
+
+.product_image {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  clip-path: polygon(20% 0%, 100% 0, 100% 20%, 100% 80%, 80% 100%, 0 100%, 0% 80%, 0% 20%);
+}
+
+.product_image_glow_wrapper {
+  position: absolute;
+  width: 103%;
+  height: 103%;
+  filter: blur(0.5rem);
+}
+
+.product_image_glow {
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(20% 0%, 100% 0, 100% 20%, 100% 80%, 80% 100%, 0 100%, 0% 80%, 0% 20%);
+}
+
+.product_name {
+  font-weight: bold;
+}
+
+.discount_name {
+  color: var(--accent-color-light);
+}
+
+.product_price_wrapper {
+  gap: 0.3rem;
+  width: max-content;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.quantity_wrapper {
+  gap: 1.5rem;
+}
+
+.quantity {
+  font-weight: bold;
+  font-size: 2.1rem;
+  cursor: default;
+}
+
+.increment,
+.decrement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  user-select: none;
+  background-color: transparent;
+  border: none;
+  outline: 0.2rem solid #ffffff;
+  color: #ffffff;
+  font-size: 2.8rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.increment:active,
+.decrement:active {
+  transform: scale(0.9);
+}
+
+.decrement[disabled] {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.delete_btn {
+  position: absolute;
+  right: -2rem;
+  top: -2rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.delete_icon {
+  width: 4rem;
+  height: 4rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product:hover {
+    box-shadow: 0 0 1.2rem 0.1rem var(--accent-color-light);
+  }
+
+  .product:hover .left_line,
+  .product:hover .right_line {
+    transform: scaleX(1);
+  }
+
+  .product:hover .left_line {
+    transform-origin: right;
+  }
+
+  .product:hover .right_line {
+    transform-origin: left;
+  }
+
+  .increment:hover {
+    outline-color: #00ff00;
+    color: #00ff00;
+  }
+
+  .decrement:hover {
+    outline-color: #ff0000;
+    color: #ff0000;
+  }
+
+  .delete_btn:hover {
+    transform: scale(1.15);
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .product_content,
+  .product_price_wrapper,
+  .quantity,
+  .product_name {
+    font-size: 1.4rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.8rem;
+  }
+
+  .product_image_wrapper {
+    width: 7rem;
+    height: 7rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .product_image_wrapper {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .product_name {
+    font-size: 1.4rem;
+  }
+
+  .product_content,
+  .product_price_wrapper,
+  .quantity {
+    font-size: 1.2rem;
+  }
+
+  .quantity_wrapper {
+    gap: 1rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .product_content {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .product_head,
+  .product_body {
+    display: grid;
+    grid-template: repeat(5, 1fr) / 1fr;
+    align-items: center;
+    width: 50%;
+  }
+
+  .product_cell,
+  .product_column_name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-bottom: 0.1rem solid rgb(36, 36, 36);
+  }
+
+  .product_content,
+  .product_price_wrapper,
+  .quantity,
+  .product_name {
+    font-size: 1.7rem;
+  }
+
+  .product_image_wrapper {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.8rem;
+    height: 2.8rem;
+    font-size: 2rem;
+    outline-width: 0.2rem;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .product_content,
+  .product_price_wrapper,
+  .quantity,
+  .product_name {
+    font-size: 1.5rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.8rem;
+    outline-width: 0.2rem;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .product_content {
+    gap: 1rem;
+  }
+
+  .product_content,
+  .product_price_wrapper,
+  .quantity,
+  .product_name {
+    font-size: 1.3rem;
+  }
+
+  .increment,
+  .decrement {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.6rem;
+    outline-width: 0.1rem;
+  }
+}

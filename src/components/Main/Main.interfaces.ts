@@ -1,6 +1,8 @@
 import type { Customer, ProductProjection } from '@commercetools/platform-sdk';
 import type { Planets } from '../../store/slices/planet-slice';
 import type { Subcategories } from '../../helpers/translationMapper';
+import type { AddressesActions } from '../../helpers/helpers.interfaces';
+import type { MemberData } from '../../helpers/membersConfig';
 
 export interface StringObj {
   [key: string]: string;
@@ -34,13 +36,7 @@ export interface RegisterValues extends LoginValues {
 export type ProfileEditorValues = Pick<RegisterValues, 'email' | 'firstName' | 'lastName' | 'dateOfBirth'>;
 
 export interface EditorProps {
-  setEditMode: React.Dispatch<
-    React.SetStateAction<{
-      isPersonalEdit: boolean;
-      isAddressesEdit: boolean;
-      isPasswordEdit: boolean;
-    }>
-  >;
+  setMode: React.Dispatch<React.SetStateAction<ProfileMode>>;
   customerData: Customer;
 }
 
@@ -70,6 +66,8 @@ export interface getProductsRequestProps {
   filter?: Filter;
   sortValue?: SortValues;
   searchQuery?: string;
+  limit?: number;
+  offset?: number;
 }
 
 export interface Image {
@@ -80,7 +78,8 @@ export interface Image {
 export interface ImageModalProps {
   images: Image[];
   startIndex: number;
-  onClose: () => void;
+  active: boolean;
+  setActive: (isActive: boolean) => void;
 }
 
 export interface ProfileAddressProps {
@@ -89,4 +88,46 @@ export interface ProfileAddressProps {
   customerData?: Customer;
   isNew?: boolean;
   setAddingAddress?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export enum ProfileMode {
+  Default,
+  PersonalEdit,
+  AddressesEdit,
+  PasswordEdit
+}
+
+export type AddressType = 'shipping' | 'billing' | 'defaultShipping' | 'defaultBilling';
+
+export interface AddressFlag {
+  action: AddressesActions;
+  checked: boolean;
+  styles: string[];
+  addressId?: string;
+}
+
+export interface MemberProps {
+  member: MemberData;
+  onClose: () => void;
+}
+
+export interface ModalProps {
+  modalCallback: (isActive: boolean) => void;
+  className: string;
+  children: React.ReactNode;
+  modalState?: boolean;
+  bg?: React.ReactNode;
+}
+
+export interface AccordionItem {
+  title: string;
+  content: string;
+}
+
+export interface AccordionItemWithState extends AccordionItem {
+  open: boolean;
+}
+
+export interface AccordionProps {
+  data: AccordionItem[];
 }

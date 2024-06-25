@@ -1,6 +1,7 @@
 import type {
   CustomerAddBillingAddressIdAction,
   CustomerAddShippingAddressIdAction,
+  CustomerRemoveAddressAction,
   CustomerRemoveBillingAddressIdAction,
   CustomerRemoveShippingAddressIdAction,
   CustomerSetDefaultBillingAddressAction,
@@ -8,6 +9,7 @@ import type {
   ErrorResponse
 } from '@commercetools/platform-sdk';
 import type { ProfileEditorValues } from '../components/Main/Main.interfaces';
+import type { Planets } from '../store/slices/planet-slice';
 
 export interface SimpleToast {
   text: string;
@@ -26,7 +28,8 @@ export type ToastInfo = SimpleToast | PromiseToast;
 export enum ErrorMessages {
   DuplicateField = 'Уже есть существующий клиент с указанным адресом электронной почты.',
   InvalidLogin = 'Неверный адрес эл. почты или пароль. Попробуйте снова!',
-  InvalidCurrentPassword = 'Текущий пароль не совпадает'
+  InvalidCurrentPassword = 'Текущий пароль не совпадает',
+  DiscountCodeNonApplicable = 'Промокод не найден'
 }
 
 export interface UpdateDataForFormat {
@@ -41,4 +44,11 @@ export type AddressesActions =
   | CustomerAddBillingAddressIdAction['action']
   | CustomerRemoveBillingAddressIdAction['action']
   | CustomerSetDefaultShippingAddressAction['action']
-  | CustomerSetDefaultBillingAddressAction['action'];
+  | CustomerSetDefaultBillingAddressAction['action']
+  | CustomerRemoveAddressAction['action'];
+
+export interface PlanetConfig {
+  value: Planets;
+  label: string;
+  className: string;
+}
