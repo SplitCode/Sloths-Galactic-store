@@ -112,7 +112,13 @@ export function ProductDetail() {
           >
             {images.map((image, index) => (
               <div key={image.url} className={styles.image_container} onClick={() => openModal(index)}>
-                <img src={image.url} alt={image.label} className={styles.product_image} />
+                <img
+                  width="500"
+                  height="300"
+                  src={image.url}
+                  alt={image.label}
+                  className={styles.product_image}
+                />
               </div>
             ))}
           </Carousel>

@@ -21,7 +21,13 @@ export function ImageModal({ images, startIndex, active, setActive }: ImageModal
         >
           {images.map((image) => (
             <div key={image.url} className={styles.image_container}>
-              <img src={image.url} alt={image.label} className={styles.enlarged_image} />
+              <img
+                width="600"
+                height="500"
+                src={image.url}
+                alt={image.label}
+                className={styles.enlarged_image}
+              />
             </div>
           ))}
         </Carousel>
