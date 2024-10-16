@@ -6,7 +6,7 @@ Our platform offers a wide range of products from different planets ⋆⭒˚.⋆
 
 We strive to make the shopping process as convenient and smooth as possible. With our platform, users enjoy a hassle-free journey from product discovery through purchase, boosting their confidence and engagement ⭐.
 
-Have a good time with [Sloths's Galactic Store](https://sloths-galactic-store.netlify.app/) ✨
+Have a good time with [Sloths's Galactic Store](https://sloth-galactic-store.netlify.app/) ✨
 
 ## Stack
 
