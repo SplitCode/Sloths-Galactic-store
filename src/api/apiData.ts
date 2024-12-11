@@ -1,25 +1,28 @@
 export enum ApiData {
-  PROJECT_KEY = 'sloths2',
-  CLIENT_SECRET = 's95IkHHpoJYLN1v6VlNgbSHEY_3zsB8_',
-  CLIENT_ID = 'w1zJHojFAuvjIWJiXH1HK57D',
+  PROJECT_KEY = 'sloth',
+  CLIENT_SECRET = 'HhRLN2WB6dw39Bg4k7rQaZ3hvm4KTSng',
+  CLIENT_ID = 'WQ1g1R0tzX2fN76FaYpUfrAZ',
   AUTH_URL = 'https://auth.europe-west1.gcp.commercetools.com',
   API_URL = 'https://api.europe-west1.gcp.commercetools.com',
-  SCOPES = 'manage_project:sloths2',
-  VENUS_CATALOG_ID = 'a836c84f-73ab-480d-89e8-49ef1c8f4cc9',
-  MARS_CATALOG_ID = '57e8a933-9627-450f-97c4-efd29b37faa6',
-  EARTH_CATALOG_ID = '75a80745-6327-4183-a922-21eddeca494b',
+  SCOPES = 'manage_project:sloth',
 
-  VENUS_PETS_ID = '68ef0458-bedd-4954-b27d-b5f16b8562f3',
-  VENUS_FOOD_ID = '845564e1-ec14-4a98-b9cd-325b4372de04',
-  VENUS_TECHNIC_ID = 'd601b388-e9a2-46b7-a3fc-6369dcb950f2',
-  MARS_PETS_ID = '4f724b94-71bb-4a19-abc6-b0d39a9ccec3',
-  MARS_FOOD_ID = 'a4c054df-2048-47ba-a758-6e742cffac15',
-  MARS_TECHNIC_ID = '5e134eec-1f79-45bc-ba55-303ce2b2bb80',
-  EARTH_PETS_ID = 'aa65e38b-b03f-4c9c-bee5-824b2bafa7df',
-  EARTH_FOOD_ID = 'd1e43cb8-f31d-41a0-be9f-b6cc38a9fa15',
-  EARTH_TECHNIC_ID = 'a801b93a-105f-426e-9b49-802524334cb9',
+  VENUS_CATALOG_ID = '34f7442a-12ab-4458-a328-735a81936a92',
+  MARS_CATALOG_ID = 'beb6de29-80b0-4b9a-b9f9-29f88475770d',
+  EARTH_CATALOG_ID = '2444ac5c-8d85-4def-90e7-4714e843e12a',
 
-  FOOD_ID = '57265abf-1c90-46fb-a041-39c8d336a8fa',
-  TECHNIC_ID = '9d2359ab-952d-4ff9-a244-bc954aa78240',
-  PETS_ID = '8d128586-0625-4f02-9591-fd01418514cb'
+  VENUS_PETS_ID = 'ad372326-b733-4ef3-8748-7b6f82645b07',
+  VENUS_FOOD_ID = '9c735d0f-c23b-411b-885d-a7b025ef17a9',
+  VENUS_TECHNIC_ID = '31e9d2f3-2863-4d67-b51b-cc8231081cdb',
+
+  MARS_PETS_ID = '32b297aa-ff04-4758-b8e5-813e1c6b1fae',
+  MARS_FOOD_ID = '99006a84-8804-43b7-9789-3552afafb173',
+  MARS_TECHNIC_ID = '2f5aa39c-12e0-49ea-85b6-09a59878f0ac',
+
+  EARTH_PETS_ID = '8fb6b9d5-0cd2-4659-95e1-ad8f6b4e0ac8',
+  EARTH_FOOD_ID = '60ca0af9-3f67-4b70-8241-0aa6325a1a8c',
+  EARTH_TECHNIC_ID = 'bfaf87cc-8add-49b1-98b6-3d3ef033433b',
+
+  FOOD_ID = '7253e3fd-9f71-48f5-adc6-1ce96566b404',
+  TECHNIC_ID = '9eee2b51-1bc3-4769-a584-4143c92a6981',
+  PETS_ID = 'd5328b94-0a1f-4951-a70a-96178ca97dc3'
 }
